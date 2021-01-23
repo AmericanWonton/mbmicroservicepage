@@ -1,0 +1,391 @@
+/* You need to initialize the parent elements to 100%
+for this to work correctly in the scrollable div */
+body, html {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 0em;
+    padding: 0em;
+    width: 100%;
+    height: 100%;
+    /* debug */
+    border: 1px solid gold;
+}
+
+.board_holder{
+    /* Flex-box formatting */
+    display: block;
+    box-sizing: border-box;
+    align-self: center;
+    width: 95%;
+    height: 90%;
+    /* debug */
+    border: 3px solid green;
+}
+
+.messageboardsectionDiv{
+    /* Flex-box formatting */
+    /* styling for auto scrolling */
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+    height: 70%;
+    align-self: center;
+    /* styling */
+    padding: 0em;
+    margin: 0em;
+    /* debug */
+    border: 1px dashed rgb(95, 2, 7);
+}
+
+.commentPageDiv{
+    /* Flex-box formatting */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    align-content: flex-end;
+    align-items: flex-end;
+    width: 100%;
+    height: 13%;
+    /* styling */
+    padding: .2em;
+    /* debug */
+    border: 1px solid rgb(240, 221, 57);
+}
+
+.pageExplorers{
+    /* Flex-box formatting */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 25%;
+    /* styling */
+    align-self: flex-end;
+    /* debug */
+}
+
+.goToDiv{
+    /* Flex-box formatting */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    align-content: flex-end;
+    align-items: flex-end;
+    width: 100%;
+    /* styling */
+    
+    /* debug */
+}
+
+.goToInputDiv{
+    /* Flex-box formatting */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 45%;
+    /* styling */
+    
+    /* debug */
+}
+
+.goInput{
+
+}
+
+.goToButtonDiv{
+    /* Flex-box formatting */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 45%;
+    /* styling */
+    
+    /* debug */
+}
+
+.goToButton{
+    font-size: 1rem;
+}
+
+.pageButtonsDivs{
+    /* Flex-box formatting */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+    /* styling */
+    
+    /* debug */
+}
+
+.leftButtonDiv{
+    /* Styling */
+    display: block;
+    width: 25%;
+    height: 2em;
+    /* styling */
+    background-image: url("../images/svg/leftarrow.svg");
+    /* background-size: 100% 100%; */
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    /* debug */
+    border: 1px solid rgb(178, 180, 24);
+}
+
+.rightButtonDiv{
+    /* Flex-box formatting */
+    display: block;
+    width: 25%;
+    height: 2em;
+    /* styling */
+    background-image: url("../images/svg/rightarrow.svg");
+    /* background-size: 100% 100%; */
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    
+    /* debug */
+    border: 1px solid rgb(178, 180, 24);
+}
+
+.pagesDiv{
+    /* Flex-box formatting */
+    display: block;
+    /* styling */
+
+    /* debug */
+}
+
+.whatPageP{
+    font-size: 1rem;
+    align-self: center;
+}
+
+.messageSectionDiv {
+    /* Flex-box formatting */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    align-self: center;
+    width: 95%;
+    height: auto;
+    /* styling */
+    position: relative;
+    /* debug */
+}
+
+.messageTextDiv{
+    /* Flex-box formatting */
+    display: block;
+    width: 100%;
+    /* styling */
+
+    /* debug */
+}
+
+.textP{
+    font-size: 1rem;
+    color: black;
+}
+
+.replyNumP{
+    font-size: 1rem;
+    color: black;
+}
+
+.replyButtonSpacingDiv{
+
+    width: 100%;
+    /* styling */
+    
+    /* debug */
+}
+
+.replyButtonDiv{
+    /* Flex-box formatting */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 15%;
+    /* styling */
+    
+    /* debug */
+}
+
+.buttonTextDiv{
+    display: block;
+    /* styling */
+    font-size: 1rem;
+    /* debug */
+}
+
+.buttonIconDiv{
+    /* Flex-box formatting */
+    display: block;
+    width: 25%;
+    height: 2em;
+    /* styling */
+    background-image: url("../images/svg/downarrow.svg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    /* debug */
+}
+
+.replyInputDiv{
+    /* Flex-box formatting */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+    /* debug */
+    border: 1px dashed purple;
+}
+
+.commentOriginalDiv{
+    /* Flex-box formatting */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+    height: 13%;
+    /* debug */
+    border: 1px solid red;
+}
+
+.textareaComment{
+    font-size: 1.1rem;
+    width: 85%;
+    height: 50%;
+}
+
+.commentButtonSendMsg{
+    width: 10%;
+    height: 50%;
+    font-size: 1rem;
+}
+
+.textareaReply{
+    font-size: 1.1rem;
+    width: 70%;
+    height: 10vh;
+}
+
+.replyButtonSendMsg{
+    width: 10%;
+    height: 10vh;
+    font-size: 1rem;
+    /* DEBUG */
+}
+
+.replyToMessageDiv{
+    /* Styling */
+    display: block;
+    width: 25%;
+    height: 2em;
+    /* debug */
+}
+
+.replyButtonP{
+    font-size: 1rem;
+    color: blue;
+    align-self: center;
+}
+
+.repliesSectionDiv{
+    /* Flex-box formatting */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+
+    /* styling */
+    padding: 1em;
+    /* scrollable styling */
+    height: auto;
+    overflow-y: auto;
+    /* debug */
+    border: 2px solid gray;
+}
+
+.replyListingDiv{
+    /* Flex-box formatting */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    /* styling */
+    padding: .2em;
+    /* debug */
+    border: 2px solid rgb(23, 182, 45);
+}
+
+
+/*** BIG TEST ZONE ****/
+.board_holder2{
+    /* Flex-box formatting */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    align-self: center;
+    /* for scrollable display */
+    position: relative;
+    width: 95%;
+    height: 90%;
+    /* debug */
+    border: 3px solid orangered;
+}
+
+.messageboardsectionDiv2{
+    /* Flex-box formatting */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: 50%;
+    /* styling */
+    padding: 0em;
+    margin: 0em;
+    /* styling for auto scrolling */
+    overflow-y: scroll;
+    overflow-x: hidden;
+    /* debug */
+    border: 1px dashed navy;
+}
+
+.messageTextDiv2{
+    /* Flex-box formatting */
+    display: block;
+    width: 100%;
+    /* styling */
+
+    /* debug */
+}
+
+.textP2{
+    font-size: 1rem;
+    color: black;
+}

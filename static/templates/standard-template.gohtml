@@ -1,0 +1,211 @@
+{{/* ****** BEGINNING OF HEAD SECTION ********/}}
+{{define "meta-title"}}
+    <meta charset="UTF-8">
+    <title>Message Board</title>
+{{end}}
+
+{{define "pixel-dense"}}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+{{end}}
+
+{{define "fav-icon1"}}
+    <link rel="shortcut icon" type="image/png" href="static/images/favicons/database.png">
+{{end}}
+
+{{define "fonts1"}}
+    <link href="https://fonts.googleapis.com/css?family=Bebas+Neue|Bowlby+One+SC|Dosis|Nunito|Odibee+Sans|Open+Sans+Condensed:300&display=swap" rel="stylesheet">
+{{end}}
+
+{{define "media-queries"}}
+    <link rel="stylesheet" type="text/css" href="static/css/main.css">
+{{end}}
+
+{{define "javascript"}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+{{end}}
+
+{{/******* END OF HEAD SECTION *****/}}
+
+{{/******** BEGINNING OF HEADER SECTION ********/}}
+{{define "header_div"}}
+    <header>
+        <div class="header_div">
+            <div class="drop-down-link-divs">
+                <div class="nothing_box">
+                    
+                </div>
+                <div class="about_box">
+                    <a href="index.html" class="headerLinks">About Me</a>
+                </div>
+                <div class="link_box">
+                    <div class="dropdown">
+                        <button class="dropbtn">Check Out My Work!</button>
+                        <div class="dropdown-content">
+                            <a href="gallery.gohtml" class="headerLinks">Event Gallery</a>
+                            <a href="" class="headerLinks">DJ Mark Mixes(COMING SOON!)</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact_me_box">
+                    <a href="bookdjmark.gohtml" class="headerLinks">Book DJ Mark</a>
+                </div>
+            </div>
+        </div>
+    </header>
+{{end}}
+{{/******** END OF HEADER SECTION ********/}}
+
+{{/******** BEGINNING OF BODY SECTION *********/}}
+{{define "sendJSMessageData"}}
+    <script>
+        //testShowData({{.}});
+        messageDataInitialize({{.}});
+    </script>
+{{end}}
+
+{{define "sendPageNumber"}}
+    <script>
+        initializeWhatPage({{.}});
+    </script>
+{{end}}
+
+{{define "messageBoardSection"}}
+    <div class="board_holder" id="board_holder">
+        <div class="commentOriginalDiv" id="commentOriginalDiv">
+            <textarea class="textareaComment" id="textareaComment" name="textareaComment" placeholder="Add comment..."></textarea>
+            <button class="commentButtonSendMsg" id="commentButtonSendMsg" onclick="orignalCommentMaker()">
+                Add comment
+            </button>
+        </div>
+        <div class="messageboardsectionDiv" id="messageboardsectionDiv">
+
+        </div>
+        <div class="commentPageDiv" id="commentPageDiv">
+            <div class="pageExplorers" id="pageExplorers">
+                <div class="pageButtonsDivs" id="pageButtonsDivs">
+                    <div class="leftButtonDiv" id="leftButtonDiv">
+
+                    </div>
+                    <div class="pagesDiv" id="pagesDiv">
+                        <p class="whatPageP" id="whatPageP">
+                            Page 1
+                        </p>
+                    </div>
+                    <div class="rightButtonDiv" id="rightButtonDiv">
+
+                    </div>
+                </div>
+                <div class="goToDiv" id="goToDiv">
+                    <div class="goToInputDiv" id="goToInputDiv">
+                        <input type="number" class="goInput" id="goInput" name="goInput" placeholder="1">
+                    </div>
+                    <div class="goToButtonDiv" id="goToButtonDiv">
+                        <button id="goToButton" class="goToButton">
+                            Go To Page
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{end}}
+
+{{define "messageBoardSizeTest"}}
+    <div class="board_holder2" id="board_holder2">
+        {{/* Here is our example Div */}}
+        <div class="messageboardsectionDiv2" id="messageboardsectionDiv2">
+            <div class="messageTextDiv2" id="messageTextDiv2">
+                <p class="textP2" id="textP2">
+                    Yo this is a test message and shit
+                </p>
+            </div>
+        </div>
+        {{/* Here is our example Div */}}
+        <div class="messageboardsectionDiv2" id="messageboardsectionDiv2">
+            <div class="messageTextDiv2" id="messageTextDiv2">
+                <p class="textP2" id="textP2">
+                    Yo this is a test message and shit
+                </p>
+            </div>
+        </div>
+        {{/* Here is our example Div */}}
+        <div class="messageboardsectionDiv2" id="messageboardsectionDiv2">
+            <div class="messageTextDiv2" id="messageTextDiv2">
+                <p class="textP2" id="textP2">
+                    Yo this is a test message and shit
+                </p>
+            </div>
+        </div>
+        {{/* Here is our example Div */}}
+        <div class="messageboardsectionDiv2" id="messageboardsectionDiv2">
+            <div class="messageTextDiv2" id="messageTextDiv2">
+                <p class="textP2" id="textP2">
+                    Yo this is a test message and shit
+                </p>
+            </div>
+        </div>
+        {{/* Here is our example Div */}}
+        <div class="messageboardsectionDiv2" id="messageboardsectionDiv2">
+            <div class="messageTextDiv2" id="messageTextDiv2">
+                <p class="textP2" id="textP2">
+                    Yo this is a test message and shit
+                </p>
+            </div>
+        </div>
+        {{/* Here is our example Div */}}
+        <div class="messageboardsectionDiv2" id="messageboardsectionDiv2">
+            <div class="messageTextDiv2" id="messageTextDiv2">
+                <p class="textP2" id="textP2">
+                    Yo this is a test message and shit
+                </p>
+            </div>
+        </div>
+        {{/* Here is our example Div */}}
+        <div class="messageboardsectionDiv2" id="messageboardsectionDiv2">
+            <div class="messageTextDiv2" id="messageTextDiv2">
+                <p class="textP2" id="textP2">
+                    Yo this is a test message and shit
+                </p>
+            </div>
+        </div>
+        {{/* Here is our example Div */}}
+        <div class="messageboardsectionDiv2" id="messageboardsectionDiv2">
+            <div class="messageTextDiv2" id="messageTextDiv2">
+                <p class="textP2" id="textP2">
+                    Yo this is a test message and shit
+                </p>
+            </div>
+        </div>
+        {{/* Here is our example Div */}}
+        <div class="messageboardsectionDiv2" id="messageboardsectionDiv2">
+            <div class="messageTextDiv2" id="messageTextDiv2">
+                <p class="textP2" id="textP2">
+                    Yo this is a test message and shit
+                </p>
+            </div>
+        </div>
+        {{/* Here is our example Div */}}
+        <div class="messageboardsectionDiv2" id="messageboardsectionDiv2">
+            <div class="messageTextDiv2" id="messageTextDiv2">
+                <p class="textP2" id="textP2">
+                    Yo this is a test message and shit
+                </p>
+            </div>
+        </div>
+    </div>
+{{end}}
+{{/******** END OF BODY SECTION ********/}}
+
+{{/******* BEGINNING OF FOOTER SECTION ******/}}
+{{define "footer_div"}}
+    <footer>
+        <div class="footer_ContactDiv">
+            {{/******** Define both clickable links to other pages ********/}}
+            <div class="theContactDiv" onclick="navigateHeader(3)">
+                <p class="contactP">Back to Login</p>
+            </div>
+        </div>
+    </footer>
+{{end}}
+{{/******** END OF FOOTER SECTION *******/}}
