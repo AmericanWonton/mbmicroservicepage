@@ -5,6 +5,8 @@ import "net/http"
 //Handles the Index requests
 func index(w http.ResponseWriter, r *http.Request) {
 
+	usernameMap = loadUsernames()
+
 	userStuff := MessageViewData{
 		TestString:  "bootyhole",
 		TheMessages: []Message{},

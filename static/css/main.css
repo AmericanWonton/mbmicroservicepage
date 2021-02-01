@@ -1,8 +1,7 @@
 /* You need to initialize the parent elements to 100%
 for this to work correctly in the scrollable div */
 body, html {
-    display: flex;
-    flex-flow: row wrap;
+    display: block;
     margin: 0em;
     padding: 0em;
     width: 100%;
@@ -17,7 +16,7 @@ body, html {
 .headerIndex{
     /* Look */
     display: block;
-    height: 24%;
+    height: 30%;
     width: 100%;
     /* DEBUG */
     border: 1px solid pink;
@@ -31,7 +30,6 @@ body, html {
     justify-content: center;
     width: 100%;
     /* styling */
-    padding: 1em;
     /* debug */
     border: 1px solid blue;
 }
@@ -42,9 +40,10 @@ body, html {
     flex-flow: wrap;
     align-content: center;
     justify-content: center;
-    width: 47%;
+    width: 45%;
     /* styling */
-    padding: .5em;
+    padding-left: .5em;
+    padding-right: .5em;
     /* debug */
     border: 1px dashed black;
 }
@@ -55,9 +54,10 @@ body, html {
     flex-flow: wrap;
     align-content: center;
     justify-content: center;
-    width: 47%;
+    width: 45%;
     /* styling */
-    padding: .5em;
+    padding-left: .5em;
+    padding-right: .5em;
     /* debug */
     border: 1px dashed black;
 }
@@ -76,7 +76,7 @@ body, html {
     justify-content: center;
     width: 100%;
     /* styling */
-    padding: .4em;
+    padding-top: .2em;
 }
 
 .entranceInfoP{
@@ -94,9 +94,10 @@ body, html {
     align-content: center;
     justify-content: center;
     width: 100%;
+    height: 70%;
     margin: 0em;
     padding: 0em;
-    height: 73%;
+    /* height: 73%; */
     overflow-y: auto;
     overflow-x: hidden;
     /* styling */
@@ -132,6 +133,21 @@ body, html {
     width: 100%;
     margin: 0em;
     padding: 0em;
+}
+
+.actionDiv{
+    /* flexbox styling */
+    display: flex;
+    flex-flow: wrap;
+    align-content: center;
+    justify-content: center;
+    justify-self: center;
+    width: 45%;
+    margin: 0em;
+    padding-left: .2em;
+    padding-right: .2em;
+    /* debug */
+    border: 1px solid red;
 }
 
 
