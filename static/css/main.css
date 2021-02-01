@@ -11,6 +11,145 @@ body, html {
     border: 1px solid gold;
 }
 
+/* Section for the Index page */
+
+/********* IDEX HEADER SECTION ******/
+.headerIndex{
+    /* Look */
+    display: block;
+    height: 24%;
+    width: 100%;
+    /* DEBUG */
+    border: 1px solid pink;
+}
+
+.messageboardEntranceDivs{
+    /* flexbox styling */
+    display: flex;
+    flex-flow: wrap;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+    /* styling */
+    padding: 1em;
+    /* debug */
+    border: 1px solid blue;
+}
+
+.entranceHDogDiv{
+    /* flexbox styling */
+    display: flex;
+    flex-flow: wrap;
+    align-content: center;
+    justify-content: center;
+    width: 47%;
+    /* styling */
+    padding: .5em;
+    /* debug */
+    border: 1px dashed black;
+}
+
+.entranceHamDiv{
+    /* flexbox styling */
+    display: flex;
+    flex-flow: wrap;
+    align-content: center;
+    justify-content: center;
+    width: 47%;
+    /* styling */
+    padding: .5em;
+    /* debug */
+    border: 1px dashed black;
+}
+
+.entranceP {
+    font-size: 2rem;
+    align-self: center;
+    text-align: center;
+}
+
+.entranceInfoDivs{
+    /* flexbox styling */
+    display: flex;
+    flex-flow: wrap;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+    /* styling */
+    padding: .4em;
+}
+
+.entranceInfoP{
+    font-size: 1rem;
+    align-self: center;
+    text-align: center;
+    color: black; 
+}
+
+/********* IDEX BODY SECTION ******/
+.mainContentDiv{
+    /* flexbox styling */
+    display: flex;
+    flex-flow: wrap;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0em;
+    padding: 0em;
+    height: 73%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* styling */
+    
+    /* debug styling */
+    border: 1px solid purple;
+}
+
+.instructUserDiv{
+    /* flexbox styling */
+    display: flex;
+    flex-flow: wrap;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0em;
+    padding: 0em;
+}
+
+.informTextP{
+    font-size: 1rem;
+    align-self: center;
+    text-align: center;
+    color: black;
+}
+
+.signInAndUpDiv{
+    /* flexbox styling */
+    display: flex;
+    flex-flow: wrap;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0em;
+    padding: 0em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Section for the Messageboard stuff */
+
 .board_holder{
     /* Flex-box formatting */
     display: block;

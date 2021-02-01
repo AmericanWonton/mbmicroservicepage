@@ -1,7 +1,7 @@
 {{/* ****** BEGINNING OF HEAD SECTION ********/}}
 {{define "meta-title"}}
     <meta charset="UTF-8">
-    <title>Message Board</title>
+    <title>Message Board Microservice</title>
 {{end}}
 
 {{define "pixel-dense"}}
@@ -54,7 +54,49 @@
         </div>
     </header>
 {{end}}
+{{define "index_header"}}
+    <header class="headerIndex">
+        <div class="messageboardEntranceDivs">
+            <div class="entranceHDogDiv">
+                <p class="entranceP" id="entrancePHDog">
+                    Hotdog Messageboard
+                </p>
+            </div>
+            <div class="entranceHamDiv">
+                <p class="entranceP" id="entrancePHam">
+                    Hamburger Messageboard
+                </p>
+            </div>
+        </div>
+        <div class="entranceInfoDivs">
+            <p class="entranceInfoP" id="entranceInfoP">
+
+            </p>
+        </div>
+    </header>
+{{end}}
 {{/******** END OF HEADER SECTION ********/}}
+
+{{/********** BEGINNING OF INDEX BODY SECTION ***********/}}
+{{define "index_body_section"}}
+    <div class="mainContentDiv">
+        {{/* Inform user of what to do on the site */}}
+        <div class="instructUserDiv">
+            <p class="informTextP">
+                Welcome to the MessageBoard Microservice! Take a look through the 'Documentation'
+                page for further instructions. Or you can create/sign in to your account
+                and test out the implementation of this app. Be sure to try sending 
+                Requests to the services to see your data as well!
+            </p>
+        </div>
+        {{/* Section to sign Users in and create accounts */}}
+        <div class="signInAndUpDiv" id="signInAndUpDiv">
+            fuck
+        </div>
+    </div>
+{{end}}
+
+{{/********** END OF INDEX BODY SECTION ***********/}}
 
 {{/******** BEGINNING OF BODY SECTION *********/}}
 {{define "sendJSMessageData"}}

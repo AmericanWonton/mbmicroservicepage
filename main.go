@@ -74,33 +74,6 @@ func logWriter(logMessage string) {
 	log.Println(logMessage)
 }
 
-//Handles the Index requests
-func index(w http.ResponseWriter, r *http.Request) {
-
-	userStuff := MessageViewData{
-		TestString:  "bootyhole",
-		TheMessages: []Message{},
-		WhatPage:    currentPageNumber,
-	}
-
-	/* Execute template, handle error */
-	err1 := template1.ExecuteTemplate(w, "index.gohtml", userStuff)
-	HandleError(w, err1)
-}
-
-//Handles the test page
-func test(w http.ResponseWriter, r *http.Request) {
-	userStuff := MessageViewData{
-		TestString:  "bootyhole",
-		TheMessages: []Message{},
-		WhatPage:    currentPageNumber,
-	}
-
-	/* Execute template, handle error */
-	err1 := template1.ExecuteTemplate(w, "test.gohtml", userStuff)
-	HandleError(w, err1)
-}
-
 // Handle Errors passing templates
 func HandleError(w http.ResponseWriter, err error) {
 	if err != nil {
@@ -114,7 +87,7 @@ func handleRequests() {
 	myRouter := mux.NewRouter().StrictSlash(true)
 
 	//Write to logger that we are handling requests
-	debugMessage := "\n\nWe are now handling requests"
+	debugMessage := "\n\nDEBUG: We are now handling requests"
 	fmt.Println(debugMessage)
 	logWriter(debugMessage)
 

@@ -12,14 +12,19 @@
         {{/* Here are our Media Query and stylesheets */}}
         {{template "media-queries"}}
         {{/* Here is our Javascript or additional code needed */}}
-        
+        <script src="static/js/index.js"></script>
     </head>
     <body>
         {{/* Here is our header */}}
-        {{template "index_header"}}
+        
         {{/* If the User session exists, (as in, we aren't passing in a 'nil' user),
         then display it here. */}}
-        {{template "index_body_section"}}
+        {{template "messageBoardSection"}}
+        {{/* Send data to the javascript functions */}}
+        {{$theData := .TheMessages}}
+        {{$thePage := .WhatPage}}
+        {{template "sendJSMessageData" $theData}}
+        {{template "sendPageNumber" $thePage}}
         {{/* Here is our footer */}}
     </body>
 </html>
