@@ -1,20 +1,17 @@
 package main
 
-import "net/http"
+import (
+	"fmt"
+	"net/http"
+)
 
 //Handles the Index requests
 func index(w http.ResponseWriter, r *http.Request) {
 
 	usernameMap = loadUsernames()
-
-	userStuff := MessageViewData{
-		TestString:  "bootyhole",
-		TheMessages: []Message{},
-		WhatPage:    currentPageNumber,
-	}
-
+	fmt.Printf("DEBUG: here we are in index: \n")
 	/* Execute template, handle error */
-	err1 := template1.ExecuteTemplate(w, "index.gohtml", userStuff)
+	err1 := template1.ExecuteTemplate(w, "index.gohtml", nil)
 	HandleError(w, err1)
 }
 

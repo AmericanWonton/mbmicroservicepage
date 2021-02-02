@@ -93,16 +93,303 @@
         <div class="signInAndUpDiv" id="signInAndUpDiv">
             {{/* Div for handling sign-up */}}
             <div class="actionDiv" id="actionDiv1">
-                
+                {{template "ajaxsignup"}}
             </div>
             {{/* Div for handling signing-in */}}
             <div class="actionDiv" id="actionDiv2">
-
+                {{template "signInFormAjax"}}
             </div>
         </div>
     </div>
 {{end}}
 
+{{define "signInFormAjax"}}
+    <div id="divformDivLogin" class="divformDiv">
+        <div class="signInAlignmentDiv">
+            {{/* USERNAME */}}
+            <div class="labelDiv">
+                <p class="labelPText">
+                    USERNAME:
+                </p>
+            </div>
+            <div class="inputDiv">
+                <input type="text" name="username" placeholder="username" id="inputTextMobileUN" required/>
+                <p class="form-field-err" id="username-err"></p>
+            </div>
+            {{/* PASSWORD */}}
+            <div class="labelDiv">
+                <p class="labelPText">
+                    PASSWORD:
+                </p>
+            </div>
+            <div class="inputDiv">
+                <input type="password" name="password" placeholder="password" id="inputTextMobilePW" required/>
+                <p class="form-field-err" id="password-err"></p>
+            </div>
+            {{/* SUBMIT BUTTON */}}
+            <div class="fieldSection">
+                <button id="submitLoginButton">Submit</button>
+            </div>
+            {{/* INFORMITIVE DIV */}}
+            <div class="informativeDiv" id="informativeDivSignIn">
+                <p class="informtextP" id="informtextPSignIn"></p>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        /* When 'Sign In' Button is clicked, we un-hide the Sign-In form
+        and hide the other form */
+        var signIn = document.getElementById("signin-ask-text");
+        if (signIn === null){
+            //Do nothing, this isn't on this page
+        } else {
+            //Declare the variables on the window
+            var divformDivLogin = document.getElementById("divformDivLogin");
+            divformDivLogin.style = "display: none";
+            //Listen for the button click
+            signIn.addEventListener("click", function(){
+                //First check to see if other sheet is open; if yes, close it
+                var divformDivSignUp = document.getElementById("divformDivSignUp");
+                if (openSignUpWindow === true) {
+                    openSignUpWindow = false;
+                    divformDivSignUp.style = "display: none";
+                }
+                //Open this form if needed
+                if (openSignInWindow === false){
+                    divformDivLogin.style = "display: flex";
+                    divformDivLogin.style = "flex-flow: wrap";
+                    divformDivLogin.style = "align-content: center";
+                    divformDivLogin.style = "justify-content: center";
+                    divformDivLogin.style = "width: 100%";
+                    divformDivLogin.style = "padding: 1rem";
+                    openSignInWindow = true;
+                } else {
+                    divformDivLogin.style = "display: none";
+                    openSignInWindow = false;
+                }
+            });
+        }
+
+        //Define elements of the 'Ajax Form'
+        var inputTextMobileUN = document.getElementById("inputTextMobileUN");
+        var inputTextMobilePW = document.getElementById("inputTextMobilePW");
+        var submitLoginButton = document.getElementById("submitLoginButton");
+        var informtextPSignIn = document.getElementById("informtextPSignIn");
+
+        /* When clicked, submit the results of the login items;
+        if successful, it will redirect to the mainpage with your newly made cookie.
+        */
+        submitLoginButton.addEventListener("click", function(){
+            var LoginData = {
+                Username: String(inputTextMobileUN.value),
+                Password: String(inputTextMobilePW.value)
+            };
+
+            var jsonString = JSON.stringify(LoginData); //stringify JSON
+
+            //Call Ajax to see if password/username are correct
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/canLogin', true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.addEventListener('readystatechange', function(){
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200){
+                    var Response = xhr.responseText;
+                    if (Number(Response.ResultNum) === 0){
+                        //Successful User Search
+                        //Clear informtextPSignIn
+                        informtextPSignIn.innerHTML = "";
+                        informtextPSignIn.innerHTML = Response.ResultMessage;
+                        //This User should have their cookie. Send them to the choice page
+                        navigateHeader(6);
+                    } else if (Number(Response.ResultNum) === 1){
+                        //Failed User Search
+                        //Clear informtextPSignIn
+                        informtextPSignIn.innerHTML = "";
+                        informtextPSignIn.innerHTML = Response.ResultMessage;
+                    } else {
+                        //Failed User Search
+                        //Clear informtextPSignIn
+                        informtextPSignIn.innerHTML = "";
+                        informtextPSignIn.innerHTML = "Wrong information returned from server";
+                        console.log("Wrong number returned from canLogin: " + Response.ResultNum);
+                        //This User should have their cookie. Send them to the choice page
+                        navigateHeader(6);
+                    }
+                }
+            });
+            xhr.send(jsonString);
+        });
+    </script>
+{{end}}
+
+{{define "ajaxsignup"}}
+    {{/* Here is the form setup,(which starts off hidden */}}
+    <div id="divformDivSignUp" class="divformDiv">
+        <div class="signInAlignmentDiv">
+            {{/* USERNAME */}}
+            <div class="labelDiv">
+                <p class="labelPText">
+                    USERNAME:
+                </p>
+            </div>
+            <div class="inputDiv">
+                <input type="text" id="username" name="username" placeholder="username" minlength=1 maxlength=20 required>
+                <br>
+                <p id="form-input-info"></p>
+            </div>
+            {{/* PASSWORD */}}
+            <div class="labelDiv">
+                <p class="labelPText">
+                    PASSWORD:
+                </p>
+            </div>
+            <div class="inputDiv">
+                <input type="password" id="password" name="password" placeholder="password" minlength=8 maxlength=20 required>
+                <br>
+                <p id="form-input-info2"></p>
+            </div>
+            {{/* SUBMIT BUTTON */}}
+            <div class="fieldSection">
+                <button id="submitSignUpButton">Submit</button>
+            </div>
+            {{/* INFORMITIVE DIV */}}
+            <div class="informativeDiv" id="informativeDivSignUp">
+                <p class="informtextP" id="informtextPSignUp"></p>
+            </div>
+        </div>
+        <div class="informFormDiv" id="informFormDiv">
+            <p class="informFormP" id="informFormP"></p>
+        </div>
+    </div>
+    {{/* On load, query available Usernames */}}
+    <script>
+        /* When 'Sign Up' is clicked, display the form and hide the Sign In Form */
+        var signUp = document.getElementById("signup-ask-text");
+
+        if (signUp === null){
+            //Do nothing, it isn't on this page
+        } else {
+            //Declare the variables on the window
+            var divformDivSignUp = document.getElementById("divformDivSignUp");
+            divformDivSignUp.style = "display: none";
+            //Listen for the button click
+            signUp.addEventListener("click", function(){
+                //First check to see if other sheet is open; if yes, close it
+                var divformDivLogin = document.getElementById("divformDivLogin");
+                if (openSignInWindow === true) {
+                    openSignInWindow = false;
+                    divformDivLogin.style = "display: none";
+                }
+                //open this sheet if needed
+                if (openSignUpWindow === false){
+                    divformDivSignUp.style = "display: flex";
+                    divformDivSignUp.style = "flex-flow: wrap";
+                    divformDivSignUp.style = "align-content: center";
+                    divformDivSignUp.style = "justify-content: center";
+                    divformDivSignUp.style = "width: 100%";
+                    divformDivSignUp.style = "padding: 1rem";
+                    openSignUpWindow = true;
+                } else {
+                    divformDivSignUp.style = "display: none";
+                    openSignUpWindow = false;
+                }
+            });
+        }
+
+        var theForm = document.querySelector('#signup-form');
+        var userName = document.querySelector('#username');
+        var password = document.querySelector('#password');
+        var fName = document.querySelector('#firstname');
+        var lName = document.querySelector('#lastname');
+        var email = document.getElementById("email");
+        var usernameErr = document.querySelector('#form-input-info');
+        var passwordErr = document.querySelector('#form-input-info2');
+        var fNameErr = document.querySelector('#form-input-info3');
+        var lNameErr = document.querySelector('#form-input-info4');
+        var role = document.getElementById("sr");
+        // get the form elements defined in your form HTML above
+        var button = document.getElementById("submitSignUpButton");
+
+        /* Check the database for Username when the key is pressed! */
+        username.addEventListener('input', function(){
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/checkUsername', true);
+            xhr.addEventListener('readystatechange', function(){
+                if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200){
+                    var item = xhr.responseText;
+                    if (item == 'TooShort') {
+                        usernameErr.textContent = 'Please enter a Username';
+                        button.disabled = true;
+                    } else if (item == 'TooLong'){
+                        usernameErr.textContent = 'Username must be under 20 characters';
+                        buttondisabled = true;
+                    } else if (item == 'ContainsLanguage'){
+                        usernameErr.textContent = 'Username is innapropriate';
+                        button.disabled = true;
+                    } else if (item == 'true') {
+                        usernameErr.textContent = 'Username taken - Try another name!';
+                        button.disabled = true;
+                    } else {
+                        usernameErr.textContent = '';
+                        button.disabled = false;
+                    }
+                }
+            });
+            xhr.send(userName.value);
+        });
+
+        /*Check to see if password is an appropriate length! */
+        password.addEventListener('input', function(){
+            passString = password.value;
+            if (passString.length <= 0) {
+                passwordErr.textContent = 'Please enter a password';
+                button.disabled = true;
+            } else if (passString.length > 20){
+                passwordErr.textContent = 'Password must be under 20 characters.';
+                button.disabled = true;
+            } else {
+                passwordErr.textContent = '';
+                button.disabled = false;
+            }
+        });
+
+        /* Send Email to User when fields are filled out */
+        button.addEventListener("click", function(){
+            var successMSG = {
+                Message: "",
+                SuccessNum: 3
+            };
+            var newUser = {
+                UserName: "",
+                Password: "",
+                UserID:   0,
+                DateCreated: "",
+                DateUpdated: ""
+            };
+            newUser.UserName = userName.value;
+            newUser.Password = password.value;
+            var jsonString = JSON.stringify(newUser);
+            //Create User and get a response
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/createUser', true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.addEventListener('readystatechange', function(){
+                if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200){
+                    var item = xhr.responseText;
+                    var SuccessMSG = JSON.parse(item);
+                    if (SuccessMSG.SuccessNum == 0){
+                        
+                    } else {
+                        document.getElementById("informFormP").innerHTML = SuccessMSG.Message;
+                        document.getElementById("informFormDiv").style.display = "block";
+                    }
+                }
+            });
+            xhr.send(jsonString);
+        });
+    </script>
+{{end}}
+ 
 {{/********** END OF INDEX BODY SECTION ***********/}}
 
 {{/******** BEGINNING OF BODY SECTION *********/}}

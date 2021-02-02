@@ -14,6 +14,19 @@ import (
 	"github.com/gorilla/mux"
 )
 
+const sessionLength int = 180 //Length of sessions
+
+//Here's our session struct
+type theSession struct {
+	username     string
+	lastActivity time.Time
+}
+
+//Session Database info
+var dbUsers = map[string]AUser{}         // user ID, user
+var dbSessions = map[string]theSession{} // session ID, session
+var dbSessionsCleaned time.Time
+
 /* TEMPLATE DEFINITION BEGINNING */
 var template1 *template.Template
 
@@ -45,6 +58,14 @@ type Message struct {
 	LastUpdated     string    `json:"LastUpdated"`     //When the message was last updated
 }
 
+type AUser struct { //Using this for Mongo
+	UserName    string `json:"UserName"`
+	Password    string `json:"Password"`
+	UserID      int    `json:"UserID"`
+	DateCreated string `json:"DateCreated"`
+	DateUpdated string `json:"DateUpdated"`
+}
+
 /* This is the current amount of results our User is looking at
 it changes as the User clicks forwards or backwards for more results */
 var currentPageNumber int = 1
@@ -52,6 +73,7 @@ var currentPageNumber int = 1
 //Parse our templates
 func init() {
 	/* Assign blank value to map so no nil errors occur */
+	usernameMap = make(map[string]bool) //Clear all Usernames when loading so no problems are caused
 	template1 = template.Must(template.ParseGlob("./static/templates/*"))
 }
 
@@ -96,6 +118,9 @@ func handleRequests() {
 	myRouter.HandleFunc("/test", test)
 	//Mongo No-SQL Stuff
 
+	//Field validation/User Creation
+	myRouter.HandleFunc("/checkUsername", checkUsername).Methods("POST")
+	myRouter.HandleFunc("/createUser", createUser).Methods("POST")
 	//Serve our static files
 	myRouter.Handle("/", http.FileServer(http.Dir("./static")))
 	myRouter.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))

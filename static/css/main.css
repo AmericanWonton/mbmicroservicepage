@@ -150,6 +150,110 @@ body, html {
     border: 1px solid red;
 }
 
+/* SYTLING FOR THE FORMS ON THE INDEX PAGE */
+.divformDiv {
+    /* Flexbox styling */
+    display: flex;
+    flex-flow: wrap;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+    /* styling */
+    padding: 1rem;
+    /* debug styling */
+    
+}
+
+.signInAlignmentDiv{
+    /* Flexbox styling */
+    display: flex;
+    flex-flow: wrap;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+    /* debug styling */
+}
+
+#sign-in-form {
+    align-self: center;
+}
+
+.labelDiv {
+    /* flexbox styling */
+    display: flex;
+    flex-flow: wrap;
+    justify-content: flex-end;
+    align-content: center;
+    width: 40%;
+    margin-right: 1em;
+    /* DEBUG */
+}
+
+.labelPText {
+    /* styling */
+    align-self: center;
+    font-size: 1rem;
+    padding-right: 1rem;
+    font-family: 'Goldman', cursive;
+    color: rgb(0, 0, 0);
+}
+
+.inputDiv {
+    /* flexbox styling */
+    display: flex;
+    flex-flow: wrap;
+    align-content: center;
+    justify-content: flex-start;
+    width: 40%;
+    margin-left: 1em;
+    /* Debug */
+}
+
+.fieldSection{
+    /* flexbox styling */
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    /* styling */
+    padding-top: 1rem;
+    /* DEBUG */
+}
+
+#my-form-button{
+    display: inline-block;
+    text-align: center;
+    align-self: center;
+    /* styling */
+    font-size: 1rem;
+}
+
+#inputTextMobileUN{
+    /* font styling */
+    font-size: 1rem;
+    font-family: 'Nunito', sans-serif;
+}
+
+
+#inputTextMobilePW{
+    /* font styling */
+    font-size: 1rem;
+    font-family: 'Nunito', sans-serif;
+}
+
+#username-err {
+
+}
+
+#password-err {
+
+}
+
+.form-field-err {
+    font-size: 1rem;
+}
+
 
 
 
