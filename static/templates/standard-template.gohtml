@@ -248,6 +248,39 @@
                 <br>
                 <p id="form-input-info2"></p>
             </div>
+            {{/* EMAIL */}}
+            <div class="labelDiv">
+                <p class="labelPText">
+                    Email:
+                </p>
+            </div>
+            <div class="inputDiv">
+                <input type="text" id="email" name="email" placeholder="email" maxlength=50 required>
+                <br>
+                <p id="form-input-info3"></p>
+            </div>
+            {{/* AREA CODE */}}
+            <div class="labelDiv">
+                <p class="labelPText">
+                    AREA CODE:
+                </p>
+            </div>
+            <div class="inputDiv">
+                <input type="number" id="areacode" name="areacode" placeholder="Area Code" maxlength=1 minlength=1 required>
+                <br>
+                <p id="form-input-info4"></p>
+            </div>
+            {{/* PHONE NUMBER */}}
+            <div class="labelDiv">
+                <p class="labelPText">
+                    PHONE NUMBER:
+                </p>
+            </div>
+            <div class="inputDiv">
+                <input type="number" id="phonenumber" name="phonenumber" placeholder="Phone Number" maxlength=10 required>
+                <br>
+                <p id="form-input-info5"></p>
+            </div>
             {{/* SUBMIT BUTTON */}}
             <div class="fieldSection">
                 <button id="submitSignUpButton">Submit</button>
@@ -299,14 +332,15 @@
         var theForm = document.querySelector('#signup-form');
         var userName = document.querySelector('#username');
         var password = document.querySelector('#password');
-        var fName = document.querySelector('#firstname');
-        var lName = document.querySelector('#lastname');
         var email = document.getElementById("email");
+        var areacode = document.getElementById("areacode");
+        var phonenumber = document.getElementById("phonenumber");
         var usernameErr = document.querySelector('#form-input-info');
         var passwordErr = document.querySelector('#form-input-info2');
-        var fNameErr = document.querySelector('#form-input-info3');
-        var lNameErr = document.querySelector('#form-input-info4');
-        var role = document.getElementById("sr");
+        var emailErr = document.getElementById("form-input-info3");
+        var areaCodeErr = document.getElementById("form-input-info4");
+        var phoneNumErr = document.getElementById("form-input-info5");
+
         // get the form elements defined in your form HTML above
         var button = document.getElementById("submitSignUpButton");
 
@@ -340,7 +374,7 @@
 
         /*Check to see if password is an appropriate length! */
         password.addEventListener('input', function(){
-            passString = password.value;
+            var passString = password.value;
             if (passString.length <= 0) {
                 passwordErr.textContent = 'Please enter a password';
                 button.disabled = true;
@@ -349,6 +383,57 @@
                 button.disabled = true;
             } else {
                 passwordErr.textContent = '';
+                button.disabled = false;
+            }
+        });
+
+        /* Check to see if email is appropriate length */
+        email.addEventListener('input', function(){
+            var emailString = email.value;
+            if (emailString.length <= 0){
+                emailErr.textContent = 'Need an email to test apis!';
+                button.disabled = true;
+            } else if (emailString.length >= 50){
+                emailErr.textContent = 'Please give an email under 50 characters to test apis!';
+                button.disabled = true;
+            } else {
+                emailErr.textContent = '';
+                button.disabled = false;
+            }
+        });
+
+        /*Check to see if area code is an appropriate length! */
+        areacode.addEventListener('input', function(){
+            var areacodeString = areacode.value;
+            if (areacodeString.length <= 0) {
+                areaCodeErr.textContent = 'Please enter an area code for your phone num to test API!';
+                button.disabled = true;
+            } else if (areacodeString.length > 1){
+                areaCodeErr.textContent = 'Please enter a 1 digit area num to test APIS!';
+                button.disabled = true;
+            } else if (areacodeString.length != 1){
+                areaCodeErr.textContent = 'Please enter a 10 digit phone num to test APIS!';
+                button.disabled = true;
+            } else {
+                areaCodeErr.textContent = '';
+                button.disabled = false;
+            }
+        });
+
+        /*Check to see if area code is an appropriate length! */
+        phonenumber.addEventListener('input', function(){
+            var phonenumString = phonenumber.value;
+            if (phonenumString.length <= 0) {
+                phoneNumErr.textContent = 'Please enter phone number to test API!';
+                button.disabled = true;
+            } else if (phonenumString.length > 10){
+                phoneNumErr.textContent = 'Please enter a 10 digit phone num to test APIS!';
+                button.disabled = true;
+            } else if (phonenumString.length != 10){
+                phoneNumErr.textContent = 'Please enter a 10 digit phone num to test APIS!';
+                button.disabled = true;
+            } else {
+                phoneNumErr.textContent = '';
                 button.disabled = false;
             }
         });
@@ -362,12 +447,19 @@
             var newUser = {
                 UserName: "",
                 Password: "",
-                UserID:   0,
+                UserID:   Number(0),
+                Email: "",
+                PhoneACode: Number(0),
+                PhoneNumber: Number(0),
+                PostsMade: Number(0),
+                RepliesMade: Number(0),
                 DateCreated: "",
                 DateUpdated: ""
             };
             newUser.UserName = userName.value;
             newUser.Password = password.value;
+            newUser.PhoneACode = Number(areacode.value);
+            newUser.PhoneNumber = Number(phonenumber.value);
             var jsonString = JSON.stringify(newUser);
             //Create User and get a response
             var xhr = new XMLHttpRequest();
@@ -378,8 +470,11 @@
                     var item = xhr.responseText;
                     var SuccessMSG = JSON.parse(item);
                     if (SuccessMSG.SuccessNum == 0){
-                        
+                        console.log("DEBUG: User created.")
+                        location.reload();
                     } else {
+                        console.log("DEBUG: We have an error: " + SuccessMSG.SuccessNum + " " +
+                        SuccessMSG.Message);
                         document.getElementById("informFormP").innerHTML = SuccessMSG.Message;
                         document.getElementById("informFormDiv").style.display = "block";
                     }

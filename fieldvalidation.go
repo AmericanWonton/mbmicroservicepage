@@ -130,6 +130,9 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 	// get form values
 	username := theUser.UserName
 	password := theUser.Password
+	email := theUser.Email
+	areacode := theUser.PhoneACode
+	phonenum := theUser.PhoneNumber
 
 	// create session
 	uuidWithHyphen := uuid.New().String()
@@ -181,6 +184,11 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 		UserName:    username,
 		Password:    encodedString,
 		UserID:      returnedMessage.RandomID,
+		Email:       email,
+		PhoneACode:  areacode,
+		PhoneNumber: phonenum,
+		PostsMade:   0,
+		RepliesMade: 0,
 		DateCreated: theTimeNow.Format("2006-01-02 15:04:05"),
 		DateUpdated: theTimeNow.Format("2006-01-02 15:04:05"),
 	}

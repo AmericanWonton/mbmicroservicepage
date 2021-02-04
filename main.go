@@ -62,6 +62,11 @@ type AUser struct { //Using this for Mongo
 	UserName    string `json:"UserName"`
 	Password    string `json:"Password"`
 	UserID      int    `json:"UserID"`
+	Email       string `json:"Email"`
+	PhoneACode  int    `json:"PhoneACode"`
+	PhoneNumber int    `json:"PhoneNumber"`
+	PostsMade   int    `json:"PostsMade"`
+	RepliesMade int    `json:"RepliesMade"`
 	DateCreated string `json:"DateCreated"`
 	DateUpdated string `json:"DateUpdated"`
 }
