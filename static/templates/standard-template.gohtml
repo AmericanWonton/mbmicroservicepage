@@ -105,6 +105,11 @@
 
 {{define "signInFormAjax"}}
     <div id="divformDivLogin" class="divformDiv">
+        <div class="signallTitleDiv">
+            <p class="signallP">
+                Sign In!
+            </p>
+        </div>
         <div class="signInAlignmentDiv">
             {{/* USERNAME */}}
             <div class="labelDiv">
@@ -139,36 +144,6 @@
     <script type="text/javascript">
         /* When 'Sign In' Button is clicked, we un-hide the Sign-In form
         and hide the other form */
-        var signIn = document.getElementById("signin-ask-text");
-        if (signIn === null){
-            //Do nothing, this isn't on this page
-        } else {
-            //Declare the variables on the window
-            var divformDivLogin = document.getElementById("divformDivLogin");
-            divformDivLogin.style = "display: none";
-            //Listen for the button click
-            signIn.addEventListener("click", function(){
-                //First check to see if other sheet is open; if yes, close it
-                var divformDivSignUp = document.getElementById("divformDivSignUp");
-                if (openSignUpWindow === true) {
-                    openSignUpWindow = false;
-                    divformDivSignUp.style = "display: none";
-                }
-                //Open this form if needed
-                if (openSignInWindow === false){
-                    divformDivLogin.style = "display: flex";
-                    divformDivLogin.style = "flex-flow: wrap";
-                    divformDivLogin.style = "align-content: center";
-                    divformDivLogin.style = "justify-content: center";
-                    divformDivLogin.style = "width: 100%";
-                    divformDivLogin.style = "padding: 1rem";
-                    openSignInWindow = true;
-                } else {
-                    divformDivLogin.style = "display: none";
-                    openSignInWindow = false;
-                }
-            });
-        }
 
         //Define elements of the 'Ajax Form'
         var inputTextMobileUN = document.getElementById("inputTextMobileUN");
@@ -200,7 +175,8 @@
                         informtextPSignIn.innerHTML = "";
                         informtextPSignIn.innerHTML = Response.ResultMessage;
                         //This User should have their cookie. Send them to the choice page
-                        navigateHeader(6);
+                        //navigateHeader(6);
+                        console.log("DEBUG: We should be logged in.");
                     } else if (Number(Response.ResultNum) === 1){
                         //Failed User Search
                         //Clear informtextPSignIn
@@ -213,7 +189,7 @@
                         informtextPSignIn.innerHTML = "Wrong information returned from server";
                         console.log("Wrong number returned from canLogin: " + Response.ResultNum);
                         //This User should have their cookie. Send them to the choice page
-                        navigateHeader(6);
+                        //navigateHeader(6);
                     }
                 }
             });
@@ -224,7 +200,12 @@
 
 {{define "ajaxsignup"}}
     {{/* Here is the form setup,(which starts off hidden */}}
-    <div id="divformDivSignUp" class="divformDiv">
+    <div class="divformDiv">
+        <div class="signallTitleDiv">
+            <p class="signallP">
+                Sign Up!
+            </p>
+        </div>
         <div class="signInAlignmentDiv">
             {{/* USERNAME */}}
             <div class="labelDiv">

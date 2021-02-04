@@ -164,6 +164,24 @@ body, html {
     
 }
 
+.signallTitleDiv{
+    /* Flexbox styling */
+    display: flex;
+    flex-flow: wrap;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+    /* styling */
+    /* debug styling */
+}
+
+.signallP{
+    font-size: 2rem;
+    align-self: center;
+    text-align: center;
+    color: black;
+}
+
 .signInAlignmentDiv{
     /* Flexbox styling */
     display: flex;

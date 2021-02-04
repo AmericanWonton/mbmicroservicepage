@@ -48,8 +48,6 @@ func loadUsernames() map[string]bool {
 		fmt.Println(theErr)
 	}
 
-	fmt.Printf("DEBUG: Here is our body we recieved: %v\n", string(body))
-
 	//Marshal the response into a type we can read
 	type ReturnMessage struct {
 		TheErr          []string        `json:"TheErr"`
@@ -243,4 +241,112 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 		logWriter(errIs)
 	}
 	fmt.Fprint(w, string(theJSONMessage))
+	/* AT THIS POINT, WE SHOULD BE GOOD TO CONCURRENTLY SEND THE USER AN EMAIL
+	AND TEXT MESSAGE */
+}
+
+//User Sign In Check
+func canLogin(w http.ResponseWriter, r *http.Request) {
+	//Collect JSON from Postman or wherever
+	//Get the byte slice from the request body ajax
+	bs, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		fmt.Println(err)
+		logWriter(err.Error())
+	}
+
+	//Declare DataType from Ajax
+	type LoginData struct {
+		Username string `json:"Username"`
+		Password string `json:"Password"`
+	}
+
+	//Declare Response back to Ajax
+	type Response struct {
+		ResultNum     int    `json:"ResultNum"`
+		ResultMessage string `json:"ResultMessage"`
+	}
+
+	responseMessage := Response{}
+
+	//Marshal the user data into our type
+	var dataForLogin LoginData
+	json.Unmarshal(bs, &dataForLogin)
+
+	bsString := []byte(dataForLogin.Password)     //Encode Password
+	encodedString := hex.EncodeToString(bsString) //Encode Password Pt2
+	dataForLogin.Password = encodedString
+	//Check to see if the login is legit
+	//Query Mongo for those username and password
+	//Send to CRUD OPERATIONS API
+	theJSONMessage, err := json.Marshal(dataForLogin)
+	if err != nil {
+		fmt.Println(err)
+		logWriter(err.Error())
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+	payload := strings.NewReader(string(theJSONMessage))
+	req, err := http.NewRequest("POST", "http://18.191.212.197:8080/userLogin", payload)
+	if err != nil {
+		theErr := "There was an error pinging userLogin in canLogin: " + err.Error()
+		logWriter(theErr)
+		fmt.Println(theErr)
+	}
+	req.Header.Add("Content-Type", "text/plain")
+
+	resp, err := http.DefaultClient.Do(req.WithContext(ctx))
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		theErr := "There was an error getting a response for userLogin in canLogin: " + err.Error()
+		logWriter(theErr)
+		fmt.Println(theErr)
+	}
+
+	//Marshal the returned response from Create User
+	type ReturnMessage struct {
+		TheErr     string `json:"TheErr"`
+		ResultMsg  string `json:"ResultMsg"`
+		SuccOrFail int    `json:"SuccOrFail"`
+		TheUser    AUser  `json:"TheUser"`
+	}
+	var returnMessage ReturnMessage
+	json.Unmarshal(body, &returnMessage)
+
+	//Log User in and give session cookie, if needed
+	if returnMessage.SuccOrFail >= 1 {
+		//This is a failure; return failure response
+		responseMessage.ResultNum = 1
+		responseMessage.ResultMessage = "Username or Password not found!"
+		logWriter(returnMessage.TheErr)
+		fmt.Printf("DEBUG: %v\n", returnMessage.TheErr)
+		theJSONMessage, err := json.Marshal(responseMessage)
+		if err != nil {
+			fmt.Println(err)
+			logWriter(err.Error())
+		}
+		fmt.Fprint(w, string(theJSONMessage))
+	} else if returnMessage.SuccOrFail == 0 {
+		responseMessage.ResultNum = 0
+		responseMessage.ResultMessage = "User logged in successfully!"
+		theJSONMessage, err := json.Marshal(responseMessage)
+		if err != nil {
+			fmt.Println(err)
+			logWriter(err.Error())
+		}
+		fmt.Fprint(w, string(theJSONMessage))
+	} else {
+		//This is a failure; return failure response
+		responseMessage.ResultNum = returnMessage.SuccOrFail
+		responseMessage.ResultMessage = "Wrong output expected"
+		logWriter("Wrong output expected")
+		fmt.Printf("DEBUG: %v\n", returnMessage.TheErr)
+		theJSONMessage, err := json.Marshal(responseMessage)
+		if err != nil {
+			fmt.Println(err)
+			logWriter(err.Error())
+		}
+		fmt.Fprint(w, string(theJSONMessage))
+	}
 }

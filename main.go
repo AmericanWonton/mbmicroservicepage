@@ -126,6 +126,7 @@ func handleRequests() {
 	//Field validation/User Creation
 	myRouter.HandleFunc("/checkUsername", checkUsername).Methods("POST")
 	myRouter.HandleFunc("/createUser", createUser).Methods("POST")
+	myRouter.HandleFunc("/canLogin", canLogin).Methods("POST")
 	//Serve our static files
 	myRouter.Handle("/", http.FileServer(http.Dir("./static")))
 	myRouter.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
