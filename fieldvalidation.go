@@ -337,7 +337,18 @@ func canLogin(w http.ResponseWriter, r *http.Request) {
 	json.Unmarshal(body, &returnMessage)
 
 	//Log User in and give session cookie, if needed
+	theUser := returnMessage.TheUser
+	dbUsers[dataForLogin.Username] = theUser
+	// create session
+	uuidWithHyphen := uuid.New().String()
 
+	cookie := &http.Cookie{
+		Name:  "session",
+		Value: uuidWithHyphen,
+	}
+	cookie.MaxAge = sessionLength
+	http.SetCookie(w, cookie)
+	dbSessions[cookie.Value] = theSession{dataForLogin.Username, time.Now()}
 	//Send a response back to Ajax after session is made
 	type SuccessMSG struct {
 		Message    string `json:"Message"`
