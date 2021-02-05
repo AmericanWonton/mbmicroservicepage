@@ -79,6 +79,7 @@ var currentPageNumber int = 1
 func init() {
 	/* Assign blank value to map so no nil errors occur */
 	usernameMap = make(map[string]bool) //Clear all Usernames when loading so no problems are caused
+	getbadWords()                       //Fill in bad words from file
 	template1 = template.Must(template.ParseGlob("./static/templates/*"))
 }
 

@@ -1,12 +1,14 @@
 package main
 
 import (
+	"bufio"
 	"context"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 
@@ -18,10 +20,30 @@ var allUsernames []string
 var usernameMap map[string]bool
 
 /* DEFINED SLURS */
-var slurs []string = []string{"penis", "vagina", "dick", "cunt", "asshole", "fag", "faggot",
-	"nigglet", "nigger", "beaner", "wetback", "wet back", "chink", "tranny", "bitch", "slut",
-	"whore", "fuck", "damn",
-	"shit", "piss", "cum", "jizz"}
+var slurs []string = []string{}
+
+//This gets the slur words we check against in our username and
+//text messages
+func getbadWords() {
+	file, err := os.Open("security/badphrases.txt")
+
+	if err != nil {
+		fmt.Printf("DEBUG: Trouble opening bad word text file: %v\n", err.Error())
+	}
+
+	scanner := bufio.NewScanner(file)
+
+	scanner.Split(bufio.ScanLines)
+	var text []string
+
+	for scanner.Scan() {
+		text = append(text, scanner.Text())
+	}
+
+	file.Close()
+
+	slurs = text
+}
 
 //Runs a mongo query to get all Usernames, then puts it in a map to return
 func loadUsernames() map[string]bool {
@@ -247,6 +269,7 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 
 //User Sign In Check
 func canLogin(w http.ResponseWriter, r *http.Request) {
+	fmt.Printf("DEBUG: We reached canLogin\n")
 	//Collect JSON from Postman or wherever
 	//Get the byte slice from the request body ajax
 	bs, err := ioutil.ReadAll(r.Body)
@@ -261,17 +284,12 @@ func canLogin(w http.ResponseWriter, r *http.Request) {
 		Password string `json:"Password"`
 	}
 
-	//Declare Response back to Ajax
-	type Response struct {
-		ResultNum     int    `json:"ResultNum"`
-		ResultMessage string `json:"ResultMessage"`
-	}
-
-	responseMessage := Response{}
-
 	//Marshal the user data into our type
 	var dataForLogin LoginData
 	json.Unmarshal(bs, &dataForLogin)
+
+	fmt.Printf("DEBUG: We got this username: %v and this password: %v\n", dataForLogin.Username,
+		dataForLogin.Password)
 
 	bsString := []byte(dataForLogin.Password)     //Encode Password
 	encodedString := hex.EncodeToString(bsString) //Encode Password Pt2
@@ -297,12 +315,16 @@ func canLogin(w http.ResponseWriter, r *http.Request) {
 
 	resp, err := http.DefaultClient.Do(req.WithContext(ctx))
 
+	fmt.Printf("DEBUG: We got stuff back from the API\n")
+
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		theErr := "There was an error getting a response for userLogin in canLogin: " + err.Error()
 		logWriter(theErr)
 		fmt.Println(theErr)
 	}
+
+	fmt.Printf("DEBUG: Here is the body: %v\n", string(body))
 
 	//Marshal the returned response from Create User
 	type ReturnMessage struct {
@@ -315,38 +337,20 @@ func canLogin(w http.ResponseWriter, r *http.Request) {
 	json.Unmarshal(body, &returnMessage)
 
 	//Log User in and give session cookie, if needed
-	if returnMessage.SuccOrFail >= 1 {
-		//This is a failure; return failure response
-		responseMessage.ResultNum = 1
-		responseMessage.ResultMessage = "Username or Password not found!"
-		logWriter(returnMessage.TheErr)
-		fmt.Printf("DEBUG: %v\n", returnMessage.TheErr)
-		theJSONMessage, err := json.Marshal(responseMessage)
-		if err != nil {
-			fmt.Println(err)
-			logWriter(err.Error())
-		}
-		fmt.Fprint(w, string(theJSONMessage))
-	} else if returnMessage.SuccOrFail == 0 {
-		responseMessage.ResultNum = 0
-		responseMessage.ResultMessage = "User logged in successfully!"
-		theJSONMessage, err := json.Marshal(responseMessage)
-		if err != nil {
-			fmt.Println(err)
-			logWriter(err.Error())
-		}
-		fmt.Fprint(w, string(theJSONMessage))
-	} else {
-		//This is a failure; return failure response
-		responseMessage.ResultNum = returnMessage.SuccOrFail
-		responseMessage.ResultMessage = "Wrong output expected"
-		logWriter("Wrong output expected")
-		fmt.Printf("DEBUG: %v\n", returnMessage.TheErr)
-		theJSONMessage, err := json.Marshal(responseMessage)
-		if err != nil {
-			fmt.Println(err)
-			logWriter(err.Error())
-		}
-		fmt.Fprint(w, string(theJSONMessage))
+
+	//Send a response back to Ajax after session is made
+	type SuccessMSG struct {
+		Message    string `json:"Message"`
+		SuccessNum int    `json:"SuccessNum"`
 	}
+	theSuccMessage := SuccessMSG{
+		Message:    returnMessage.ResultMsg,
+		SuccessNum: returnMessage.SuccOrFail,
+	}
+	theJSONMessage, err = json.Marshal(theSuccMessage)
+	if err != nil {
+		fmt.Println(err)
+		logWriter(err.Error())
+	}
+	fmt.Fprint(w, string(theJSONMessage))
 }

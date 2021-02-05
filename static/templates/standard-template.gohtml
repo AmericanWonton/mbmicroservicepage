@@ -161,35 +161,31 @@
             };
 
             var jsonString = JSON.stringify(LoginData); //stringify JSON
-
+            console.log("DEBUG: about to post to canLogin");
             //Call Ajax to see if password/username are correct
             var xhr = new XMLHttpRequest();
             xhr.open('POST', '/canLogin', true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.addEventListener('readystatechange', function(){
                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200){
-                    var Response = xhr.responseText;
-                    if (Number(Response.ResultNum) === 0){
+                    var item = xhr.responseText;
+                    var SuccessMSG = JSON.parse(item);
+                    if (SuccessMSG.SuccessNum === 0){
                         //Successful User Search
                         //Clear informtextPSignIn
                         informtextPSignIn.innerHTML = "";
-                        informtextPSignIn.innerHTML = Response.ResultMessage;
+                        informtextPSignIn.innerHTML = SuccessMSG.Message;
                         //This User should have their cookie. Send them to the choice page
                         //navigateHeader(6);
                         console.log("DEBUG: We should be logged in.");
-                    } else if (Number(Response.ResultNum) === 1){
-                        //Failed User Search
-                        //Clear informtextPSignIn
-                        informtextPSignIn.innerHTML = "";
-                        informtextPSignIn.innerHTML = Response.ResultMessage;
                     } else {
                         //Failed User Search
                         //Clear informtextPSignIn
+                        console.log("DEBUG: There was some error logging the User in:");
+                        console.log(SuccessMSG.Message);
+                        console.log(SuccessMSG.SuccessNum);
                         informtextPSignIn.innerHTML = "";
-                        informtextPSignIn.innerHTML = "Wrong information returned from server";
-                        console.log("Wrong number returned from canLogin: " + Response.ResultNum);
-                        //This User should have their cookie. Send them to the choice page
-                        //navigateHeader(6);
+                        informtextPSignIn.innerHTML = SuccessMSG.Message;
                     }
                 }
             });
