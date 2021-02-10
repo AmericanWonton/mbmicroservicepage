@@ -349,6 +349,8 @@ func canLogin(w http.ResponseWriter, r *http.Request) {
 	cookie.MaxAge = sessionLength
 	http.SetCookie(w, cookie)
 	dbSessions[cookie.Value] = theSession{dataForLogin.Username, time.Now()}
+	/* Use Concurrency to send emails and Text Messages */
+
 	//Send a response back to Ajax after session is made
 	type SuccessMSG struct {
 		Message    string `json:"Message"`
