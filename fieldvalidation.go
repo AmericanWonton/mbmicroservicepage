@@ -9,6 +9,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 
@@ -52,7 +53,7 @@ func loadUsernames() map[string]bool {
 
 	//Call our crudOperations Microservice in order to get our Usernames
 	//Create a context for timing out
-	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	req, err := http.NewRequest("GET", "http://18.191.212.197:8080/giveAllUsernames", nil)
 	if err != nil {
@@ -265,6 +266,161 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, string(theJSONMessage))
 	/* AT THIS POINT, WE SHOULD BE GOOD TO CONCURRENTLY SEND THE USER AN EMAIL
 	AND TEXT MESSAGE */
+	//Format variable to send in functions
+	aMessage := ""
+	aSubject := ""
+	if theSuccMessage.SuccessNum != 0 {
+		//Create failure messages
+		aMessage = "Sorry, " + username + ", there was an error creating your profile. Please see below and " +
+			"see if you can adjust your information for a successful submission. Otherwise, you can email me at johnnycowboy39@gmail.com " +
+			"for further support. \n Thanks and have a great day.\n " + "Error: " + otherReturnedMessage.ResultMsg
+		aSubject = "Profile creation failure"
+	} else {
+		//Create success messages
+		aMessage = "Hello, " + username + ", thank you for creating a profile on this test site! Feel free to read the comments and add some of " +
+			"your own! If you have any quesitons, please email me at johnnycowboy39@gmail.com.\n Thanks again,\nJoseph Keller"
+		aSubject = "Profile Created"
+	}
+
+	//Send Text Message
+	wg.Add(1)
+	go sendText(aMessage, areacode, phonenum)
+	//Send Email
+	wg.Add(1)
+	go sendEmail(aMessage, email, aSubject)
+
+	wg.Wait() //Not sure if this is needed or in the right spot...DEBUG
+}
+
+//Sends a text message with a go routine, no response needed, it's just logged
+func sendText(theMessage string, areacode int, phonenumber int) {
+	//Declare DataType for JSON
+	type TextInfo struct {
+		TextMessage string `json:"TextMessage"`
+		PhoneACode  int    `json:"PhoneACode"`
+		PhoneNumber int    `json:"PhoneNumber"`
+	}
+
+	dataTextMessage := TextInfo{
+		TextMessage: theMessage,
+		PhoneACode:  areacode,
+		PhoneNumber: phonenumber,
+	}
+
+	//Marshal into JSON to use
+	theJSONMessage, err := json.Marshal(dataTextMessage)
+	if err != nil {
+		fmt.Println(err)
+		logWriter(err.Error())
+	}
+	//Send the text message info and wait for a response
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+	payload := strings.NewReader(string(theJSONMessage))
+	req, err := http.NewRequest("POST", "http://18.188.234.83:80/sendTextMessage", payload)
+	if err != nil {
+		theErr := "There was an error sending a text in sendText: " + err.Error()
+		logWriter(theErr)
+		fmt.Println(theErr)
+	}
+	req.Header.Add("Content-Type", "text/plain")
+
+	resp, err := http.DefaultClient.Do(req.WithContext(ctx))
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		theErr := "There was an error getting a response for sendText: " + err.Error()
+		logWriter(theErr)
+		fmt.Println(theErr)
+	}
+
+	//Declare return information for JSON
+	type ReturnMessage struct {
+		TheErr     string `json:"TheErr"`
+		ResultMsg  string `json:"ResultMsg"`
+		SuccOrFail int    `json:"SuccOrFail"`
+	}
+	var otherReturnedMessage ReturnMessage
+	json.Unmarshal(body, &otherReturnedMessage)
+
+	//Log the results
+	logMessage := ""
+	if otherReturnedMessage.SuccOrFail != 0 {
+		logMessage = "Failure to send text message: " + otherReturnedMessage.TheErr + "\n" + otherReturnedMessage.ResultMsg
+	} else {
+		area := strconv.Itoa(areacode)
+		phonnum := strconv.Itoa(phonenumber)
+		logMessage = "Message successfully created for " + area + "-" + phonnum
+	}
+	logWriter(logMessage)
+
+	wg.Done() //For GoRoutines
+}
+
+//Sends an email with a go routine, no response needed it's just logged
+func sendEmail(theMessage string, emailAddress string, subject string) {
+	//Declare DataType for JSON
+	//Declare DataType from JSON
+	type EmailInfo struct {
+		EmailMessage string `json:"EmailString"`
+		EmailAddress string `json:"EmailAddressString"`
+		EmailSubject string `json:"EmailSubject"`
+	}
+
+	dataEmail := EmailInfo{
+		EmailMessage: theMessage,
+		EmailAddress: emailAddress,
+		EmailSubject: subject,
+	}
+
+	fmt.Printf("DEBUG: Here is our email: %v\n", dataEmail)
+
+	//Marshal into JSON to use
+	theJSONMessage, err := json.Marshal(dataEmail)
+	if err != nil {
+		fmt.Println(err)
+		logWriter(err.Error())
+	}
+	//Send the text message info and wait for a response
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+	payload := strings.NewReader(string(theJSONMessage))
+	req, err := http.NewRequest("POST", "http://18.188.234.83:80/sendEmail", payload)
+	if err != nil {
+		theErr := "There was an error sending an email in sendEmail: " + err.Error()
+		logWriter(theErr)
+		fmt.Println(theErr)
+	}
+	req.Header.Add("Content-Type", "text/plain")
+
+	resp, err := http.DefaultClient.Do(req.WithContext(ctx))
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		theErr := "There was an error getting a response in sendEmail " + err.Error()
+		logWriter(theErr)
+		fmt.Println(theErr)
+	}
+
+	//Declare return information for JSON
+	type ReturnMessage struct {
+		TheErr     string `json:"TheErr"`
+		ResultMsg  string `json:"ResultMsg"`
+		SuccOrFail int    `json:"SuccOrFail"`
+	}
+	var otherReturnedMessage ReturnMessage
+	json.Unmarshal(body, &otherReturnedMessage)
+
+	//Log the results
+	logMessage := ""
+	if otherReturnedMessage.SuccOrFail != 0 {
+		logMessage = "Failure to email: " + otherReturnedMessage.TheErr + "\n" + otherReturnedMessage.ResultMsg
+	} else {
+		logMessage = "Email successfully created for " + emailAddress
+	}
+	logWriter(logMessage)
+
+	wg.Done() //For GoRoutines
 }
 
 //User Sign In Check
