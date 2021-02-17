@@ -5,6 +5,13 @@ import (
 	"net/http"
 )
 
+//DEBUG not sure if needed
+type MessageViewData struct {
+	TestString  string    `json:"TestString"`
+	TheMessages []Message `json:"TheMessages"`
+	WhatPage    int       `json:"WhatPage"`
+}
+
 //Handles the Index requests
 func index(w http.ResponseWriter, r *http.Request) {
 

@@ -7,6 +7,19 @@ import (
 	"github.com/google/uuid"
 )
 
+const sessionLength int = 180 //Length of sessions
+
+//Here's our session struct
+type theSession struct {
+	username     string
+	lastActivity time.Time
+}
+
+//Session Database info
+var dbUsers = map[string]AUser{}         // user ID, user
+var dbSessions = map[string]theSession{} // session ID, session
+var dbSessionsCleaned time.Time
+
 func getUser(w http.ResponseWriter, req *http.Request) AUser {
 	// get cookie
 	cookie, err := req.Cookie("session")

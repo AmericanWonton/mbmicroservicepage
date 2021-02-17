@@ -18,48 +18,12 @@ import (
 //Here is our waitgroup
 var wg sync.WaitGroup
 
-const sessionLength int = 180 //Length of sessions
-
-//Here's our session struct
-type theSession struct {
-	username     string
-	lastActivity time.Time
-}
-
-//Session Database info
-var dbUsers = map[string]AUser{}         // user ID, user
-var dbSessions = map[string]theSession{} // session ID, session
-var dbSessionsCleaned time.Time
-
 /* TEMPLATE DEFINITION BEGINNING */
 var template1 *template.Template
 
 //Define function maps
 var funcMap = template.FuncMap{
 	"upperCase": strings.ToUpper, //upperCase is a key we can call inside of the template html file
-}
-
-//DEBUG not sure if needed
-type MessageViewData struct {
-	TestString  string    `json:"TestString"`
-	TheMessages []Message `json:"TheMessages"`
-	WhatPage    int       `json:"WhatPage"`
-}
-
-//DEBUG  Message displayed on the board
-type Message struct {
-	MessageID       int       `json:"MessageID"`       //ID of this Message
-	UserID          int       `json:"UserID"`          //ID of the owner of this message
-	Messages        []Message `json:"Messages"`        //Array of Messages under this one
-	IsChild         bool      `json:"IsChild"`         //Is this message childed to another message
-	HasChildren     bool      `json:"HasChildren"`     //Whether this message has children to list
-	ParentMessageID int       `json:"ParentMessageID"` //The ID of this parent
-	UberParentID    int       `json:"UberParentID"`    //The final parent of this parent, IF EQUAL PARENT
-	Order           int       `json:"Order"`           //Order the commnet is in with it's reply tree
-	RepliesAmount   int       `json:"RepliesAmount"`   //Amount of replies this message has
-	TheMessage      string    `json:"TheMessage"`      //The MEssage in the post
-	DateCreated     string    `json:"DateCreated"`     //When the message was created
-	LastUpdated     string    `json:"LastUpdated"`     //When the message was last updated
 }
 
 type AUser struct { //Using this for Mongo
@@ -75,16 +39,16 @@ type AUser struct { //Using this for Mongo
 	DateUpdated string `json:"DateUpdated"`
 }
 
-/* This is the current amount of results our User is looking at
-it changes as the User clicks forwards or backwards for more results */
-var currentPageNumber int = 1
-
 //Parse our templates
 func init() {
 	/* Assign blank value to map so no nil errors occur */
-	usernameMap = make(map[string]bool) //Clear all Usernames when loading so no problems are caused
-	getbadWords()                       //Fill in bad words from file
+	usernameMap = make(map[string]bool)           //Clear all Usernames when loading so no problems are caused
+	loadedMessagesMapHDog = make(map[int]Message) //Clearing this so we don't have any issues
+	loadedMessagesMapHam = make(map[int]Message)  //Clearing this so we don't have any issues
+	getbadWords()                                 //Fill in bad words from file
 	template1 = template.Must(template.ParseGlob("./static/templates/*"))
+	createTestMessages()
+
 }
 
 //Writes to the log; called from most anywhere in this program!
