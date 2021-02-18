@@ -12,7 +12,6 @@ import (
 
 /* This is the current amount of results our User is looking at
 it changes as the User clicks forwards or backwards for more results */
-var currentPageNumber int = 1
 var currentPageNumHotDog int = 1
 var currentPageNumHamburger int = 1
 
@@ -105,6 +104,88 @@ func createTestMessages() {
 	}
 }
 
+/* This refreshes messages from the database anytime a User
+pings one of our web pages */
+func refreshDatabases() {
+	//Nullify all maps to not cause issues
+	loadedMessagesMapHDog = make(map[int]Message)
+	loadedMessagesMapHam = make(map[int]Message)
+	/* Ping our CRUD API to get our most recent databases */
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+	req, err := http.NewRequest("GET", "http://18.191.212.197:8080/isMessageBoardCreated", nil)
+	if err != nil {
+		theErr := "There was an error getting a random id in getRandomID: " + err.Error()
+		logWriter(theErr)
+		fmt.Println(theErr)
+	}
+	req.Header.Add("Content-Type", "text/plain")
+
+	resp, err := http.DefaultClient.Do(req.WithContext(ctx))
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		theErr := "There was an error getting a response for refreshDatabases: " + err.Error()
+		logWriter(theErr)
+		fmt.Println(theErr)
+	}
+
+	type ReturnMessage struct {
+		TheErr      []string     `json:"TheErr"`
+		ResultMsg   []string     `json:"ResultMsg"`
+		SuccOrFail  int          `json:"SuccOrFail"`
+		GivenHDogMB MessageBoard `json:"GivenHDogMB"`
+		GivenHamMB  MessageBoard `json:"GivenHamMB"`
+	}
+	var otherReturnedMessage ReturnMessage
+	json.Unmarshal(body, &otherReturnedMessage)
+
+	//Validate our responses; if successful response, update our db
+	if otherReturnedMessage.SuccOrFail != 0 {
+		//Failure, log error
+		message := ""
+		for j := 0; j < len(otherReturnedMessage.TheErr); j++ {
+			message = message + otherReturnedMessage.TheErr[j] + "\n"
+		}
+		logWriter(message)
+		fmt.Println(message)
+	} else {
+		//Fill our databases with response
+		theMessageBoardHDog = otherReturnedMessage.GivenHDogMB
+		theMessageBoardHam = otherReturnedMessage.GivenHamMB
+		//Fill our messages with go routine
+		wg.Add(1)
+		go fillMessageMaps("hotdog")
+		wg.Add(1)
+		go fillMessageMaps("hamburger")
+		wg.Wait()
+	}
+}
+
+/* DEBUG: This goroutine is supposed to quickly fill our messageMaps
+concurrently....not sure how useful this is yet, or if it can be converted into a
+channel */
+func fillMessageMaps(whichMap string) {
+	switch whichMap {
+	case "hotdog":
+		for x := 0; x < len(theMessageBoardHDog.AllOriginalMessages); x++ {
+			loadedMessagesMapHDog[x+1] = theMessageBoardHDog.AllOriginalMessages[x]
+		}
+		break
+	case "hamburger":
+		for x := 0; x < len(theMessageBoardHam.AllOriginalMessages); x++ {
+			loadedMessagesMapHam[x+1] = theMessageBoardHam.AllOriginalMessages[x]
+		}
+		break
+	default:
+		err := "Wrong 'whichMap' entered in fillMessageMaps: " + whichMap
+		fmt.Println(err)
+		logWriter(err)
+		break
+	}
+	wg.Done()
+}
+
 //This gets 10 results for display on a messageboard page
 func getTenResults(whatPageNum int, whatBoard string) ([]Message, bool) {
 	giveMessages := []Message{}
@@ -176,6 +257,92 @@ func getTenResults(whatPageNum int, whatBoard string) ([]Message, bool) {
 	return giveMessages, okayResult
 }
 
+/* Called in Ajax from Javascript everytime User clicks left or right or submits a page
+with results they'd like to see. If it's successful, it returns a number of JSON formatted Messages
+for the page to update with. If not, it returns an error, which can be put in the pageNumber field. */
+func evaluateTenResults(w http.ResponseWriter, r *http.Request) {
+	//Collect JSON from Postman or wherever
+	//Get the byte slice from the request body ajax
+	bs, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		fmt.Println(err)
+	}
+	//Declare datatype from Ajax
+	type PageData struct {
+		ThePage  int    `json:"ThePage"`
+		WhatPage string `json:"WhatPage"`
+	}
+	//Unmarshal JSON
+	var pageDataPosted PageData
+	json.Unmarshal(bs, &pageDataPosted)
+	//Attempt to get data from loaded message map
+	someMessages, goodMessageFind := getTenResults(pageDataPosted.ThePage, pageDataPosted.WhatPage)
+	//Declare data to return
+	type ReturnMessage struct {
+		Messages   []Message `json:"Messages"`
+		ResultMsg  string    `json:"ResultMsg"`
+		SuccOrFail int       `json:"SuccOrFail"`
+	}
+	if goodMessageFind == true {
+		//Set the current page number server side in case User refreshes
+		switch pageDataPosted.WhatPage {
+		case "hotdog":
+			currentPageNumHotDog = pageDataPosted.ThePage
+			//Return failure message
+			theReturnMessage := ReturnMessage{
+				Messages:   someMessages,
+				ResultMsg:  "Page Found",
+				SuccOrFail: 0,
+			}
+			theJSONMessage, err := json.Marshal(theReturnMessage)
+			if err != nil {
+				fmt.Println(err)
+			}
+			fmt.Fprint(w, string(theJSONMessage))
+			break
+		case "hamburger":
+			currentPageNumHamburger = pageDataPosted.ThePage
+			//Return failure message
+			theReturnMessage := ReturnMessage{
+				Messages:   someMessages,
+				ResultMsg:  "Page Found",
+				SuccOrFail: 0,
+			}
+			theJSONMessage, err := json.Marshal(theReturnMessage)
+			if err != nil {
+				fmt.Println(err)
+			}
+			fmt.Fprint(w, string(theJSONMessage))
+			break
+		default:
+			//Return failure message
+			theReturnMessage := ReturnMessage{
+				Messages:   someMessages,
+				ResultMsg:  "Error finding page...wrong data posted: " + pageDataPosted.WhatPage,
+				SuccOrFail: 1,
+			}
+			theJSONMessage, err := json.Marshal(theReturnMessage)
+			if err != nil {
+				fmt.Println(err)
+			}
+			fmt.Fprint(w, string(theJSONMessage))
+			break
+		}
+	} else {
+		//Return failure message
+		theReturnMessage := ReturnMessage{
+			Messages:   someMessages,
+			ResultMsg:  "Error finding page...",
+			SuccOrFail: 1,
+		}
+		theJSONMessage, err := json.Marshal(theReturnMessage)
+		if err != nil {
+			fmt.Println(err)
+		}
+		fmt.Fprint(w, string(theJSONMessage))
+	}
+}
+
 //This is for reversing the order of a Message array for display
 func reverseSlice(orderedSlice []Message) []Message {
 	last := len(orderedSlice) - 1
@@ -221,7 +388,7 @@ func messageOriginalAjax(w http.ResponseWriter, r *http.Request) {
 		SuccessBool:    true,
 		SuccessInt:     0,
 		CreatedMessage: newestMessage,
-		ThePageNow:     currentPageNumber,
+		ThePageNow:     0,
 	}
 
 	theTimeNow := time.Now() //Needed for setting time values
@@ -260,6 +427,8 @@ func messageOriginalAjax(w http.ResponseWriter, r *http.Request) {
 		go updateMongoMessageBoard(theMessageBoardHDog)
 		//Update the messagemap as well
 		loadedMessagesMapHDog[len(loadedMessagesMapHDog)+1] = newestMessage
+		//Set value for return data
+		theDataReturn.ThePageNow = currentPageNumHotDog
 		break
 	case "hamburger":
 		theOrder = len(theMessageBoardHam.AllOriginalMessages) + 1
@@ -293,6 +462,8 @@ func messageOriginalAjax(w http.ResponseWriter, r *http.Request) {
 		go updateMongoMessageBoard(theMessageBoardHam)
 		//Update the messagemap as well
 		loadedMessagesMapHam[len(loadedMessagesMapHam)+1] = newestMessage
+		//Set value for return data
+		theDataReturn.ThePageNow = currentPageNumHamburger
 		break
 	default:
 		message := "Incorrect 'whatboard' is put in messageOriginalAjax: " + postedMessage.WhatBoard

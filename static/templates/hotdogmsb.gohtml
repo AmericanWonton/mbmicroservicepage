@@ -12,7 +12,8 @@
         {{/* Here are our Media Query and stylesheets */}}
         {{template "media-queries"}}
         {{/* Here is our Javascript or additional code needed */}}
-        <script src="static/js/index.js"></script>
+        <script src="static/js/messagepages.js"></script>
+        <script src="static/js/pagehandling.js"></script>
     </head>
     <body>
         {{/* Here is our header */}}
@@ -23,8 +24,12 @@
         {{/* Send data to the javascript functions */}}
         {{$theData := .TheMessages}}
         {{$thePage := .WhatPage}}
+        {{$theUserName := .Username}}
+        {{$theUserID := .UserID}}
         {{template "sendJSMessageData" $theData}}
         {{template "sendPageNumber" $thePage}}
+        {{template "sendUsername" $theUserName}}
+        {{template "sendUserID" $theUserID}}
         {{/* Here is our footer */}}
     </body>
 </html>

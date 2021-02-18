@@ -62,6 +62,12 @@ body, html {
     border: 1px dashed black;
 }
 
+.pageLeadButton{
+    width: 100%;
+    height: 100%;
+    align-items: center;
+}
+
 .entranceP {
     font-size: 2rem;
     align-self: center;

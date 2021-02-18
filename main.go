@@ -48,7 +48,6 @@ func init() {
 	getbadWords()                                 //Fill in bad words from file
 	template1 = template.Must(template.ParseGlob("./static/templates/*"))
 	createTestMessages()
-
 }
 
 //Writes to the log; called from most anywhere in this program!
@@ -86,10 +85,12 @@ func handleRequests() {
 	debugMessage := "\n\nDEBUG: We are now handling requests"
 	fmt.Println(debugMessage)
 	logWriter(debugMessage)
-
+	//Favicon and page spots
 	http.Handle("/favicon.ico", http.NotFoundHandler()) //For missing FavIcon
 	myRouter.HandleFunc("/", index)
 	myRouter.HandleFunc("/test", test)
+	myRouter.HandleFunc("/hotdogMB", hotdogMB)
+	myRouter.HandleFunc("/hamburgerMB", hamburgerMB)
 	//Mongo No-SQL Stuff
 
 	//Field validation/User Creation

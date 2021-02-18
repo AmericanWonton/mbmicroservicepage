@@ -13,3 +13,7 @@ DEBUG: We are now handling requests
 2021/02/14 18:18:12 Message successfully created for 1-3143228594
 2021/02/14 18:18:13 Email successfully created for johnnycowboy39@gmail.com
 2021/02/14 18:18:13 No issues returning Usernames
+2021/02/17 18:06:44 
+
+DEBUG: We are now handling requests
+2021/02/17 18:07:00 No issues returning Usernames

@@ -58,14 +58,18 @@
     <header class="headerIndex">
         <div class="messageboardEntranceDivs">
             <div class="entranceHDogDiv">
-                <p class="entranceP" id="entrancePHDog">
-                    Hotdog Messageboard
-                </p>
+                <button class="pageLeadButton" id="pageLeadButton" onclick="navigateHeader(3)">
+                    <p class="entranceP" id="entrancePHDog">
+                        Hotdog Messageboard
+                    </p>
+                </button>
             </div>
             <div class="entranceHamDiv">
-                <p class="entranceP" id="entrancePHam">
-                    Hamburger Messageboard
-                </p>
+                <button class="pageLeadButton" id="pageLeadButton" onclick="navigateHeader(4)">
+                    <p class="entranceP" id="entrancePHam">
+                        Hamburger Messageboard
+                    </p>
+                </button>
             </div>
         </div>
         <div class="entranceInfoDivs">
@@ -476,6 +480,18 @@
 {{define "sendPageNumber"}}
     <script>
         initializeWhatPage({{.}});
+    </script>
+{{end}}
+
+{{define "sendUsername"}}
+    <script>
+        setUsername({{.}});
+    </script>
+{{end}}
+
+{{define "sendUserID"}}
+    <script>
+        setUserID({{.}});
     </script>
 {{end}}
 
