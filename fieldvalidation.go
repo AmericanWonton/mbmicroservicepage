@@ -434,6 +434,13 @@ func canLogin(w http.ResponseWriter, r *http.Request) {
 		logWriter(err.Error())
 	}
 
+	//Send a response back to Ajax after session is made
+	type SuccessMSG struct {
+		Message    string `json:"Message"`
+		SuccessNum int    `json:"SuccessNum"`
+	}
+	theSuccMessage := SuccessMSG{}
+
 	//Declare DataType from Ajax
 	type LoginData struct {
 		Username string `json:"Username"`
@@ -492,30 +499,33 @@ func canLogin(w http.ResponseWriter, r *http.Request) {
 	var returnMessage ReturnMessage
 	json.Unmarshal(body, &returnMessage)
 
-	//Log User in and give session cookie, if needed
-	theUser := returnMessage.TheUser
-	dbUsers[dataForLogin.Username] = theUser
-	// create session
-	uuidWithHyphen := uuid.New().String()
+	//Check for a null User returned
+	if returnMessage.SuccOrFail != 0 {
+		theSuccMessage = SuccessMSG{
+			Message:    returnMessage.ResultMsg,
+			SuccessNum: returnMessage.SuccOrFail,
+		}
+	} else {
+		//Log User in and give session cookie, if needed
+		theUser := returnMessage.TheUser
+		dbUsers[dataForLogin.Username] = theUser
+		// create session
+		uuidWithHyphen := uuid.New().String()
 
-	cookie := &http.Cookie{
-		Name:  "session",
-		Value: uuidWithHyphen,
-	}
-	cookie.MaxAge = sessionLength
-	http.SetCookie(w, cookie)
-	dbSessions[cookie.Value] = theSession{dataForLogin.Username, time.Now()}
-	/* Use Concurrency to send emails and Text Messages */
+		cookie := &http.Cookie{
+			Name:  "session",
+			Value: uuidWithHyphen,
+		}
+		cookie.MaxAge = sessionLength
+		http.SetCookie(w, cookie)
+		dbSessions[cookie.Value] = theSession{dataForLogin.Username, time.Now()}
 
-	//Send a response back to Ajax after session is made
-	type SuccessMSG struct {
-		Message    string `json:"Message"`
-		SuccessNum int    `json:"SuccessNum"`
+		theSuccMessage = SuccessMSG{
+			Message:    returnMessage.ResultMsg,
+			SuccessNum: returnMessage.SuccOrFail,
+		}
 	}
-	theSuccMessage := SuccessMSG{
-		Message:    returnMessage.ResultMsg,
-		SuccessNum: returnMessage.SuccOrFail,
-	}
+
 	theJSONMessage, err = json.Marshal(theSuccMessage)
 	if err != nil {
 		fmt.Println(err)

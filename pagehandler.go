@@ -23,7 +23,6 @@ type ViewData struct {
 
 //Handles the Index requests
 func index(w http.ResponseWriter, r *http.Request) {
-
 	usernameMap = loadUsernames()
 	fmt.Printf("DEBUG: here we are in index: \n")
 	/* Execute template, handle error */

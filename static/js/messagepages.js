@@ -644,7 +644,7 @@ function changePageNumber(thePageCurrently){
     document.getElementById("goInput").value = thePageCurrently; //Clear any values put in
     document.getElementById("goInput").placeholder = thePageCurrently; //Display Message
 }
-
+//Creates an original comment when the 'Add Comment' button is clicked.
 function orignalCommentMaker(){
     console.log("DEBUG: Submitting an original comment.");
     var textareaComment = document.getElementById("textareaComment");
@@ -668,8 +668,8 @@ function orignalCommentMaker(){
             } else {
                 /* Page Load unsuccessfull. Informing User in goInput */
                 textareaComment.value = ""; //Clear any values put in
-                textareaComment.innerHTML = ""; //Clear any value put in there
-                textareaReply.placeholder = DataReturn.SuccessMsg; //Display Message
+                textareaComment.innerHTML = ""; //Clear any value put in theree
+                textareaComment.placeholder = DataReturn.SuccessMsg; //Display error message
             }
         }
     });
