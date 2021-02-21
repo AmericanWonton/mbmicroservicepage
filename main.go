@@ -83,7 +83,7 @@ func handleRequests() {
 
 	//Write to logger that we are handling requests
 	debugMessage := "\n\nDEBUG: We are now handling requests"
-	fmt.Println(debugMessage)
+	//fmt.Println(debugMessage)
 	logWriter(debugMessage)
 	//Favicon and page spots
 	http.Handle("/favicon.ico", http.NotFoundHandler()) //For missing FavIcon

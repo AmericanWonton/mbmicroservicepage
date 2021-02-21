@@ -90,7 +90,6 @@ func createTestMessages() {
 		theMessageBoardHDog = MessageBoard{}
 		theMessageBoardHam = MessageBoard{}
 	} else {
-		fmt.Printf("DEBUG: Got the messageboards for hotdog and hamburger\n")
 		theMessageBoardHDog = returnedMessage.GivenHDogMB
 		theMessageBoardHam = returnedMessage.GivenHamMB
 		//Fill the hotdog Messagemap
@@ -415,19 +414,16 @@ func messageOriginalAjax(w http.ResponseWriter, r *http.Request) {
 			DateCreated:     theTimeNow.Format("2006-01-02 15:04:05"),
 			LastUpdated:     theTimeNow.Format("2006-01-02 15:04:05"),
 		}
-		//Insert new Message into database and update on server
 		//Update the messagemap as well
 		loadedMessagesMapHDog[len(loadedMessagesMapHDog)+1] = newestMessage
-		//Update our hotdog messageboard
+		//Update our hotdog messageboard THIS IS THE PROBLEM AREA
 		theMessageBoardHDog.AllMessages = append(theMessageBoardHDog.AllMessages, newestMessage)
 		theMessageBoardHDog.AllMessagesMap[newestMessage.MessageID] = newestMessage
 		theMessageBoardHDog.AllOriginalMessages = append(theMessageBoardHDog.AllOriginalMessages, newestMessage)
 		theMessageBoardHDog.AllOriginalMessagesMap[newestMessage.MessageID] = newestMessage
 		theMessageBoardHDog.LastUpdated = theTimeNow.Format("2006-01-02 15:04:05")
 		testFuncCall()
-		//insertOneMessage(newestMessage)
-		//Set value for return data
-		theDataReturn.ThePageNow = currentPageNumHotDog
+		updateMongoMessageBoard(theMessageBoardHDog)
 		break
 	case "hamburger":
 		theOrder = len(theMessageBoardHam.AllOriginalMessages) + 1
