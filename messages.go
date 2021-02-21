@@ -396,6 +396,7 @@ func messageOriginalAjax(w http.ResponseWriter, r *http.Request) {
 	//Set the 'order' for the newest message
 	switch postedMessage.WhatBoard {
 	case "hotdog":
+		fmt.Printf("DEBUG: Making an original message for a hotdog\n")
 		theOrder = len(theMessageBoardHDog.AllOriginalMessages) + 1
 		//Format the new Original Message
 		newestMessage = Message{
@@ -415,18 +416,16 @@ func messageOriginalAjax(w http.ResponseWriter, r *http.Request) {
 			LastUpdated:     theTimeNow.Format("2006-01-02 15:04:05"),
 		}
 		//Insert new Message into database and update on server
-		wg.Add(1)
-		go insertOneMessage(newestMessage)
+		//Update the messagemap as well
+		loadedMessagesMapHDog[len(loadedMessagesMapHDog)+1] = newestMessage
 		//Update our hotdog messageboard
 		theMessageBoardHDog.AllMessages = append(theMessageBoardHDog.AllMessages, newestMessage)
 		theMessageBoardHDog.AllMessagesMap[newestMessage.MessageID] = newestMessage
 		theMessageBoardHDog.AllOriginalMessages = append(theMessageBoardHDog.AllOriginalMessages, newestMessage)
 		theMessageBoardHDog.AllOriginalMessagesMap[newestMessage.MessageID] = newestMessage
 		theMessageBoardHDog.LastUpdated = theTimeNow.Format("2006-01-02 15:04:05")
-		wg.Add(1)
-		go updateMongoMessageBoard(theMessageBoardHDog)
-		//Update the messagemap as well
-		loadedMessagesMapHDog[len(loadedMessagesMapHDog)+1] = newestMessage
+		testFuncCall()
+		//insertOneMessage(newestMessage)
 		//Set value for return data
 		theDataReturn.ThePageNow = currentPageNumHotDog
 		break
@@ -449,19 +448,17 @@ func messageOriginalAjax(w http.ResponseWriter, r *http.Request) {
 			DateCreated:     theTimeNow.Format("2006-01-02 15:04:05"),
 			LastUpdated:     theTimeNow.Format("2006-01-02 15:04:05"),
 		}
+		//Update the messagemap as well
+		loadedMessagesMapHam[len(loadedMessagesMapHam)+1] = newestMessage
 		//Insert new Message into database and update on server
-		wg.Add(1)
-		go insertOneMessage(newestMessage)
+		insertOneMessage(newestMessage)
 		//Update our hotdog messageboard
 		theMessageBoardHam.AllMessages = append(theMessageBoardHam.AllMessages, newestMessage)
 		theMessageBoardHam.AllMessagesMap[newestMessage.MessageID] = newestMessage
 		theMessageBoardHam.AllOriginalMessages = append(theMessageBoardHam.AllOriginalMessages, newestMessage)
 		theMessageBoardHam.AllOriginalMessagesMap[newestMessage.MessageID] = newestMessage
 		theMessageBoardHam.LastUpdated = theTimeNow.Format("2006-01-02 15:04:05")
-		wg.Add(1)
-		go updateMongoMessageBoard(theMessageBoardHam)
-		//Update the messagemap as well
-		loadedMessagesMapHam[len(loadedMessagesMapHam)+1] = newestMessage
+		updateMongoMessageBoard(theMessageBoardHam)
 		//Set value for return data
 		theDataReturn.ThePageNow = currentPageNumHamburger
 		break
@@ -475,7 +472,7 @@ func messageOriginalAjax(w http.ResponseWriter, r *http.Request) {
 		break
 	}
 
-	wg.Wait() //Not sure if this is needed or in the right spot...DEBUG
+	fmt.Printf("Here is the data we are going to send back: %v\n", theDataReturn)
 
 	dataJSON, err := json.Marshal(theDataReturn)
 	if err != nil {
@@ -727,8 +724,9 @@ func insertOneMessage(theMessage Message) {
 		fmt.Println(err)
 		logWriter(err.Error())
 	}
+	fmt.Printf("DEBUG: we are in insertOneMessage. Here is the message: %v\n", theMessage)
 	//Send to CRUD OPERATIONS API
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
 	payload := strings.NewReader(string(theJSONMessage))
 	req, err := http.NewRequest("POST", "http://18.191.212.197:8080/insertOneNewMessage", payload)
@@ -757,6 +755,8 @@ func insertOneMessage(theMessage Message) {
 	var otherReturnedMessage OtherReturnMessage
 	json.Unmarshal(body, &otherReturnedMessage)
 
+	fmt.Printf("Here is the message retuned to 'insertOneMessage': %v\n\n", otherReturnedMessage)
+
 	if otherReturnedMessage.SuccOrFail != 0 {
 		theMessage := otherReturnedMessage.TheErr
 		logWriter(theMessage)
@@ -766,13 +766,11 @@ func insertOneMessage(theMessage Message) {
 		logWriter(theMessage)
 		fmt.Println(theMessage)
 	}
-
-	wg.Done()
 }
 
 /* Update one messageboard, (calls the CRUD Microservice, can be used with GO Routines) */
 func updateMongoMessageBoard(updatedMessageBoard MessageBoard) {
-
+	fmt.Printf("DEBUG: We are in updateMongoMessageBoard\n")
 	type UpdatedMongoBoard struct {
 		UpdatedMessageBoard MessageBoard `json:"UpdatedMessageBoard"`
 	}
@@ -785,8 +783,9 @@ func updateMongoMessageBoard(updatedMessageBoard MessageBoard) {
 		fmt.Println(err)
 		logWriter(err.Error())
 	}
+	fmt.Printf("\nDEBUG: We are in updateMongoMessageboard. Here is our messageboard: %v\n\n", string(theJSONMessage))
 	//Send to CRUD OPERATIONS API
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
 	payload := strings.NewReader(string(theJSONMessage))
 	req, err := http.NewRequest("POST", "http://18.191.212.197:8080/updateMongoMessageBoard", payload)
@@ -815,6 +814,8 @@ func updateMongoMessageBoard(updatedMessageBoard MessageBoard) {
 	var theReturnedMessage ReturnMessage
 	json.Unmarshal(body, &theReturnedMessage)
 
+	fmt.Printf("DEBUG: Here we are in updateMongoMessageboard. Here is our JSON returned from the request:\n%v\n", theReturnedMessage)
+
 	if theReturnedMessage.SuccOrFail != 0 {
 		theMessage := ""
 		for i := 0; i < len(theReturnedMessage.TheErr); i++ {
@@ -830,8 +831,6 @@ func updateMongoMessageBoard(updatedMessageBoard MessageBoard) {
 		fmt.Println(theMessage)
 		logWriter(theMessage)
 	}
-
-	wg.Done()
 }
 
 /* This function calls the CRUD Microservice to get a random ID */
@@ -874,4 +873,10 @@ func getRandomID() int {
 		}
 	}
 	return theID
+}
+
+/* TESTING ZONE */
+func testFuncCall() {
+	fmt.Printf("420 69 swag\n")
+
 }

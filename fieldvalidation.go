@@ -425,7 +425,6 @@ func sendEmail(theMessage string, emailAddress string, subject string) {
 
 //User Sign In Check
 func canLogin(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("DEBUG: We reached canLogin\n")
 	//Collect JSON from Postman or wherever
 	//Get the byte slice from the request body ajax
 	bs, err := ioutil.ReadAll(r.Body)
@@ -451,9 +450,6 @@ func canLogin(w http.ResponseWriter, r *http.Request) {
 	var dataForLogin LoginData
 	json.Unmarshal(bs, &dataForLogin)
 
-	fmt.Printf("DEBUG: We got this username: %v and this password: %v\n", dataForLogin.Username,
-		dataForLogin.Password)
-
 	bsString := []byte(dataForLogin.Password)     //Encode Password
 	encodedString := hex.EncodeToString(bsString) //Encode Password Pt2
 	dataForLogin.Password = encodedString
@@ -478,16 +474,12 @@ func canLogin(w http.ResponseWriter, r *http.Request) {
 
 	resp, err := http.DefaultClient.Do(req.WithContext(ctx))
 
-	fmt.Printf("DEBUG: We got stuff back from the API\n")
-
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		theErr := "There was an error getting a response for userLogin in canLogin: " + err.Error()
 		logWriter(theErr)
 		fmt.Println(theErr)
 	}
-
-	fmt.Printf("DEBUG: Here is the body: %v\n", string(body))
 
 	//Marshal the returned response from Create User
 	type ReturnMessage struct {

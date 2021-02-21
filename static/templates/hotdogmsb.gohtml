@@ -26,10 +26,12 @@
         {{$thePage := .WhatPage}}
         {{$theUserName := .Username}}
         {{$theUserID := .UserID}}
+        {{$theBoardType := .WhatBoard}}
         {{template "sendJSMessageData" $theData}}
         {{template "sendPageNumber" $thePage}}
         {{template "sendUsername" $theUserName}}
         {{template "sendUserID" $theUserID}}
+        {{template "sendBoardType" $theBoardType}}
         {{/* Here is our footer */}}
     </body>
 </html>

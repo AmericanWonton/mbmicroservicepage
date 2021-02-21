@@ -64,3 +64,127 @@ DEBUG: We are now handling requests
 
 DEBUG: We are now handling requests
 2021/02/20 13:22:48 No issues returning Usernames
+2021/02/20 13:36:50 
+
+DEBUG: We are now handling requests
+2021/02/20 13:36:56 No issues returning Usernames
+2021/02/20 13:36:57 No issues returning Usernames
+2021/02/20 13:46:25 
+
+DEBUG: We are now handling requests
+2021/02/20 13:46:28 No issues returning Usernames
+2021/02/20 13:46:30 No issues returning Usernames
+2021/02/20 13:55:46 No issues returning Usernames
+2021/02/20 14:34:09 
+
+DEBUG: We are now handling requests
+2021/02/20 14:34:16 No issues returning Usernames
+2021/02/20 14:38:17 
+
+DEBUG: We are now handling requests
+2021/02/20 14:46:56 
+
+DEBUG: We are now handling requests
+2021/02/20 14:47:09 No issues returning Usernames
+2021/02/20 14:58:23 
+
+DEBUG: We are now handling requests
+2021/02/20 14:58:37 No issues returning Usernames
+2021/02/20 15:01:32 
+
+DEBUG: We are now handling requests
+2021/02/20 15:01:33 No issues returning Usernames
+2021/02/20 15:03:12 Incorrect 'whatboard' is put in messageOriginalAjax: 
+2021/02/20 15:04:01 Incorrect 'whatboard' is put in messageOriginalAjax: 
+2021/02/20 15:20:54 
+
+DEBUG: We are now handling requests
+2021/02/20 15:20:57 No issues returning Usernames
+2021/02/20 15:21:14 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":703486821141,"UserID":443628525026,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"first comment","WhatBoard":"hotdog","DateCreated":"2021-02-20 15:21:13","LastUpdated":"2021-02-20 15:21:13"}
+2021/02/20 15:21:14 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":17265455384,"UserID":443526525584,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"first comment","WhatBoard":"hotdog","DateCreated":"2021-02-20 15:21:13","LastUpdated":"2021-02-20 15:21:13"}
+2021/02/20 15:21:14 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":344421044507,"UserID":255253464452,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"first comment","WhatBoard":"hotdog","DateCreated":"2021-02-20 15:21:14","LastUpdated":"2021-02-20 15:21:14"}
+2021/02/20 15:38:23 
+
+DEBUG: We are now handling requests
+2021/02/20 15:38:29 No issues returning Usernames
+2021/02/20 15:38:48 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":123061272464,"UserID":322484414563,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"Shabuoptie","WhatBoard":"hotdog","DateCreated":"2021-02-20 15:38:47","LastUpdated":"2021-02-20 15:38:47"}
+2021/02/20 15:38:48 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":804084142887,"UserID":554685467633,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"Shabuoptie","WhatBoard":"hotdog","DateCreated":"2021-02-20 15:38:47","LastUpdated":"2021-02-20 15:38:47"}
+2021/02/20 15:38:48 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":878757287272,"UserID":165215661155,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"Shabuoptie","WhatBoard":"hotdog","DateCreated":"2021-02-20 15:38:48","LastUpdated":"2021-02-20 15:38:48"}
+2021/02/20 15:48:01 
+
+DEBUG: We are now handling requests
+2021/02/20 15:48:06 No issues returning Usernames
+2021/02/20 15:48:39 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":608406162253,"UserID":466465765075,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"big oof","WhatBoard":"hotdog","DateCreated":"2021-02-20 15:48:38","LastUpdated":"2021-02-20 15:48:38"}
+2021/02/20 15:48:39 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":735316374843,"UserID":342000865422,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"big oof","WhatBoard":"hotdog","DateCreated":"2021-02-20 15:48:39","LastUpdated":"2021-02-20 15:48:39"}
+2021/02/20 15:48:39 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":325662305433,"UserID":680457088200,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"big oof","WhatBoard":"hotdog","DateCreated":"2021-02-20 15:48:39","LastUpdated":"2021-02-20 15:48:39"}
+2021/02/20 15:51:47 
+
+DEBUG: We are now handling requests
+2021/02/20 15:51:51 No issues returning Usernames
+2021/02/20 15:51:54 No issues returning Usernames
+2021/02/20 15:52:15 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":511302547232,"UserID":288547503470,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"bascooptie","WhatBoard":"hotdog","DateCreated":"2021-02-20 15:52:15","LastUpdated":"2021-02-20 15:52:15"}
+2021/02/20 15:52:15 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":660266860115,"UserID":154577426138,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"bascooptie","WhatBoard":"hotdog","DateCreated":"2021-02-20 15:52:15","LastUpdated":"2021-02-20 15:52:15"}
+2021/02/20 15:52:15 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":258455875311,"UserID":423686028320,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"bascooptie","WhatBoard":"hotdog","DateCreated":"2021-02-20 15:52:15","LastUpdated":"2021-02-20 15:52:15"}
+2021/02/20 15:52:16 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":10717062113,"UserID":253415145251,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"bascooptie","WhatBoard":"hotdog","DateCreated":"2021-02-20 15:52:16","LastUpdated":"2021-02-20 15:52:16"}
+2021/02/20 16:10:22 
+
+DEBUG: We are now handling requests
+2021/02/20 16:10:25 No issues returning Usernames
+2021/02/20 16:10:43 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":377743420652,"UserID":38238204121,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"bddadfdsf","WhatBoard":"hotdog","DateCreated":"2021-02-20 16:10:43","LastUpdated":"2021-02-20 16:10:43"}
+2021/02/20 16:10:43 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":50383763874,"UserID":37356326015,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"bddadfdsf","WhatBoard":"hotdog","DateCreated":"2021-02-20 16:10:43","LastUpdated":"2021-02-20 16:10:43"}
+2021/02/20 16:10:43 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":536530425111,"UserID":502110675838,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"bddadfdsf","WhatBoard":"hotdog","DateCreated":"2021-02-20 16:10:43","LastUpdated":"2021-02-20 16:10:43"}
+2021/02/20 16:24:52 
+
+DEBUG: We are now handling requests
+2021/02/20 16:24:57 No issues returning Usernames
+2021/02/20 16:24:59 No issues returning Usernames
+2021/02/20 16:25:13 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":341521324637,"UserID":784000216644,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"boof","WhatBoard":"hotdog","DateCreated":"2021-02-20 16:25:13","LastUpdated":"2021-02-20 16:25:13"}
+2021/02/20 16:25:14 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":614418151577,"UserID":231002460428,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"boof","WhatBoard":"hotdog","DateCreated":"2021-02-20 16:25:13","LastUpdated":"2021-02-20 16:25:13"}
+2021/02/20 16:25:14 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":111765817310,"UserID":34502543244,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"boof","WhatBoard":"hotdog","DateCreated":"2021-02-20 16:25:14","LastUpdated":"2021-02-20 16:25:14"}
+2021/02/21 10:21:09 
+
+DEBUG: We are now handling requests
+2021/02/21 10:21:27 No issues returning Usernames
+2021/02/21 10:21:47 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":13538484352,"UserID":886403782538,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"First thangs firs\n","WhatBoard":"hotdog","DateCreated":"2021-02-21 10:21:47","LastUpdated":"2021-02-21 10:21:47"}
+2021/02/21 10:21:48 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":730387286585,"UserID":540872645843,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"First thangs firs\n","WhatBoard":"hotdog","DateCreated":"2021-02-21 10:21:47","LastUpdated":"2021-02-21 10:21:47"}
+2021/02/21 10:21:48 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":334243042608,"UserID":272830180608,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"First thangs firs\n","WhatBoard":"hotdog","DateCreated":"2021-02-21 10:21:48","LastUpdated":"2021-02-21 10:21:48"}
+2021/02/21 10:27:44 
+
+DEBUG: We are now handling requests
+2021/02/21 10:27:47 No issues returning Usernames
+2021/02/21 10:27:49 No issues returning Usernames
+2021/02/21 10:28:58 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":887415764766,"UserID":870603407271,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"hheeeyy yuhhhh","WhatBoard":"hotdog","DateCreated":"2021-02-21 10:28:58","LastUpdated":"2021-02-21 10:28:58"}
+2021/02/21 10:28:58 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":787801544206,"UserID":613144885423,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"hheeeyy yuhhhh","WhatBoard":"hotdog","DateCreated":"2021-02-21 10:28:58","LastUpdated":"2021-02-21 10:28:58"}
+2021/02/21 10:28:58 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":506545736041,"UserID":621636483387,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"hheeeyy yuhhhh","WhatBoard":"hotdog","DateCreated":"2021-02-21 10:28:58","LastUpdated":"2021-02-21 10:28:58"}
+2021/02/21 10:32:41 
+
+DEBUG: We are now handling requests
+2021/02/21 10:32:51 No issues returning Usernames
+2021/02/21 10:32:53 No issues returning Usernames
+2021/02/21 10:39:08 
+
+DEBUG: We are now handling requests
+2021/02/21 10:39:14 No issues returning Usernames
+2021/02/21 10:39:24 
+Success updating hotdog and hamburger messageboards
+2021/02/21 11:06:58 
+
+DEBUG: We are now handling requests
+2021/02/21 11:07:08 No issues returning Usernames
+2021/02/21 11:17:03 
+
+DEBUG: We are now handling requests
+2021/02/21 11:17:09 No issues returning Usernames
+2021/02/21 11:18:27 
+
+DEBUG: We are now handling requests
+2021/02/21 11:18:30 No issues returning Usernames
+2021/02/21 11:20:56 
+
+DEBUG: We are now handling requests
+2021/02/21 11:21:04 No issues returning Usernames
+2021/02/21 11:21:06 No issues returning Usernames
+2021/02/21 11:21:13 No issues returning Usernames
+2021/02/21 11:24:25 
+
+DEBUG: We are now handling requests

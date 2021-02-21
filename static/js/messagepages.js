@@ -9,10 +9,11 @@ var TheUser = {
     UserID: 0
 };
 
-var whatPage; //The page displaying which comments
+var whatPage; //The page number we are on
+var whatBoard; //which board we are currently on
 var variableNameInt = 0; //A number to attach to variable IDs to make them unique
 
-//This func intializes whatPage the messages are on when the page loads
+//This func intializes what number of comments we are loading
 function initializeWhatPage(thePage){
     whatPage = thePage;
 }
@@ -20,6 +21,11 @@ function initializeWhatPage(thePage){
 function setUsername(username){
     TheUser.UserName = username;
 }
+//This function sets what messageboard type we are on
+function setBoardType(boardType){
+    whatBoard = boardType;
+}
+
 
 //This sets the UserID for TheUser
 function setUserID(userID){
@@ -649,7 +655,9 @@ function orignalCommentMaker(){
     console.log("DEBUG: Submitting an original comment.");
     var textareaComment = document.getElementById("textareaComment");
     var OriginalMessage = {
-        TheMessage: String(textareaComment.value)
+        TheMessage: String(textareaComment.value),
+        PosterName: String(TheUser.UserName),
+        WhatBoard: String(whatBoard)
     };
     //Original Message with Ajax
     var jsonString = JSON.stringify(OriginalMessage); //Stringify Data
@@ -674,7 +682,6 @@ function orignalCommentMaker(){
         }
     });
     xhr.send(jsonString);
-
 }
 
 /* Test area stuff */

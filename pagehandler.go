@@ -18,7 +18,8 @@ type ViewData struct {
 	UserID         int       `json:"UserID"`         //The UserID
 	TheMessages    []Message `json:"TheMessages"`    //The Messages we need to display
 	MessageDisplay int       `json:"MessageDisplay"` //This is IF we need a message displayed
-	WhatPage       string    `json:"WhatPage"`       //What messageboard is displayed
+	WhatPage       int       `json:"WhatPage"`       //What pageNumber we are on
+	WhatBoard      string    `json:"WhatBoard"`      //This is what board we are posting from
 }
 
 //Handles the Index requests
@@ -49,8 +50,43 @@ func hotdogMB(w http.ResponseWriter, r *http.Request) {
 		UserID:         aUser.UserID,
 		TheMessages:    ourMessages,
 		MessageDisplay: 0,
-		WhatPage:       "hotdog",
+		WhatPage:       currentPageNumHotDog,
+		WhatBoard:      "hotdog",
 	}
+	/* TEST JSON STUFF */
+	/*
+		type UpdatedMongoBoard struct {
+			UpdatedMessageBoard MessageBoard `json:"UpdatedMessageBoard"`
+		}
+		theUpdatedMongoBoard := UpdatedMongoBoard{}
+		theMBTest := MessageBoard{}
+		theMessageTest := Message{
+			MessageID:       334545,
+			UserID:          445653,
+			PosterName:      "JimUsername",
+			Messages:        []Message{},
+			IsChild:         false,
+			HasChildren:     false,
+			ParentMessageID: 0,
+			UberParentID:    0,
+			Order:           0,
+			RepliesAmount:   0,
+			TheMessage:      "Test message one",
+			DateCreated:     "Uhhh",
+			LastUpdated:     "eaadf",
+		}
+
+		theMBTest.AllMessages = append(theMBTest.AllMessages, theMessageTest)
+		theMBTest.BoardName = "hotdog"
+		theMBTest.MessageBoardID = 640165801064
+
+		theUpdatedMongoBoard.UpdatedMessageBoard = theMBTest
+
+		yee, _ := json.Marshal(theUpdatedMongoBoard)
+
+		fmt.Printf("DEBUG: \n\n Here is yee: %v\n\n", string(yee))
+	*/
+	//updateMongoMessageBoard(theMBTest)
 	/* Execute template, handle error */
 	err1 := template1.ExecuteTemplate(w, "hotdogmsb.gohtml", vd)
 	HandleError(w, err1)
