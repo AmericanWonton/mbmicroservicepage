@@ -152,12 +152,9 @@ func refreshDatabases() {
 		//Fill our databases with response
 		theMessageBoardHDog = otherReturnedMessage.GivenHDogMB
 		theMessageBoardHam = otherReturnedMessage.GivenHamMB
-		//Fill our messages with go routine
-		wg.Add(1)
-		go fillMessageMaps("hotdog")
-		wg.Add(1)
-		go fillMessageMaps("hamburger")
-		wg.Wait()
+		//Fill our messages with go routine DEBUG
+		fillMessageMaps("hotdog")
+		fillMessageMaps("hamburger")
 	}
 }
 
@@ -182,7 +179,6 @@ func fillMessageMaps(whichMap string) {
 		logWriter(err)
 		break
 	}
-	wg.Done()
 }
 
 //This gets 10 results for display on a messageboard page
@@ -416,14 +412,27 @@ func messageOriginalAjax(w http.ResponseWriter, r *http.Request) {
 		}
 		//Update the messagemap as well
 		loadedMessagesMapHDog[len(loadedMessagesMapHDog)+1] = newestMessage
+		fmt.Printf("DEBUG: We were able to update the map successfully\n")
 		//Update our hotdog messageboard THIS IS THE PROBLEM AREA
-		theMessageBoardHDog.AllMessages = append(theMessageBoardHDog.AllMessages, newestMessage)
-		theMessageBoardHDog.AllMessagesMap[newestMessage.MessageID] = newestMessage
-		theMessageBoardHDog.AllOriginalMessages = append(theMessageBoardHDog.AllOriginalMessages, newestMessage)
-		theMessageBoardHDog.AllOriginalMessagesMap[newestMessage.MessageID] = newestMessage
-		theMessageBoardHDog.LastUpdated = theTimeNow.Format("2006-01-02 15:04:05")
+		testMB := MessageBoard{
+			MessageBoardID:         theMessageBoardHDog.MessageBoardID,
+			BoardName:              theMessageBoardHDog.BoardName,
+			AllMessages:            theMessageBoardHDog.AllMessages,
+			AllMessagesMap:         theMessageBoardHDog.AllMessagesMap,
+			AllOriginalMessages:    theMessageBoardHDog.AllOriginalMessages,
+			AllOriginalMessagesMap: theMessageBoardHDog.AllOriginalMessagesMap,
+			LastUpdated:            theTimeNow.Format("2006-01-02 15:04:05"),
+			DateCreated:            theMessageBoardHDog.DateCreated,
+		}
+		testMB.AllMessages = append([]Message{newestMessage}, testMB.AllMessages...)
+		testMB.AllMessagesMap[newestMessage.MessageID] = newestMessage
+		testMB.AllOriginalMessages = append([]Message{newestMessage}, testMB.AllOriginalMessages...)
+		testMB.AllOriginalMessagesMap[newestMessage.MessageID] = newestMessage
+		testMB.LastUpdated = theTimeNow.Format("2006-01-02 15:04:05")
+		fmt.Printf("DEBUG: We are able to update the messageboard\n")
 		testFuncCall()
-		updateMongoMessageBoard(theMessageBoardHDog)
+		updateMongoMessageBoard(testMB)
+		insertOneMessage(newestMessage)
 		break
 	case "hamburger":
 		theOrder = len(theMessageBoardHam.AllOriginalMessages) + 1

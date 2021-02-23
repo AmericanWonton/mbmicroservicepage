@@ -53,40 +53,6 @@ func hotdogMB(w http.ResponseWriter, r *http.Request) {
 		WhatPage:       currentPageNumHotDog,
 		WhatBoard:      "hotdog",
 	}
-	/* TEST JSON STUFF */
-	/*
-		type UpdatedMongoBoard struct {
-			UpdatedMessageBoard MessageBoard `json:"UpdatedMessageBoard"`
-		}
-		theUpdatedMongoBoard := UpdatedMongoBoard{}
-		theMBTest := MessageBoard{}
-		theMessageTest := Message{
-			MessageID:       334545,
-			UserID:          445653,
-			PosterName:      "JimUsername",
-			Messages:        []Message{},
-			IsChild:         false,
-			HasChildren:     false,
-			ParentMessageID: 0,
-			UberParentID:    0,
-			Order:           0,
-			RepliesAmount:   0,
-			TheMessage:      "Test message one",
-			DateCreated:     "Uhhh",
-			LastUpdated:     "eaadf",
-		}
-
-		theMBTest.AllMessages = append(theMBTest.AllMessages, theMessageTest)
-		theMBTest.BoardName = "hotdog"
-		theMBTest.MessageBoardID = 640165801064
-
-		theUpdatedMongoBoard.UpdatedMessageBoard = theMBTest
-
-		yee, _ := json.Marshal(theUpdatedMongoBoard)
-
-		fmt.Printf("DEBUG: \n\n Here is yee: %v\n\n", string(yee))
-	*/
-	//updateMongoMessageBoard(theMBTest)
 	/* Execute template, handle error */
 	err1 := template1.ExecuteTemplate(w, "hotdogmsb.gohtml", vd)
 	HandleError(w, err1)

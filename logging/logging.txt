@@ -213,3 +213,82 @@ Success updating hotdog and hamburger messageboards
 
 DEBUG: We are now handling requests
 2021/02/21 12:04:25 No issues returning Usernames
+2021/02/22 18:09:28 
+
+DEBUG: We are now handling requests
+2021/02/22 18:09:35 No issues returning Usernames
+2021/02/22 18:09:36 No issues returning Usernames
+2021/02/22 18:10:01 
+Success updating hotdog and hamburger messageboards
+2021/02/22 18:13:36 
+
+DEBUG: We are now handling requests
+2021/02/22 18:13:52 No issues returning Usernames
+2021/02/22 18:13:54 No issues returning Usernames
+2021/02/22 18:13:55 No issues returning Usernames
+2021/02/22 18:14:28 
+Success updating hotdog and hamburger messageboards
+2021/02/22 18:16:54 
+
+DEBUG: We are now handling requests
+2021/02/22 18:17:02 No issues returning Usernames
+2021/02/22 18:17:20 
+Success updating hotdog and hamburger messageboards
+2021/02/22 18:21:10 
+
+DEBUG: We are now handling requests
+2021/02/22 18:21:14 No issues returning Usernames
+2021/02/22 18:21:18 No issues returning Usernames
+2021/02/22 18:26:51 
+
+DEBUG: We are now handling requests
+2021/02/22 18:26:56 No issues returning Usernames
+2021/02/22 18:26:59 No issues returning Usernames
+2021/02/22 18:34:46 
+
+DEBUG: We are now handling requests
+2021/02/22 18:35:08 No issues returning Usernames
+2021/02/22 18:43:04 
+
+DEBUG: We are now handling requests
+2021/02/22 18:43:08 No issues returning Usernames
+2021/02/22 18:43:18 No issues returning Usernames
+2021/02/22 18:49:02 
+
+DEBUG: We are now handling requests
+2021/02/22 18:49:08 No issues returning Usernames
+2021/02/22 18:49:09 No issues returning Usernames
+2021/02/22 18:49:35 
+Success updating hotdog and hamburger messageboards
+2021/02/22 18:58:21 
+
+DEBUG: We are now handling requests
+2021/02/22 18:58:33 No issues returning Usernames
+2021/02/22 18:58:54 
+Success updating hotdog and hamburger messageboards
+2021/02/22 18:58:54 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":17727787884,"UserID":644510076351,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"dfdafsdfdsf","WhatBoard":"hotdog","DateCreated":"2021-02-22 18:58:54","LastUpdated":"2021-02-22 18:58:54"}
+2021/02/22 19:06:44 
+
+DEBUG: We are now handling requests
+2021/02/22 19:06:57 No issues returning Usernames
+2021/02/22 19:10:19 
+
+DEBUG: We are now handling requests
+2021/02/22 19:10:27 No issues returning Usernames
+2021/02/22 19:10:30 No issues returning Usernames
+2021/02/22 19:17:42 
+
+DEBUG: We are now handling requests
+2021/02/22 19:17:47 No issues returning Usernames
+2021/02/22 19:18:09 No issues returning Usernames
+2021/02/22 19:31:27 
+
+DEBUG: We are now handling requests
+2021/02/22 19:31:39 No issues returning Usernames
+2021/02/22 19:35:30 
+
+DEBUG: We are now handling requests
+2021/02/22 19:36:02 No issues returning Usernames
+2021/02/22 19:36:15 
+Success updating hotdog and hamburger messageboards
+2021/02/22 19:36:15 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":611704773538,"UserID":17287536205,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"dfadfdfads","WhatBoard":"hotdog","DateCreated":"2021-02-22 19:36:15","LastUpdated":"2021-02-22 19:36:15"}

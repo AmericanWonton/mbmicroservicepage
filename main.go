@@ -42,10 +42,14 @@ type AUser struct { //Using this for Mongo
 //Parse our templates
 func init() {
 	/* Assign blank value to map so no nil errors occur */
-	usernameMap = make(map[string]bool)           //Clear all Usernames when loading so no problems are caused
-	loadedMessagesMapHDog = make(map[int]Message) //Clearing this so we don't have any issues
-	loadedMessagesMapHam = make(map[int]Message)  //Clearing this so we don't have any issues
-	getbadWords()                                 //Fill in bad words from file
+	usernameMap = make(map[string]bool)                                //Clear all Usernames when loading so no problems are caused
+	loadedMessagesMapHDog = make(map[int]Message)                      //Clearing this so we don't have any issues
+	loadedMessagesMapHam = make(map[int]Message)                       //Clearing this so we don't have any issues
+	theMessageBoardHDog.AllMessagesMap = make(map[int]Message)         //Clearing this so we don't have any issues
+	theMessageBoardHDog.AllOriginalMessagesMap = make(map[int]Message) //Clearing this so we don't have any issues
+	theMessageBoardHam.AllMessagesMap = make(map[int]Message)          //Clearing this so we don't have any issues
+	theMessageBoardHam.AllOriginalMessagesMap = make(map[int]Message)  //Clearing this so we don't have any issues
+	getbadWords()                                                      //Fill in bad words from file
 	template1 = template.Must(template.ParseGlob("./static/templates/*"))
 	createTestMessages()
 }
