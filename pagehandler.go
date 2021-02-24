@@ -39,7 +39,6 @@ func hotdogMB(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 		return
 	}
-	fmt.Printf("DEBUG: here we are in hotdogMB: \n")
 	/* First, we need to query for this messageboard, in case other users
 	made comments while this other user was on another page */
 	refreshDatabases() //Refresh our DBS/Messageboards Maps

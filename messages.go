@@ -181,38 +181,49 @@ func fillMessageMaps(whichMap string) {
 	}
 }
 
-//This gets 10 results for display on a messageboard page
+/*This gets 10 results for display on a messageboard page
+we should be getting them last in, first out
+*/
 func getTenResults(whatPageNum int, whatBoard string) ([]Message, bool) {
 	giveMessages := []Message{}
 	topResult := whatPageNum * 10              //Last Result to add to map
 	minResult := ((whatPageNum * 10) - 10) + 1 //First result to add to map
 	okayResult := true                         //The result returned if we have messages to return
+	/*
+		ogMessageArrayLength := len(theMessageBoardHDog.AllOriginalMessages)
+		start := ogMessageArrayLength - (whatPageNum * 10)
+		if _, ok := loadedMessagesMapHDog[minResult]; ok {
+			for g := start; g <= start+10; g++ {
+				//if the message exists, add it
+				if _, ok := loadedMessagesMapHDog[g]; ok {
+					giveMessages = append([]Message{loadedMessagesMapHDog[g]}, giveMessages...)
+				} else {
+					//Do nothing, message does not exist
+				}
+			}
+		}
+	*/
+	//Maybe don't reverse it, cuz we appended it well
 
 	switch whatBoard {
 	case "hotdog":
-		//Initial check to see if a map exists
+		/* Get the highest count of messages in an array from our message board */
+		ogMessageArrayLength := len(theMessageBoardHDog.AllOriginalMessages)
+		start := ogMessageArrayLength - (whatPageNum * 10)
+		//Initial check to see if this message exists in our map
 		if _, ok := loadedMessagesMapHDog[minResult]; ok {
-			//top value exists, get the message in range
-			for x := minResult; x <= topResult; x++ {
-				//Check to see if top result exists to value of ten; if not, add nothing
-				if _, ok := loadedMessagesMapHDog[x]; ok {
-					giveMessages = append(giveMessages, loadedMessagesMapHDog[x])
+			for g := start; g <= start+10; g++ {
+				//if the message exists, add it
+				if _, ok := loadedMessagesMapHDog[g]; ok {
+					giveMessages = append([]Message{loadedMessagesMapHDog[g]}, giveMessages...)
 				} else {
-					//Do nothing, there's no message here
+					//Do nothing, message does not exist
 				}
 			}
-			okayResult = true
 		} else {
 			fmt.Printf("DEBUG: Page value does not exist! The Value: %v\n", minResult)
 			fmt.Printf("DEBUG: Here is our map currently: \n\n%v\n\n", loadedMessagesMapHDog)
 			okayResult = false
-		}
-
-		//Reversing order of slice for 'MessageBoard Display' purposes
-		giveMessages = reverseSlice(giveMessages)
-
-		for q := 0; q < len(giveMessages); q++ {
-			//fmt.Printf("giveMessages results %v: %v\n", q, giveMessages[q])
 		}
 		break
 	case "hamburger":
@@ -234,11 +245,11 @@ func getTenResults(whatPageNum int, whatBoard string) ([]Message, bool) {
 			okayResult = false
 		}
 
-		//Reversing order of slice for 'MessageBoard Display' purposes
-		giveMessages = reverseSlice(giveMessages)
+		//DEBUG: Reversing order of slice for 'MessageBoard Display' purposes
+		//giveMessages = reverseSlice(giveMessages)
 
 		for q := 0; q < len(giveMessages); q++ {
-			//fmt.Printf("giveMessages results %v: %v\n", q, giveMessages[q])
+			fmt.Printf("giveMessages results %v: %v\n", q, giveMessages[q])
 		}
 		break
 	default:
@@ -392,7 +403,6 @@ func messageOriginalAjax(w http.ResponseWriter, r *http.Request) {
 	//Set the 'order' for the newest message
 	switch postedMessage.WhatBoard {
 	case "hotdog":
-		fmt.Printf("DEBUG: Making an original message for a hotdog\n")
 		theOrder = len(theMessageBoardHDog.AllOriginalMessages) + 1
 		//Format the new Original Message
 		newestMessage = Message{
@@ -416,9 +426,9 @@ func messageOriginalAjax(w http.ResponseWriter, r *http.Request) {
 		//Update the messagemap as well
 		loadedMessagesMapHDog[len(loadedMessagesMapHDog)+1] = newestMessage
 		//Update our hotdog messageboard THIS IS THE PROBLEM AREA
-		theMessageBoardHDog.AllMessages = append([]Message{newestMessage}, theMessageBoardHDog.AllMessages...)
+		theMessageBoardHDog.AllMessages = append(theMessageBoardHDog.AllMessages, newestMessage)
 		theMessageBoardHDog.AllMessagesMap[newestMessage.MessageID] = newestMessage
-		theMessageBoardHDog.AllOriginalMessages = append([]Message{newestMessage}, theMessageBoardHDog.AllOriginalMessages...)
+		theMessageBoardHDog.AllOriginalMessages = append(theMessageBoardHDog.AllOriginalMessages, newestMessage)
 		theMessageBoardHDog.AllOriginalMessagesMap[newestMessage.MessageID] = newestMessage
 		theMessageBoardHDog.LastUpdated = theTimeNow.Format("2006-01-02 15:04:05")
 		updateMongoMessageBoard(theMessageBoardHDog)
@@ -448,9 +458,9 @@ func messageOriginalAjax(w http.ResponseWriter, r *http.Request) {
 		//Insert new Message into database and update on server
 		insertOneMessage(newestMessage)
 		//Update our hamburger messageboard
-		theMessageBoardHam.AllMessages = append([]Message{newestMessage}, theMessageBoardHam.AllMessages...)
+		theMessageBoardHam.AllMessages = append(theMessageBoardHam.AllMessages, newestMessage)
 		theMessageBoardHam.AllMessagesMap[newestMessage.MessageID] = newestMessage
-		theMessageBoardHam.AllOriginalMessages = append([]Message{newestMessage}, theMessageBoardHam.AllOriginalMessages...)
+		theMessageBoardHam.AllOriginalMessages = append(theMessageBoardHam.AllOriginalMessages, newestMessage)
 		theMessageBoardHam.AllOriginalMessagesMap[newestMessage.MessageID] = newestMessage
 		theMessageBoardHam.LastUpdated = theTimeNow.Format("2006-01-02 15:04:05")
 		updateMongoMessageBoard(theMessageBoardHam)
@@ -720,7 +730,6 @@ func insertOneMessage(theMessage Message) {
 		fmt.Println(err)
 		logWriter(err.Error())
 	}
-	fmt.Printf("DEBUG: we are in insertOneMessage. Here is the message: %v\n", theMessage)
 	//Send to CRUD OPERATIONS API
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
@@ -766,7 +775,6 @@ func insertOneMessage(theMessage Message) {
 
 /* Update one messageboard, (calls the CRUD Microservice, can be used with GO Routines) */
 func updateMongoMessageBoard(updatedMessageBoard MessageBoard) {
-	fmt.Printf("DEBUG: We are in updateMongoMessageBoard\n")
 	type UpdatedMongoBoard struct {
 		UpdatedMessageBoard MessageBoard `json:"UpdatedMessageBoard"`
 	}
@@ -779,7 +787,6 @@ func updateMongoMessageBoard(updatedMessageBoard MessageBoard) {
 		fmt.Println(err)
 		logWriter(err.Error())
 	}
-	fmt.Printf("\nDEBUG: We are in updateMongoMessageboard. Here is our messageboard: %v\n\n", string(theJSONMessage))
 	//Send to CRUD OPERATIONS API
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
@@ -809,8 +816,6 @@ func updateMongoMessageBoard(updatedMessageBoard MessageBoard) {
 	}
 	var theReturnedMessage ReturnMessage
 	json.Unmarshal(body, &theReturnedMessage)
-
-	fmt.Printf("DEBUG: Here we are in updateMongoMessageboard. Here is our JSON returned from the request:\n%v\n", theReturnedMessage)
 
 	if theReturnedMessage.SuccOrFail != 0 {
 		theMessage := ""

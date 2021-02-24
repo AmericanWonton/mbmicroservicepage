@@ -554,6 +554,7 @@ window.addEventListener('DOMContentLoaded', function(){
         var thePage = Number(goInput.value);
         var PageData = {
             ThePage: thePage,
+            WhatPage: String(whatBoard)
         }
         var jsonString = JSON.stringify(PageData); //Stringify Data
         //Send Request to change page
@@ -588,6 +589,7 @@ window.addEventListener('DOMContentLoaded', function(){
         var thePage = whatPage -1;
         var PageData = {
             ThePage: thePage,
+            WhatPage: String(whatBoard)
         }
         var jsonString = JSON.stringify(PageData); //Stringify Data
         //Send Request to change page
@@ -621,6 +623,7 @@ window.addEventListener('DOMContentLoaded', function(){
         var thePage = whatPage + 1;
         var PageData = {
             ThePage: thePage,
+            WhatPage: String(whatBoard)
         }
         var jsonString = JSON.stringify(PageData); //Stringify Data
         //Send Request to change page
