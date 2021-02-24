@@ -216,6 +216,7 @@ function createMessageDivs(variableNameIntCurrently, currentMessage, currentPare
             var TheParentMessage = {
                 MessageID: Number(currentMessage.MessageID),
                 UserID: Number(currentMessage.UserID),
+                PosterName: String(currentMessage.PosterName),
                 Messages: currentMessage.Messages,
                 IsChild: currentMessage.IsChild,
                 HasChildren: currentMessage.HasChildren,
@@ -224,12 +225,14 @@ function createMessageDivs(variableNameIntCurrently, currentMessage, currentPare
                 Order: currentMessage.Order,
                 RepliesAmount: currentMessage.RepliesAmount,
                 TheMessage: currentMessage.TheMessage,
+                WhatBoard:  currentMessage.WhatBoard,
                 DateCreated: currentMessage.DateCreated,
                 LastUpdated: currentMessage.LastUpdated
             }; //Declare Message JSON for parent,(which will be currentMessage)
             var TheChildMessage = {
                 MessageID: 0,
                 UserID: 0,
+                PosterName: String(TheUser.UserName),
                 Messages: new Array(),
                 IsChild: true,
                 HasChildren: false,
@@ -238,13 +241,17 @@ function createMessageDivs(variableNameIntCurrently, currentMessage, currentPare
                 Order: 0,
                 RepliesAmount: 0,
                 TheMessage: String(textareaReply.value),
+                WhatBoard: String(whatBoard),
                 DateCreated: "",
                 LastUpdated: ""
             }; //Declare Message JSON for parent,(which will be a message we make with reply to parent)
             var MessageReply = {
                 ParentMessage: TheParentMessage,
                 ChildMessage: TheChildMessage,
-                CurrentPage: whatPage
+                CurrentPage: whatPage,
+                PosterName: String(TheUser.UserName),
+                UserID: Number(TheUser.UserID),
+                WhatBoard: String(whatBoard)
             };
             //Reply with Ajax
             var jsonString = JSON.stringify(MessageReply); //Stringify Data
@@ -448,6 +455,7 @@ function createMessageReply(variableNameIntCurrently, currentMessage){
             var TheParentMessage = {
                 MessageID: Number(currentMessage.MessageID),
                 UserID: Number(currentMessage.UserID),
+                PosterName: String(currentMessage.PosterName),
                 Messages: currentMessage.Messages,
                 IsChild: currentMessage.IsChild,
                 HasChildren: currentMessage.HasChildren,
@@ -456,12 +464,14 @@ function createMessageReply(variableNameIntCurrently, currentMessage){
                 Order: currentMessage.Order,
                 RepliesAmount: currentMessage.RepliesAmount,
                 TheMessage: currentMessage.TheMessage,
+                WhatBoard:  currentMessage.WhatBoard,
                 DateCreated: currentMessage.DateCreated,
                 LastUpdated: currentMessage.LastUpdated
             }; //Declare Message JSON for parent,(which will be currentMessage)
             var TheChildMessage = {
                 MessageID: 0,
                 UserID: 0,
+                PosterName: String(TheUser.UserName),
                 Messages: new Array(),
                 IsChild: true,
                 HasChildren: false,
@@ -470,13 +480,17 @@ function createMessageReply(variableNameIntCurrently, currentMessage){
                 Order: 0,
                 RepliesAmount: 0,
                 TheMessage: String(textareaReply.value),
+                WhatBoard: String(whatBoard),
                 DateCreated: "",
                 LastUpdated: ""
             }; //Declare Message JSON for parent,(which will be a message we make with reply to parent)
             var MessageReply = {
                 ParentMessage: TheParentMessage,
                 ChildMessage: TheChildMessage,
-                CurrentPage: whatPage
+                CurrentPage: whatPage,
+                PosterName: String(TheUser.UserName),
+                UserID: Number(TheUser.UserID),
+                WhatBoard: String(whatBoard)
             };
             //Reply with Ajax
             var jsonString = JSON.stringify(MessageReply); //Stringify Data
@@ -652,11 +666,11 @@ function changePageNumber(thePageCurrently){
 }
 //Creates an original comment when the 'Add Comment' button is clicked.
 function orignalCommentMaker(){
-    console.log("DEBUG: Submitting an original comment.");
     var textareaComment = document.getElementById("textareaComment");
     var OriginalMessage = {
         TheMessage: String(textareaComment.value),
         PosterName: String(TheUser.UserName),
+        UserID: Number(TheUser.UserID),
         WhatBoard: String(whatBoard)
     };
     //Original Message with Ajax

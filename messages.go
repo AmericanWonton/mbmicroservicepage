@@ -355,6 +355,7 @@ func messageOriginalAjax(w http.ResponseWriter, r *http.Request) {
 	type OriginalMessage struct {
 		TheMessage string `json:"TheMessage"`
 		PosterName string `json:"PosterName"`
+		UserID     int    `json:"UserID"`
 		WhatBoard  string `json:"WhatBoard"`
 	}
 	//Collect JSON from Postman or wherever
@@ -396,7 +397,7 @@ func messageOriginalAjax(w http.ResponseWriter, r *http.Request) {
 		//Format the new Original Message
 		newestMessage = Message{
 			MessageID:       getRandomID(),
-			UserID:          getRandomID(),
+			UserID:          postedMessage.UserID,
 			PosterName:      postedMessage.PosterName,
 			Messages:        []Message{},
 			IsChild:         false,
@@ -410,36 +411,25 @@ func messageOriginalAjax(w http.ResponseWriter, r *http.Request) {
 			DateCreated:     theTimeNow.Format("2006-01-02 15:04:05"),
 			LastUpdated:     theTimeNow.Format("2006-01-02 15:04:05"),
 		}
+		//Insert one new message into datbase
+		insertOneMessage(newestMessage)
 		//Update the messagemap as well
 		loadedMessagesMapHDog[len(loadedMessagesMapHDog)+1] = newestMessage
-		fmt.Printf("DEBUG: We were able to update the map successfully\n")
 		//Update our hotdog messageboard THIS IS THE PROBLEM AREA
-		testMB := MessageBoard{
-			MessageBoardID:         theMessageBoardHDog.MessageBoardID,
-			BoardName:              theMessageBoardHDog.BoardName,
-			AllMessages:            theMessageBoardHDog.AllMessages,
-			AllMessagesMap:         theMessageBoardHDog.AllMessagesMap,
-			AllOriginalMessages:    theMessageBoardHDog.AllOriginalMessages,
-			AllOriginalMessagesMap: theMessageBoardHDog.AllOriginalMessagesMap,
-			LastUpdated:            theTimeNow.Format("2006-01-02 15:04:05"),
-			DateCreated:            theMessageBoardHDog.DateCreated,
-		}
-		testMB.AllMessages = append([]Message{newestMessage}, testMB.AllMessages...)
-		testMB.AllMessagesMap[newestMessage.MessageID] = newestMessage
-		testMB.AllOriginalMessages = append([]Message{newestMessage}, testMB.AllOriginalMessages...)
-		testMB.AllOriginalMessagesMap[newestMessage.MessageID] = newestMessage
-		testMB.LastUpdated = theTimeNow.Format("2006-01-02 15:04:05")
-		fmt.Printf("DEBUG: We are able to update the messageboard\n")
-		testFuncCall()
-		updateMongoMessageBoard(testMB)
-		insertOneMessage(newestMessage)
+		theMessageBoardHDog.AllMessages = append([]Message{newestMessage}, theMessageBoardHDog.AllMessages...)
+		theMessageBoardHDog.AllMessagesMap[newestMessage.MessageID] = newestMessage
+		theMessageBoardHDog.AllOriginalMessages = append([]Message{newestMessage}, theMessageBoardHDog.AllOriginalMessages...)
+		theMessageBoardHDog.AllOriginalMessagesMap[newestMessage.MessageID] = newestMessage
+		theMessageBoardHDog.LastUpdated = theTimeNow.Format("2006-01-02 15:04:05")
+		updateMongoMessageBoard(theMessageBoardHDog)
+		theDataReturn.ThePageNow = currentPageNumHotDog
 		break
 	case "hamburger":
 		theOrder = len(theMessageBoardHam.AllOriginalMessages) + 1
 		//Format the new Original Message
 		newestMessage = Message{
 			MessageID:       getRandomID(),
-			UserID:          getRandomID(),
+			UserID:          postedMessage.UserID,
 			PosterName:      postedMessage.PosterName,
 			Messages:        []Message{},
 			IsChild:         false,
@@ -457,10 +447,10 @@ func messageOriginalAjax(w http.ResponseWriter, r *http.Request) {
 		loadedMessagesMapHam[len(loadedMessagesMapHam)+1] = newestMessage
 		//Insert new Message into database and update on server
 		insertOneMessage(newestMessage)
-		//Update our hotdog messageboard
-		theMessageBoardHam.AllMessages = append(theMessageBoardHam.AllMessages, newestMessage)
+		//Update our hamburger messageboard
+		theMessageBoardHam.AllMessages = append([]Message{newestMessage}, theMessageBoardHam.AllMessages...)
 		theMessageBoardHam.AllMessagesMap[newestMessage.MessageID] = newestMessage
-		theMessageBoardHam.AllOriginalMessages = append(theMessageBoardHam.AllOriginalMessages, newestMessage)
+		theMessageBoardHam.AllOriginalMessages = append([]Message{newestMessage}, theMessageBoardHam.AllOriginalMessages...)
 		theMessageBoardHam.AllOriginalMessagesMap[newestMessage.MessageID] = newestMessage
 		theMessageBoardHam.LastUpdated = theTimeNow.Format("2006-01-02 15:04:05")
 		updateMongoMessageBoard(theMessageBoardHam)
@@ -476,8 +466,6 @@ func messageOriginalAjax(w http.ResponseWriter, r *http.Request) {
 		theDataReturn.SuccessMsg = message
 		break
 	}
-
-	fmt.Printf("Here is the data we are going to send back: %v\n", theDataReturn)
 
 	dataJSON, err := json.Marshal(theDataReturn)
 	if err != nil {
@@ -495,6 +483,7 @@ func messageReplyAjax(w http.ResponseWriter, r *http.Request) {
 		ChildMessage  Message `json:"ChildMessage"`
 		CurrentPage   int     `json:"CurrentPage"`
 		PosterName    string  `json:"PosterName"`
+		UserID        int     `json:"UserID"`
 		WhatBoard     string  `json:"WhatBoard"`
 	}
 	//Collect JSON from Postman or wherever
@@ -544,7 +533,7 @@ func messageReplyAjax(w http.ResponseWriter, r *http.Request) {
 		//Format the newestMessage
 		newestMessage := Message{
 			MessageID:       getRandomID(),
-			UserID:          getRandomID(),
+			UserID:          postedMessageReply.UserID,
 			PosterName:      postedMessageReply.PosterName,
 			Messages:        []Message{},
 			IsChild:         true,
@@ -565,6 +554,7 @@ func messageReplyAjax(w http.ResponseWriter, r *http.Request) {
 			theReturnData.SuccessBool = true
 			theReturnData.SuccessInt = 0
 			theReturnData.SuccessMsg = "Successful datatbase update"
+			theReturnData.CreatedMessage = newestMessage
 		} else {
 			theReturnData.SuccessBool = false
 			theReturnData.SuccessInt = 1
@@ -587,7 +577,7 @@ func messageReplyAjax(w http.ResponseWriter, r *http.Request) {
 		//Format the newestMessage
 		newestMessage := Message{
 			MessageID:       getRandomID(),
-			UserID:          getRandomID(),
+			UserID:          postedMessageReply.UserID,
 			PosterName:      postedMessageReply.PosterName,
 			Messages:        []Message{},
 			IsChild:         true,
@@ -608,6 +598,7 @@ func messageReplyAjax(w http.ResponseWriter, r *http.Request) {
 			theReturnData.SuccessBool = true
 			theReturnData.SuccessInt = 0
 			theReturnData.SuccessMsg = "Successful datatbase update"
+			theReturnData.CreatedMessage = newestMessage
 		} else {
 			theReturnData.SuccessBool = false
 			theReturnData.SuccessInt = 1

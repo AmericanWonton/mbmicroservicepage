@@ -292,3 +292,6 @@ DEBUG: We are now handling requests
 2021/02/22 19:36:15 
 Success updating hotdog and hamburger messageboards
 2021/02/22 19:36:15 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":611704773538,"UserID":17287536205,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"dfadfdfads","WhatBoard":"hotdog","DateCreated":"2021-02-22 19:36:15","LastUpdated":"2021-02-22 19:36:15"}
+2021/02/24 13:30:55 
+
+DEBUG: We are now handling requests
