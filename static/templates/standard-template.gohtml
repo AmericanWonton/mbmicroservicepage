@@ -502,39 +502,46 @@
 {{end}}
 
 {{define "messageBoardSection"}}
-    <div class="board_holder" id="board_holder">
-        <div class="commentOriginalDiv" id="commentOriginalDiv">
-            <textarea class="textareaComment" id="textareaComment" name="textareaComment" placeholder="Add comment..."></textarea>
-            <button class="commentButtonSendMsg" id="commentButtonSendMsg" onclick="orignalCommentMaker()">
-                Add comment
-            </button>
+    <div class="sectionHolderDiv" id="sectionHolderDiv">
+        <div class="boardNameDiv" id="boardNameDiv">
+            <h1 class="boardNameh1" id="boardNameh1">
+                Board Name Here
+            </h1>
         </div>
-        <div class="messageboardsectionDiv" id="messageboardsectionDiv">
+        <div class="board_holder" id="board_holder">
+            <div class="commentOriginalDiv" id="commentOriginalDiv">
+                <textarea class="textareaComment" id="textareaComment" name="textareaComment" placeholder="Add comment..."></textarea>
+                <button class="commentButtonSendMsg" id="commentButtonSendMsg" onclick="orignalCommentMaker()">
+                    Add comment
+                </button>
+            </div>
+            <div class="messageboardsectionDiv" id="messageboardsectionDiv">
 
-        </div>
-        <div class="commentPageDiv" id="commentPageDiv">
-            <div class="pageExplorers" id="pageExplorers">
-                <div class="pageButtonsDivs" id="pageButtonsDivs">
-                    <div class="leftButtonDiv" id="leftButtonDiv">
+            </div>
+            <div class="commentPageDiv" id="commentPageDiv">
+                <div class="pageExplorers" id="pageExplorers">
+                    <div class="pageButtonsDivs" id="pageButtonsDivs">
+                        <div class="leftButtonDiv" id="leftButtonDiv">
 
-                    </div>
-                    <div class="pagesDiv" id="pagesDiv">
-                        <p class="whatPageP" id="whatPageP">
-                            Page 1
-                        </p>
-                    </div>
-                    <div class="rightButtonDiv" id="rightButtonDiv">
+                        </div>
+                        <div class="pagesDiv" id="pagesDiv">
+                            <p class="whatPageP" id="whatPageP">
+                                Page 1
+                            </p>
+                        </div>
+                        <div class="rightButtonDiv" id="rightButtonDiv">
 
+                        </div>
                     </div>
-                </div>
-                <div class="goToDiv" id="goToDiv">
-                    <div class="goToInputDiv" id="goToInputDiv">
-                        <input type="number" class="goInput" id="goInput" name="goInput" placeholder="1">
-                    </div>
-                    <div class="goToButtonDiv" id="goToButtonDiv">
-                        <button id="goToButton" class="goToButton">
-                            Go To Page
-                        </button>
+                    <div class="goToDiv" id="goToDiv">
+                        <div class="goToInputDiv" id="goToInputDiv">
+                            <input type="number" class="goInput" id="goInput" name="goInput" placeholder="1">
+                        </div>
+                        <div class="goToButtonDiv" id="goToButtonDiv">
+                            <button id="goToButton" class="goToButton">
+                                Go To Page
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

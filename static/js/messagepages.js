@@ -91,6 +91,25 @@ function createMessageDivs(variableNameIntCurrently, currentMessage, currentPare
     var messageSectionDiv = document.createElement("div");
     messageSectionDiv.setAttribute("id", idNamer);
     messageSectionDiv.setAttribute("class", "messageSectionDiv");
+    //postinfodiv
+    idNamer = ""; //Set idNamer to nil
+    idNamer = "postinfodiv" + varNameInt.toString();
+    var postinfodiv = document.createElement("div");
+    postinfodiv.setAttribute("id", idNamer);
+    postinfodiv.setAttribute("class", "postinfodiv");
+    //posterstuffdiv
+    idNamer = ""; //Set idNamer to nil
+    idNamer = "posterstuffdiv" + varNameInt.toString();
+    var posterstuffdiv = document.createElement("div");
+    posterstuffdiv.setAttribute("id", idNamer);
+    posterstuffdiv.setAttribute("class", "posterstuffdiv");
+    //posterstuffp
+    idNamer = ""; //Set idNamer to nil
+    idNamer = "posterstuffp" + varNameInt.toString();
+    var posterstuffp = document.createElement("p");
+    posterstuffp.setAttribute("id", idNamer);
+    posterstuffp.setAttribute("class", "posternamep");
+    posterstuffp.innerHTML = currentMessage.PosterName + " - " + String(currentMessage.DateCreated.slice(0,10)); //Set Name value
     //messageTextDiv
     idNamer = ""; //Set idNamer to nil
     idNamer = "messageTextDiv" + varNameInt.toString();
@@ -105,7 +124,10 @@ function createMessageDivs(variableNameIntCurrently, currentMessage, currentPare
     textP.setAttribute("class", "textP");
     textP.innerHTML = currentMessage.TheMessage; //Set Message value
     //Attach Elements to each other
+    posterstuffdiv.appendChild(posterstuffp);
+    postinfodiv.appendChild(posterstuffdiv);
     messageTextDiv.appendChild(textP);
+    messageSectionDiv.appendChild(postinfodiv);
     messageSectionDiv.appendChild(messageTextDiv);
 
     /* REPLY BUTTON SECTION */
@@ -331,6 +353,25 @@ function createMessageReply(variableNameIntCurrently, currentMessage){
     var messageSectionDiv = document.createElement("div");
     messageSectionDiv.setAttribute("id", idNamer);
     messageSectionDiv.setAttribute("class", "messageSectionDiv");
+    //postinfodiv
+    idNamer = ""; //Set idNamer to nil
+    idNamer = "postinfodiv" + varNameInt.toString();
+    var postinfodiv = document.createElement("div");
+    postinfodiv.setAttribute("id", idNamer);
+    postinfodiv.setAttribute("class", "postinfodiv");
+    //posterstuffdiv
+    idNamer = ""; //Set idNamer to nil
+    idNamer = "posterstuffdiv" + varNameInt.toString();
+    var posterstuffdiv = document.createElement("div");
+    posterstuffdiv.setAttribute("id", idNamer);
+    posterstuffdiv.setAttribute("class", "posterstuffdiv");
+    //posterstuffp
+    idNamer = ""; //Set idNamer to nil
+    idNamer = "posterstuffp" + varNameInt.toString();
+    var posterstuffp = document.createElement("p");
+    posterstuffp.setAttribute("id", idNamer);
+    posterstuffp.setAttribute("class", "posternamep");
+    posterstuffp.innerHTML = currentMessage.PosterName + " - " + String(currentMessage.DateCreated.slice(0,10)); //Set Name value
     //messageTextDiv
     idNamer = ""; //Set idNamer to nil
     idNamer = "messageTextDiv" + varNameInt.toString();
@@ -345,7 +386,10 @@ function createMessageReply(variableNameIntCurrently, currentMessage){
     textP.setAttribute("class", "textP");
     textP.innerHTML = currentMessage.TheMessage; //Set Message value
     //Attach Elements to each other
+    posterstuffdiv.appendChild(posterstuffp);
+    postinfodiv.appendChild(posterstuffdiv);
     messageTextDiv.appendChild(textP);
+    messageSectionDiv.appendChild(postinfodiv);
     messageSectionDiv.appendChild(messageTextDiv);
 
     /* REPLY BUTTON SECTION */
@@ -535,6 +579,7 @@ function createMessageReply(variableNameIntCurrently, currentMessage){
 //Add event to check if this Message board exists on this page; if so, set value to 1 on load of page
 window.addEventListener('DOMContentLoaded', function(){
     //Declare variables that should be on this page
+    var boardNameh1 = document.getElementById("boardNameh1"); //Lists what board it is
     var whatPageP = document.getElementById("whatPageP"); //Lists what page it is
     var goToButton = document.getElementById("goToButton"); //Button for initializing page number
     var leftButtonDiv = document.getElementById("leftButtonDiv"); //Left Button Page Navigation
@@ -547,6 +592,12 @@ window.addEventListener('DOMContentLoaded', function(){
         changePageNumber(whatPage);
     }
 
+    //Set whatBoard on initial page loading
+    if (boardNameh1 === null){
+        console.log("DEBUG: This page does not have 'whatboard' for which to fill messages");
+    } else {
+        boardNameh1.innerHTML = String("Welcome to the " + whatBoard + " messageboard!");
+    }
     //Set the 'onClick' event for this goToButton
     goToButton.addEventListener("click", function(){
         //Declare the input field
@@ -652,6 +703,9 @@ window.addEventListener('DOMContentLoaded', function(){
         });
         xhr.send(jsonString);
     });
+
+    /* DEBUG: This is a testing zone whenever we enter a page */
+    testStringTrunc("2021-02-25 18:01:08");
 });
 
 //Change the Page Number showing to what page it currently is
@@ -709,4 +763,9 @@ function testShowData(theData){
     for (var i = 0; i < theData.length; i++){
         console.log("Here is our data for " + i + ": " + theData[i].TheMessage);
     }
+}
+
+function testStringTrunc(theDate) {
+    var testStringTrunc = String(theDate.slice(0, 10));
+    console.log("Here is our test string: " + testStringTrunc);
 }

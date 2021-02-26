@@ -1,37 +1,135 @@
-2021/02/24 16:01:36 
+2021/02/25 17:58:39 
 
 DEBUG: We are now handling requests
-2021/02/24 16:01:38 No issues returning Usernames
-2021/02/24 16:01:55 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":758588208263,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":2,"RepliesAmount":0,"TheMessage":"secondmessage","WhatBoard":"hotdog","DateCreated":"2021-02-24 16:01:55","LastUpdated":"2021-02-24 16:01:55"}
-2021/02/24 16:01:55 
+2021/02/25 17:58:43 No issues returning Usernames
+2021/02/25 17:59:02 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":36813565755,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"1","WhatBoard":"hotdog","DateCreated":"2021-02-25 17:59:02","LastUpdated":"2021-02-25 17:59:02"}
+2021/02/25 17:59:02 
 Success updating hotdog and hamburger messageboards
-2021/02/24 16:02:29 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":151470283358,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":3,"RepliesAmount":0,"TheMessage":"3rd message","WhatBoard":"hotdog","DateCreated":"2021-02-24 16:02:29","LastUpdated":"2021-02-24 16:02:29"}
-2021/02/24 16:02:29 
+2021/02/25 17:59:06 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":807836558424,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":2,"RepliesAmount":0,"TheMessage":"2","WhatBoard":"hotdog","DateCreated":"2021-02-25 17:59:05","LastUpdated":"2021-02-25 17:59:05"}
+2021/02/25 17:59:06 
 Success updating hotdog and hamburger messageboards
-2021/02/24 16:02:33 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":440150465585,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":4,"RepliesAmount":0,"TheMessage":"4th message","WhatBoard":"hotdog","DateCreated":"2021-02-24 16:02:33","LastUpdated":"2021-02-24 16:02:33"}
-2021/02/24 16:02:33 
+2021/02/25 17:59:08 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":663225584032,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":3,"RepliesAmount":0,"TheMessage":"3","WhatBoard":"hotdog","DateCreated":"2021-02-25 17:59:08","LastUpdated":"2021-02-25 17:59:08"}
+2021/02/25 17:59:08 
 Success updating hotdog and hamburger messageboards
-2021/02/24 16:02:38 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":25564068422,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":5,"RepliesAmount":0,"TheMessage":"5th message","WhatBoard":"hotdog","DateCreated":"2021-02-24 16:02:38","LastUpdated":"2021-02-24 16:02:38"}
-2021/02/24 16:02:38 
+2021/02/25 17:59:10 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":743331057046,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":4,"RepliesAmount":0,"TheMessage":"4","WhatBoard":"hotdog","DateCreated":"2021-02-25 17:59:10","LastUpdated":"2021-02-25 17:59:10"}
+2021/02/25 17:59:10 
 Success updating hotdog and hamburger messageboards
-2021/02/24 16:02:41 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":642354201117,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":6,"RepliesAmount":0,"TheMessage":"6th message","WhatBoard":"hotdog","DateCreated":"2021-02-24 16:02:41","LastUpdated":"2021-02-24 16:02:41"}
-2021/02/24 16:02:41 
+2021/02/25 17:59:13 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":861587230160,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":5,"RepliesAmount":0,"TheMessage":"5","WhatBoard":"hotdog","DateCreated":"2021-02-25 17:59:12","LastUpdated":"2021-02-25 17:59:12"}
+2021/02/25 17:59:13 
 Success updating hotdog and hamburger messageboards
-2021/02/24 16:02:44 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":437237102588,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":7,"RepliesAmount":0,"TheMessage":"7","WhatBoard":"hotdog","DateCreated":"2021-02-24 16:02:43","LastUpdated":"2021-02-24 16:02:43"}
-2021/02/24 16:02:44 
+2021/02/25 17:59:16 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":115665314740,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":6,"RepliesAmount":0,"TheMessage":"6","WhatBoard":"hotdog","DateCreated":"2021-02-25 17:59:16","LastUpdated":"2021-02-25 17:59:16"}
+2021/02/25 17:59:16 
 Success updating hotdog and hamburger messageboards
-2021/02/24 16:02:45 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":434010633163,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":8,"RepliesAmount":0,"TheMessage":"8","WhatBoard":"hotdog","DateCreated":"2021-02-24 16:02:45","LastUpdated":"2021-02-24 16:02:45"}
-2021/02/24 16:02:45 
+2021/02/25 17:59:18 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":57111124536,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":7,"RepliesAmount":0,"TheMessage":"7","WhatBoard":"hotdog","DateCreated":"2021-02-25 17:59:18","LastUpdated":"2021-02-25 17:59:18"}
+2021/02/25 17:59:18 
 Success updating hotdog and hamburger messageboards
-2021/02/24 16:02:47 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":361555033811,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":9,"RepliesAmount":0,"TheMessage":"9","WhatBoard":"hotdog","DateCreated":"2021-02-24 16:02:47","LastUpdated":"2021-02-24 16:02:47"}
-2021/02/24 16:02:47 
+2021/02/25 17:59:20 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":710271216823,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":8,"RepliesAmount":0,"TheMessage":"8","WhatBoard":"hotdog","DateCreated":"2021-02-25 17:59:20","LastUpdated":"2021-02-25 17:59:20"}
+2021/02/25 17:59:20 
 Success updating hotdog and hamburger messageboards
-2021/02/24 16:02:50 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":543121273473,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":10,"RepliesAmount":0,"TheMessage":"10","WhatBoard":"hotdog","DateCreated":"2021-02-24 16:02:50","LastUpdated":"2021-02-24 16:02:50"}
-2021/02/24 16:02:50 
+2021/02/25 17:59:22 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":840011504616,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":9,"RepliesAmount":0,"TheMessage":"9","WhatBoard":"hotdog","DateCreated":"2021-02-25 17:59:21","LastUpdated":"2021-02-25 17:59:21"}
+2021/02/25 17:59:22 
 Success updating hotdog and hamburger messageboards
-2021/02/24 16:02:56 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":727837658566,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":11,"RepliesAmount":0,"TheMessage":"11","WhatBoard":"hotdog","DateCreated":"2021-02-24 16:02:56","LastUpdated":"2021-02-24 16:02:56"}
-2021/02/24 16:02:56 
+2021/02/25 17:59:27 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":42485560204,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":10,"RepliesAmount":0,"TheMessage":"10","WhatBoard":"hotdog","DateCreated":"2021-02-25 17:59:27","LastUpdated":"2021-02-25 17:59:27"}
+2021/02/25 17:59:27 
 Success updating hotdog and hamburger messageboards
-2021/02/24 16:03:10 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":803570368027,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":12,"RepliesAmount":0,"TheMessage":"12","WhatBoard":"hotdog","DateCreated":"2021-02-24 16:03:09","LastUpdated":"2021-02-24 16:03:09"}
-2021/02/24 16:03:10 
+2021/02/25 17:59:31 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":546004830544,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":11,"RepliesAmount":0,"TheMessage":"11","WhatBoard":"hotdog","DateCreated":"2021-02-25 17:59:31","LastUpdated":"2021-02-25 17:59:31"}
+2021/02/25 17:59:31 
+Success updating hotdog and hamburger messageboards
+2021/02/25 17:59:39 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":738384440023,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":12,"RepliesAmount":0,"TheMessage":"12","WhatBoard":"hotdog","DateCreated":"2021-02-25 17:59:39","LastUpdated":"2021-02-25 17:59:39"}
+2021/02/25 17:59:39 
+Success updating hotdog and hamburger messageboards
+2021/02/25 18:00:02 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":403085132183,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":13,"RepliesAmount":0,"TheMessage":"13","WhatBoard":"hotdog","DateCreated":"2021-02-25 18:00:02","LastUpdated":"2021-02-25 18:00:02"}
+2021/02/25 18:00:02 
+Success updating hotdog and hamburger messageboards
+2021/02/25 18:00:05 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":415150053803,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":14,"RepliesAmount":0,"TheMessage":"14","WhatBoard":"hotdog","DateCreated":"2021-02-25 18:00:05","LastUpdated":"2021-02-25 18:00:05"}
+2021/02/25 18:00:05 
+Success updating hotdog and hamburger messageboards
+2021/02/25 18:00:08 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":280533125702,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":15,"RepliesAmount":0,"TheMessage":"15","WhatBoard":"hotdog","DateCreated":"2021-02-25 18:00:08","LastUpdated":"2021-02-25 18:00:08"}
+2021/02/25 18:00:09 
+Success updating hotdog and hamburger messageboards
+2021/02/25 18:00:12 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":82382164487,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":16,"RepliesAmount":0,"TheMessage":"16","WhatBoard":"hotdog","DateCreated":"2021-02-25 18:00:12","LastUpdated":"2021-02-25 18:00:12"}
+2021/02/25 18:00:12 
+Success updating hotdog and hamburger messageboards
+2021/02/25 18:00:16 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":643267418070,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":17,"RepliesAmount":0,"TheMessage":"17","WhatBoard":"hotdog","DateCreated":"2021-02-25 18:00:16","LastUpdated":"2021-02-25 18:00:16"}
+2021/02/25 18:00:16 
+Success updating hotdog and hamburger messageboards
+2021/02/25 18:00:20 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":688056506757,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":18,"RepliesAmount":0,"TheMessage":"18","WhatBoard":"hotdog","DateCreated":"2021-02-25 18:00:20","LastUpdated":"2021-02-25 18:00:20"}
+2021/02/25 18:00:20 
+Success updating hotdog and hamburger messageboards
+2021/02/25 18:00:23 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":476010805248,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":19,"RepliesAmount":0,"TheMessage":"19","WhatBoard":"hotdog","DateCreated":"2021-02-25 18:00:23","LastUpdated":"2021-02-25 18:00:23"}
+2021/02/25 18:00:23 
+Success updating hotdog and hamburger messageboards
+2021/02/25 18:00:26 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":756825752015,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":20,"RepliesAmount":0,"TheMessage":"20","WhatBoard":"hotdog","DateCreated":"2021-02-25 18:00:26","LastUpdated":"2021-02-25 18:00:26"}
+2021/02/25 18:00:27 
+Success updating hotdog and hamburger messageboards
+2021/02/25 18:00:31 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":612853460225,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":21,"RepliesAmount":0,"TheMessage":"21","WhatBoard":"hotdog","DateCreated":"2021-02-25 18:00:30","LastUpdated":"2021-02-25 18:00:30"}
+2021/02/25 18:00:31 
+Success updating hotdog and hamburger messageboards
+2021/02/25 18:00:35 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":762032507526,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":22,"RepliesAmount":0,"TheMessage":"22","WhatBoard":"hotdog","DateCreated":"2021-02-25 18:00:35","LastUpdated":"2021-02-25 18:00:35"}
+2021/02/25 18:00:35 
+Success updating hotdog and hamburger messageboards
+2021/02/25 18:00:37 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":741374618510,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":23,"RepliesAmount":0,"TheMessage":"23","WhatBoard":"hotdog","DateCreated":"2021-02-25 18:00:37","LastUpdated":"2021-02-25 18:00:37"}
+2021/02/25 18:00:37 
+Success updating hotdog and hamburger messageboards
+2021/02/25 18:00:40 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":8788477638,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":24,"RepliesAmount":0,"TheMessage":"24","WhatBoard":"hotdog","DateCreated":"2021-02-25 18:00:40","LastUpdated":"2021-02-25 18:00:40"}
+2021/02/25 18:00:40 
+Success updating hotdog and hamburger messageboards
+2021/02/25 18:00:44 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":8084406661,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":25,"RepliesAmount":0,"TheMessage":"25","WhatBoard":"hotdog","DateCreated":"2021-02-25 18:00:44","LastUpdated":"2021-02-25 18:00:44"}
+2021/02/25 18:00:44 
+Success updating hotdog and hamburger messageboards
+2021/02/25 18:00:47 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":346060747606,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":26,"RepliesAmount":0,"TheMessage":"26","WhatBoard":"hotdog","DateCreated":"2021-02-25 18:00:47","LastUpdated":"2021-02-25 18:00:47"}
+2021/02/25 18:00:47 
+Success updating hotdog and hamburger messageboards
+2021/02/25 18:00:51 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":603103682655,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":27,"RepliesAmount":0,"TheMessage":"27","WhatBoard":"hotdog","DateCreated":"2021-02-25 18:00:51","LastUpdated":"2021-02-25 18:00:51"}
+2021/02/25 18:00:51 
+Success updating hotdog and hamburger messageboards
+2021/02/25 18:00:56 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":66044753845,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":28,"RepliesAmount":0,"TheMessage":"28","WhatBoard":"hotdog","DateCreated":"2021-02-25 18:00:56","LastUpdated":"2021-02-25 18:00:56"}
+2021/02/25 18:00:56 
+Success updating hotdog and hamburger messageboards
+2021/02/25 18:00:59 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":432117671610,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":29,"RepliesAmount":0,"TheMessage":"29","WhatBoard":"hotdog","DateCreated":"2021-02-25 18:00:59","LastUpdated":"2021-02-25 18:00:59"}
+2021/02/25 18:00:59 
+Success updating hotdog and hamburger messageboards
+2021/02/25 18:01:02 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":524578457343,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":30,"RepliesAmount":0,"TheMessage":"30","WhatBoard":"hotdog","DateCreated":"2021-02-25 18:01:02","LastUpdated":"2021-02-25 18:01:02"}
+2021/02/25 18:01:02 
+Success updating hotdog and hamburger messageboards
+2021/02/25 18:01:05 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":265643888551,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":31,"RepliesAmount":0,"TheMessage":"31","WhatBoard":"hotdog","DateCreated":"2021-02-25 18:01:05","LastUpdated":"2021-02-25 18:01:05"}
+2021/02/25 18:01:05 
+Success updating hotdog and hamburger messageboards
+2021/02/25 18:01:08 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":672262656576,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":32,"RepliesAmount":0,"TheMessage":"32","WhatBoard":"hotdog","DateCreated":"2021-02-25 18:01:08","LastUpdated":"2021-02-25 18:01:08"}
+2021/02/25 18:01:08 
+Success updating hotdog and hamburger messageboards
+2021/02/25 18:24:10 
+
+DEBUG: We are now handling requests
+2021/02/25 18:24:15 No issues returning Usernames
+2021/02/25 18:25:07 
+
+DEBUG: We are now handling requests
+2021/02/25 18:25:13 No issues returning Usernames
+2021/02/25 18:25:36 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":462255106746,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":1,"RepliesAmount":0,"TheMessage":"Test first messsage in hamburger board","WhatBoard":"hamburger","DateCreated":"2021-02-25 18:25:36","LastUpdated":"2021-02-25 18:25:36"}
+2021/02/25 18:25:36 
+Success updating hotdog and hamburger messageboards
+2021/02/25 18:25:58 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":77215117123,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":2,"RepliesAmount":0,"TheMessage":"Tset second message in hamburger board","WhatBoard":"hamburger","DateCreated":"2021-02-25 18:25:58","LastUpdated":"2021-02-25 18:25:58"}
+2021/02/25 18:25:58 
+Success updating hotdog and hamburger messageboards
+2021/02/25 18:26:07 Updated the hamburger messageboard in uberUpdate
+2021/02/25 18:26:15 Updated the hamburger messageboard in uberUpdate
+2021/02/25 18:26:31 Updated the hamburger messageboard in uberUpdate
+2021/02/25 18:26:43 Updated the hamburger messageboard in uberUpdate
+2021/02/25 18:27:09 No issues returning Usernames
+2021/02/25 19:07:18 
+
+DEBUG: We are now handling requests
+2021/02/25 19:07:22 No issues returning Usernames
+2021/02/25 19:08:23 Updated the hotdog messageboard in uberUpdate
+2021/02/25 19:22:27 
+
+DEBUG: We are now handling requests
+2021/02/25 19:22:32 No issues returning Usernames
+2021/02/25 19:29:33 
+
+DEBUG: We are now handling requests
+2021/02/25 19:29:43 No issues returning Usernames
+2021/02/25 19:30:34 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":676005018022,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":33,"RepliesAmount":0,"TheMessage":"The boof is coming","WhatBoard":"hotdog","DateCreated":"2021-02-25 19:30:34","LastUpdated":"2021-02-25 19:30:34"}
+2021/02/25 19:30:34 
 Success updating hotdog and hamburger messageboards

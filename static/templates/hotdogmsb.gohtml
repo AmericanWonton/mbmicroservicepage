@@ -17,21 +17,22 @@
     </head>
     <body>
         {{/* Here is our header */}}
-        
+        {{/* Send data to the javascript functions pt 1 */}}
+        {{$theBoardType := .WhatBoard}}
+        {{template "sendBoardType" $theBoardType}}
         {{/* If the User session exists, (as in, we aren't passing in a 'nil' user),
         then display it here. */}}
         {{template "messageBoardSection"}}
-        {{/* Send data to the javascript functions */}}
+        {{/* Send data to the javascript functions Pt 2*/}}
         {{$theData := .TheMessages}}
         {{$thePage := .WhatPage}}
         {{$theUserName := .Username}}
         {{$theUserID := .UserID}}
-        {{$theBoardType := .WhatBoard}}
+        
         {{template "sendJSMessageData" $theData}}
         {{template "sendPageNumber" $thePage}}
         {{template "sendUsername" $theUserName}}
         {{template "sendUserID" $theUserID}}
-        {{template "sendBoardType" $theBoardType}}
         {{/* Here is our footer */}}
     </body>
 </html>

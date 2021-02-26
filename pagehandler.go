@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 )
 
@@ -65,16 +64,18 @@ func hamburgerMB(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 		return
 	}
-	fmt.Printf("DEBUG: here we are in hamburgerMB: \n")
-	type ViewData struct {
-		TheUser        AUser  `json:"TheUser"`        //The User we use
-		MessageDisplay int    `json:"MessageDisplay"` //This is IF we need a message displayed
-		WhatPage       string `json:"WhatPage"`       //What messageboard is displayed
-	}
+	/* First, we need to query for this messageboard, in case other users
+	made comments while this other user was on another page */
+	refreshDatabases() //Refresh our DBS/Messageboards Maps
+	/* Second, we need to get 10 results based off of what page number it is */
+	ourMessages, _ := getTenResults(currentPageNumHamburger, "hamburger")
 	vd := ViewData{
-		TheUser:        aUser,
+		Username:       aUser.UserName,
+		UserID:         aUser.UserID,
+		TheMessages:    ourMessages,
 		MessageDisplay: 0,
-		WhatPage:       "hamburger",
+		WhatPage:       currentPageNumHamburger,
+		WhatBoard:      "hamburger",
 	}
 	/* Execute template, handle error */
 	err1 := template1.ExecuteTemplate(w, "hamburgermsb.gohtml", vd)

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {{/* Here is our meta charset and title */}}
+        {{template "meta-title"}}
+        {{/* Here is our pixel density markup */}}
+        {{template "pixel-dense"}}
+        {{/* Here is our FavIcon */}}
+        {{template "fav-icon1"}}
+        {{/* Here are our fonts */}}
+        {{template "fonts1"}}
+        {{/* Here are our Media Query and stylesheets */}}
+        {{template "media-queries"}}
+        {{/* Here is our Javascript or additional code needed */}}
+        <script src="static/js/messagepages.js"></script>
+        <script src="static/js/pagehandling.js"></script>
+    </head>
+    <body>
+        {{/* Here is our header */}}
+        {{/* Send data to Javascript Pt 1 */}}
+        {{$theBoardType := .WhatBoard}}
+        {{template "sendBoardType" $theBoardType}}
+        {{/* If the User session exists, (as in, we aren't passing in a 'nil' user),
+        then display it here. */}}
+        {{template "messageBoardSection"}}
+        {{/* Send data to the javascript functions Pt 2*/}}
+        {{$theData := .TheMessages}}
+        {{$thePage := .WhatPage}}
+        {{$theUserName := .Username}}
+        {{$theUserID := .UserID}}
+        
+        {{template "sendJSMessageData" $theData}}
+        {{template "sendPageNumber" $thePage}}
+        {{template "sendUsername" $theUserName}}
+        {{template "sendUserID" $theUserID}}
+        {{/* Here is our footer */}}
+    </body>
+</html>

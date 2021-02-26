@@ -185,25 +185,9 @@ func fillMessageMaps(whichMap string) {
 we should be getting them last in, first out
 */
 func getTenResults(whatPageNum int, whatBoard string) ([]Message, bool) {
-	giveMessages := []Message{}
-	topResult := whatPageNum * 10              //Last Result to add to map
+	giveMessages := []Message{}                //The messages to return, based on what page number we are
 	minResult := ((whatPageNum * 10) - 10) + 1 //First result to add to map
 	okayResult := true                         //The result returned if we have messages to return
-	/*
-		ogMessageArrayLength := len(theMessageBoardHDog.AllOriginalMessages)
-		start := ogMessageArrayLength - (whatPageNum * 10)
-		if _, ok := loadedMessagesMapHDog[minResult]; ok {
-			for g := start; g <= start+10; g++ {
-				//if the message exists, add it
-				if _, ok := loadedMessagesMapHDog[g]; ok {
-					giveMessages = append([]Message{loadedMessagesMapHDog[g]}, giveMessages...)
-				} else {
-					//Do nothing, message does not exist
-				}
-			}
-		}
-	*/
-	//Maybe don't reverse it, cuz we appended it well
 
 	switch whatBoard {
 	case "hotdog":
@@ -227,29 +211,23 @@ func getTenResults(whatPageNum int, whatBoard string) ([]Message, bool) {
 		}
 		break
 	case "hamburger":
-		//Initial check to see if a map exists
+		/* Get the highest count of messages in an array from our message board */
+		ogMessageArrayLength := len(theMessageBoardHam.AllOriginalMessages)
+		start := ogMessageArrayLength - (whatPageNum * 10)
+		//Initial check to see if this message exists in our map
 		if _, ok := loadedMessagesMapHam[minResult]; ok {
-			//top value exists, get the message in range
-			for x := minResult; x <= topResult; x++ {
-				//Check to see if top result exists to value of ten; if not, add nothing
-				if _, ok := loadedMessagesMapHam[x]; ok {
-					giveMessages = append(giveMessages, loadedMessagesMapHam[x])
+			for g := start; g <= start+10; g++ {
+				//if the message exists, add it
+				if _, ok := loadedMessagesMapHam[g]; ok {
+					giveMessages = append([]Message{loadedMessagesMapHam[g]}, giveMessages...)
 				} else {
-					//Do nothing, there's no message here
+					//Do nothing, message does not exist
 				}
 			}
-			okayResult = true
 		} else {
 			fmt.Printf("DEBUG: Page value does not exist! The Value: %v\n", minResult)
 			fmt.Printf("DEBUG: Here is our map currently: \n\n%v\n\n", loadedMessagesMapHam)
 			okayResult = false
-		}
-
-		//DEBUG: Reversing order of slice for 'MessageBoard Display' purposes
-		//giveMessages = reverseSlice(giveMessages)
-
-		for q := 0; q < len(giveMessages); q++ {
-			fmt.Printf("giveMessages results %v: %v\n", q, giveMessages[q])
 		}
 		break
 	default:
