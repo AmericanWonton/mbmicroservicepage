@@ -11,13 +11,13 @@ dockerbuildandpush:
 	docker tag mainwebpage americanwonton/mainwebpage
 	docker push americanwonton/mainwebpage
 dockerrun:
-	docker run -it -p 80:80 mainwebpage
+	docker run -it -p 8080:8080 mainwebpage
 dockerrundetached:
-	docker run -d -p 80:80 mainwebpage
+	docker run -d -p 8080:8080 mainwebpage
 dockerrunitvolume:
-	docker run -it -p 80:80 -v photo-images:/static/images mainwebpage
+	docker run -it -p 8080:8080 -v photo-images:/static/images mainwebpage
 dockerrundetvolume:
-	docker run -d -p 80:80 -v photo-images:/static/images mainwebpage
+	docker run -d -p 8080:8080 -v photo-images:/static/images mainwebpage
 dockertagimage:
 	docker tag mainwebpage americanwonton/mainwebpage
 dockerimagepush:
