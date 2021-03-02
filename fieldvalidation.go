@@ -16,6 +16,14 @@ import (
 	"github.com/google/uuid"
 )
 
+/* Used for API Calls */
+var giveUsernames string
+var addUser string
+var sendEmailCall string
+var sendTextCall string
+var randomIDAPI string
+var userLogin string
+
 /* Both are used for usernames below */
 var allUsernames []string
 var usernameMap map[string]bool
@@ -46,6 +54,38 @@ func getbadWords() {
 	slurs = text
 }
 
+//This gets the API Calls we use throughout the application
+func getAPICallVariables() {
+	file, err := os.Open("security/apicalls.txt")
+
+	if err != nil {
+		fmt.Printf("DEBUG: Trouble opening api call text file: %v\n", err.Error())
+		logWriter("DEBUG: Trouble opening api call text file: %v\n" + err.Error())
+	}
+
+	scanner := bufio.NewScanner(file)
+
+	scanner.Split(bufio.ScanLines)
+	var text []string
+
+	for scanner.Scan() {
+		text = append(text, scanner.Text())
+	}
+
+	file.Close()
+
+	addUser = text[0]
+	sendTextCall = text[1]
+	sendEmailCall = text[2]
+	giveUsernames = text[3]
+	randomIDAPI = text[4]
+	userLogin = text[5]
+	uberUpdateCall = text[6]
+	insertOneMessageCall = text[7]
+	updateMongoMessageBoardCall = text[8]
+	isMessageBoardMade = text[9]
+}
+
 //Runs a mongo query to get all Usernames, then puts it in a map to return
 func loadUsernames() map[string]bool {
 	mapOusernameToReturn := make(map[string]bool)
@@ -55,7 +95,7 @@ func loadUsernames() map[string]bool {
 	//Create a context for timing out
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-	req, err := http.NewRequest("GET", "http://18.191.212.197:8080/giveAllUsernames", nil)
+	req, err := http.NewRequest("GET", giveUsernames, nil)
 	if err != nil {
 		theErr := "There was an error getting Usernames in loadUsernames: " + err.Error()
 		logWriter(theErr)
@@ -175,7 +215,7 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 	//Create a context for timing out
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	req, err := http.NewRequest("GET", "http://18.191.212.197:8080/randomIDCreationAPI", nil)
+	req, err := http.NewRequest("GET", randomIDAPI, nil)
 	if err != nil {
 		theErr := "There was an error getting a random id in createUser: " + err.Error()
 		logWriter(theErr)
@@ -222,7 +262,7 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 	ctx, cancel = context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	payload := strings.NewReader(string(theJSONMessage))
-	req, err = http.NewRequest("POST", "http://18.191.212.197:8080/addUser", payload)
+	req, err = http.NewRequest("POST", addUser, payload)
 	if err != nil {
 		theErr := "There was an error getting a random id in createUser: " + err.Error()
 		logWriter(theErr)
@@ -317,7 +357,7 @@ func sendText(theMessage string, areacode int, phonenumber int) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	payload := strings.NewReader(string(theJSONMessage))
-	req, err := http.NewRequest("POST", "http://18.188.234.83:80/sendTextMessage", payload)
+	req, err := http.NewRequest("POST", sendTextCall, payload)
 	if err != nil {
 		theErr := "There was an error sending a text in sendText: " + err.Error()
 		logWriter(theErr)
@@ -385,7 +425,7 @@ func sendEmail(theMessage string, emailAddress string, subject string) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	payload := strings.NewReader(string(theJSONMessage))
-	req, err := http.NewRequest("POST", "http://18.188.234.83:80/sendEmail", payload)
+	req, err := http.NewRequest("POST", sendEmailCall, payload)
 	if err != nil {
 		theErr := "There was an error sending an email in sendEmail: " + err.Error()
 		logWriter(theErr)
@@ -464,7 +504,7 @@ func canLogin(w http.ResponseWriter, r *http.Request) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	payload := strings.NewReader(string(theJSONMessage))
-	req, err := http.NewRequest("POST", "http://18.191.212.197:8080/userLogin", payload)
+	req, err := http.NewRequest("POST", userLogin, payload)
 	if err != nil {
 		theErr := "There was an error pinging userLogin in canLogin: " + err.Error()
 		logWriter(theErr)

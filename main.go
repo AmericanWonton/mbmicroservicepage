@@ -50,6 +50,7 @@ func init() {
 	theMessageBoardHam.AllMessagesMap = make(map[int]Message)          //Clearing this so we don't have any issues
 	theMessageBoardHam.AllOriginalMessagesMap = make(map[int]Message)  //Clearing this so we don't have any issues
 	getbadWords()                                                      //Fill in bad words from file
+	getAPICallVariables()                                              //Get all the API variables
 	template1 = template.Must(template.ParseGlob("./static/templates/*"))
 	createTestMessages()
 }

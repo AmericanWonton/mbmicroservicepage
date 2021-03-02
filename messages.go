@@ -10,6 +10,12 @@ import (
 	"time"
 )
 
+/* This is used for API calls */
+var uberUpdateCall string
+var insertOneMessageCall string
+var updateMongoMessageBoardCall string
+var isMessageBoardMade string
+
 /* This is the current amount of results our User is looking at
 it changes as the User clicks forwards or backwards for more results */
 var currentPageNumHotDog int = 1
@@ -54,7 +60,7 @@ func createTestMessages() {
 	//Ping our CRUD Microservice to see if Messageboards are already created
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	req, err := http.NewRequest("GET", "http://18.191.212.197:8080/isMessageBoardCreated", nil)
+	req, err := http.NewRequest("GET", isMessageBoardMade, nil)
 	if err != nil {
 		theErr := "There was an error reaching out to isMessageBoardCreated: " + err.Error()
 		logWriter(theErr)
@@ -112,7 +118,7 @@ func refreshDatabases() {
 	/* Ping our CRUD API to get our most recent databases */
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	req, err := http.NewRequest("GET", "http://18.191.212.197:8080/isMessageBoardCreated", nil)
+	req, err := http.NewRequest("GET", isMessageBoardMade, nil)
 	if err != nil {
 		theErr := "There was an error getting a random id in getRandomID: " + err.Error()
 		logWriter(theErr)
@@ -643,7 +649,7 @@ func uberUpdate(newestMessage Message, parentMessage Message, whatBoard string) 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	payload := strings.NewReader(string(theJSONMessage))
-	req, err := http.NewRequest("POST", "http://18.191.212.197:8080/uberUpdate", payload)
+	req, err := http.NewRequest("POST", uberUpdateCall, payload)
 	if err != nil {
 		theErr := "There was an error inserting a message in uberUpdate: " + err.Error()
 		logWriter(theErr)
@@ -712,7 +718,7 @@ func insertOneMessage(theMessage Message) {
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
 	payload := strings.NewReader(string(theJSONMessage))
-	req, err := http.NewRequest("POST", "http://18.191.212.197:8080/insertOneNewMessage", payload)
+	req, err := http.NewRequest("POST", insertOneMessageCall, payload)
 	if err != nil {
 		theErr := "There was an error inserting a message in insertOneMessage: " + err.Error()
 		logWriter(theErr)
@@ -769,7 +775,7 @@ func updateMongoMessageBoard(updatedMessageBoard MessageBoard) {
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
 	payload := strings.NewReader(string(theJSONMessage))
-	req, err := http.NewRequest("POST", "http://18.191.212.197:8080/updateMongoMessageBoard", payload)
+	req, err := http.NewRequest("POST", updateMongoMessageBoardCall, payload)
 	if err != nil {
 		theErr := "There was an error inserting a message in updateMongoMessageBoard: " + err.Error()
 		logWriter(theErr)
@@ -819,7 +825,7 @@ func getRandomID() int {
 	//Send to CRUD OPERATIONS API
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	req, err := http.NewRequest("GET", "http://18.191.212.197:8080/randomIDCreationAPI", nil)
+	req, err := http.NewRequest("GET", randomIDAPI, nil)
 	if err != nil {
 		theErr := "There was an error getting a random id in getRandomID: " + err.Error()
 		logWriter(theErr)
@@ -857,5 +863,4 @@ func getRandomID() int {
 /* TESTING ZONE */
 func testFuncCall() {
 	fmt.Printf("420 69 swag\n")
-
 }
