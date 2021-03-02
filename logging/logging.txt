@@ -133,3 +133,10 @@ DEBUG: We are now handling requests
 2021/02/25 19:30:34 User successfully inserted message in insertOneNewMessage in crudoperations: {"MessageID":676005018022,"UserID":210528212176,"PosterName":"americanwonton","Messages":[],"IsChild":false,"HasChildren":false,"ParentMessageID":0,"UberParentID":0,"Order":33,"RepliesAmount":0,"TheMessage":"The boof is coming","WhatBoard":"hotdog","DateCreated":"2021-02-25 19:30:34","LastUpdated":"2021-02-25 19:30:34"}
 2021/02/25 19:30:34 
 Success updating hotdog and hamburger messageboards
+2021/03/01 18:20:30 
+
+DEBUG: We are now handling requests
+2021/03/01 18:20:41 No issues returning Usernames
+2021/03/01 18:21:27 
+
+DEBUG: We are now handling requests

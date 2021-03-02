@@ -89,6 +89,7 @@ func handleRequests() {
 	debugMessage := "\n\nDEBUG: We are now handling requests"
 	//fmt.Println(debugMessage)
 	logWriter(debugMessage)
+	fmt.Println(debugMessage)
 	//Favicon and page spots
 	http.Handle("/favicon.ico", http.NotFoundHandler()) //For missing FavIcon
 	myRouter.HandleFunc("/", index)
