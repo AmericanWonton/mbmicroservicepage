@@ -490,8 +490,10 @@ func messageReplyAjax(w http.ResponseWriter, r *http.Request) {
 	var postedMessageReply MessageReply
 	json.Unmarshal(bs, &postedMessageReply)
 
-	//Declare return data and inform Ajax
+	//Decalre this up here to use for GO-Routine
 	newestMessage := Message{}
+
+	//Declare return data and inform Ajax
 	type ReturnData struct {
 		SuccessMsg     string  `json:"SuccessMsg"`
 		SuccessBool    bool    `json:"SuccessBool"`
@@ -525,7 +527,7 @@ func messageReplyAjax(w http.ResponseWriter, r *http.Request) {
 		theTimeNow := time.Now()
 
 		//Format the newestMessage
-		newestMessage := Message{
+		newestMessage = Message{
 			MessageID:       getRandomID(),
 			UserID:          postedMessageReply.UserID,
 			PosterName:      postedMessageReply.PosterName,
@@ -569,7 +571,7 @@ func messageReplyAjax(w http.ResponseWriter, r *http.Request) {
 		theTimeNow := time.Now()
 
 		//Format the newestMessage
-		newestMessage := Message{
+		newestMessage = Message{
 			MessageID:       getRandomID(),
 			UserID:          postedMessageReply.UserID,
 			PosterName:      postedMessageReply.PosterName,
@@ -614,6 +616,15 @@ func messageReplyAjax(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("There's an error marshalling this data")
 	}
 	fmt.Fprintf(w, string(dataJSON))
+
+	/* This sends text and email updates to the replied User;
+	only happens if theReturnData is successful, and the same User isn't replying
+	to themselves */
+	if theReturnData.SuccessInt == 0 {
+		wg.Add(1)
+		go updateUserReply(newestMessage.UserID, theReturnData.ParentMessage.UserID, newestMessage.TheMessage, theReturnData.ParentMessage.TheMessage)
+		wg.Wait()
+	}
 }
 
 /* Calls the UberUpdate in the CRUD Microservice. Updates our messageboards
@@ -816,6 +827,103 @@ func updateMongoMessageBoard(updatedMessageBoard MessageBoard) {
 		fmt.Println(theMessage)
 		logWriter(theMessage)
 	}
+}
+
+/* Sends email and text updates to Users. In future updates, we will allow Users to opt-out of
+these updates, or just email/text */
+func updateUserReply(replierUserID int, postUserID int, replierMessage string, posterMessage string) {
+	//Begin getting Users
+	replyUser, succ1 := getUserCaller(replierUserID)
+	if succ1 == true {
+		postUser, succ2 := getUserCaller(replierUserID)
+		if succ2 == true {
+			//Poster and replier found; compile messages and send them with go routines
+			theMessageSend := "Hey " + postUser.UserName + ", " + replyUser.UserName + " has responded to your comment: " +
+				"\n" + "You said:\n" + posterMessage + "\nThey said:\n" + replierMessage + "\n"
+			wg.Add(1)
+			sendText(theMessageSend, postUser.PhoneACode, postUser.PhoneNumber)
+			wg.Add(1)
+			sendEmail(theMessageSend, postUser.Email, "Reply to your Post")
+			wg.Wait()
+		} else {
+			//Failed to get original poster. End function
+		}
+	} else {
+		//Failed to get replyUser. End function
+	}
+
+	wg.Done()
+}
+
+/* This calls the CRUD Microservice to get a User. It takes a
+UserID as an argument */
+func getUserCaller(theUserIDSend int) (AUser, bool) {
+	userReturn := AUser{}
+	resultReturn := true
+
+	//Decalre JSON we recieve
+	type UserIDUser struct {
+		TheUserID int `json:"TheUserID"`
+	}
+	theUserID := UserIDUser{
+		TheUserID: theUserIDSend,
+	}
+	//Get the Username of the person who replied
+	theJSONMessage, err := json.Marshal(theUserID)
+	if err != nil {
+		fmt.Println(err)
+		logWriter(err.Error())
+	}
+	//Send to CRUD OPERATIONS API
+	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+	defer cancel()
+	payload := strings.NewReader(string(theJSONMessage))
+	req, err := http.NewRequest("POST", getUserCall, payload)
+	if err != nil {
+		theErr := "There was an error getting a User in updateUserReply: " + err.Error()
+		logWriter(theErr)
+		fmt.Println(theErr)
+	}
+	req.Header.Add("Content-Type", "text/plain")
+
+	resp, err := http.DefaultClient.Do(req.WithContext(ctx))
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		theErr := "There was an error getting a response for a User in updateUserReply: " + err.Error()
+		logWriter(theErr)
+		fmt.Println(theErr)
+	}
+
+	//Marshal the returned response from Create User
+	type ReturnMessage struct {
+		TheErr       []string `json:"TheErr"`
+		ResultMsg    []string `json:"ResultMsg"`
+		SuccOrFail   int      `json:"SuccOrFail"`
+		ReturnedUser AUser    `json:"ReturnedUserMap"`
+	}
+	var returnedMessage ReturnMessage
+	json.Unmarshal(body, &returnedMessage)
+
+	/* Apply User if User find is successful */
+	if returnedMessage.SuccOrFail == 0 {
+		//Return success
+		resultReturn = true
+		userReturn = returnedMessage.ReturnedUser
+	} else {
+		//Log failure, return failure
+		theErr := ""
+		for j := 0; j < len(returnedMessage.TheErr); j++ {
+			theErr = theErr + "\n" + returnedMessage.TheErr[j]
+		}
+		theMsg := "Failure in getUserCaller: " + theErr
+		fmt.Println(theMsg)
+		logWriter(theMsg)
+		resultReturn = false
+		userReturn = AUser{}
+	}
+
+	return userReturn, resultReturn
 }
 
 /* This function calls the CRUD Microservice to get a random ID */

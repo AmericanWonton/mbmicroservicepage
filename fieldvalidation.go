@@ -23,6 +23,7 @@ var sendEmailCall string
 var sendTextCall string
 var randomIDAPI string
 var userLogin string
+var getUserCall string
 
 /* Both are used for usernames below */
 var allUsernames []string
@@ -84,6 +85,7 @@ func getAPICallVariables() {
 	insertOneMessageCall = text[7]
 	updateMongoMessageBoardCall = text[8]
 	isMessageBoardMade = text[9]
+	getUserCall = text[10]
 }
 
 //Runs a mongo query to get all Usernames, then puts it in a map to return
