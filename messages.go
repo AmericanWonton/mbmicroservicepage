@@ -623,7 +623,7 @@ func messageReplyAjax(w http.ResponseWriter, r *http.Request) {
 	if theReturnData.SuccessInt == 0 {
 		wg.Add(1)
 		go updateUserReply(newestMessage.UserID, theReturnData.ParentMessage.UserID, newestMessage.TheMessage, theReturnData.ParentMessage.TheMessage)
-		wg.Wait()
+		wg.Wait() //Ends go routine here
 	}
 }
 
@@ -841,9 +841,9 @@ func updateUserReply(replierUserID int, postUserID int, replierMessage string, p
 			theMessageSend := "Hey " + postUser.UserName + ", " + replyUser.UserName + " has responded to your comment: " +
 				"\n" + "You said:\n" + posterMessage + "\nThey said:\n" + replierMessage + "\n"
 			wg.Add(1)
-			sendText(theMessageSend, postUser.PhoneACode, postUser.PhoneNumber)
+			go sendText(theMessageSend, postUser.PhoneACode, postUser.PhoneNumber)
 			wg.Add(1)
-			sendEmail(theMessageSend, postUser.Email, "Reply to your Post")
+			go sendEmail(theMessageSend, postUser.Email, "Reply to your Post")
 			wg.Wait()
 		} else {
 			//Failed to get original poster. End function
@@ -851,8 +851,7 @@ func updateUserReply(replierUserID int, postUserID int, replierMessage string, p
 	} else {
 		//Failed to get replyUser. End function
 	}
-
-	wg.Done()
+	wg.Done() //End Go routine
 }
 
 /* This calls the CRUD Microservice to get a User. It takes a
