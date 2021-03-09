@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {{/* Here is our meta charset and title */}}
+        {{template "meta-title"}}
+        {{/* Here is our pixel density markup */}}
+        {{template "pixel-dense"}}
+        {{/* Here is our FavIcon */}}
+        {{template "fav-icon1"}}
+        {{/* Here are our fonts */}}
+        {{template "fonts1"}}
+        {{/* Here are our Media Query and stylesheets */}}
+        {{template "media-queries"}}
+        {{/* Here is our Javascript or additional code needed */}}
+        <script src="static/js/user.js"></script>
+    </head>
+    <body>
+        {{/* Here is our header */}}
+        {{template "documentation_header"}}
+        {{/* Here is the body section */}}
+        <div class="mainContentDiv" id="mainContentDiv">
+            {{/* Content for display */}}
+            {{template "documentation_intro"}}
+            {{template "documentation_documents_block"}}
+        </div>
+        {{/* Here is our footer */}}
+    </body>
+</html>

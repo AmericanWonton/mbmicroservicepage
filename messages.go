@@ -617,14 +617,7 @@ func messageReplyAjax(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Fprintf(w, string(dataJSON))
 
-	/* This sends text and email updates to the replied User;
-	only happens if theReturnData is successful, and the same User isn't replying
-	to themselves */
-	if theReturnData.SuccessInt == 0 {
-		wg.Add(1)
-		go updateUserReply(newestMessage.UserID, theReturnData.ParentMessage.UserID, newestMessage.TheMessage, theReturnData.ParentMessage.TheMessage)
-		wg.Wait() //Ends go routine here
-	}
+	return
 }
 
 /* Calls the UberUpdate in the CRUD Microservice. Updates our messageboards
@@ -829,13 +822,59 @@ func updateMongoMessageBoard(updatedMessageBoard MessageBoard) {
 	}
 }
 
+/* Called from Ajax after our 'messageReplyAjax' successfully updates our messages;
+this begins the process to update our Users. In text and email, then
+returns a response to Ajax */
+func updateUserTextEmail(w http.ResponseWriter, r *http.Request) {
+	//Initialize struct for taking messages
+	type MessageInfo struct {
+		NewMessageUserID int    `json:"NewMessageUserID"`
+		PosterUserID     int    `json:"PosterUserID"`
+		NewMessage       string `json:"NewMessage"`
+		ParentMessage    string `json:"ParentMessage"`
+	}
+	//Collect JSON from Postman or wherever
+	//Get the byte slice from the request body ajax
+	bs, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		fmt.Println(err)
+	}
+	//Marshal it into our type
+	var messageInfo MessageInfo
+	json.Unmarshal(bs, &messageInfo)
+
+	//Declare return data and inform Ajax
+	type ReturnData struct {
+		SuccessMsg  string `json:"SuccessMsg"`
+		SuccessBool bool   `json:"SuccessBool"`
+		SuccessInt  int    `json:"SuccessInt"`
+	}
+	theReturnData := ReturnData{
+		SuccessMsg:  "Users are updated",
+		SuccessBool: true,
+		SuccessInt:  0,
+	}
+
+	/* This sends text and email updates to the replied User;
+	only happens if theReturnData is successful, and the same User isn't replying
+	to themselves */
+	updateUserReply(messageInfo.NewMessageUserID, messageInfo.PosterUserID, messageInfo.NewMessage, messageInfo.ParentMessage)
+
+	dataJSON, err := json.Marshal(theReturnData)
+	if err != nil {
+		fmt.Println("There's an error marshalling this data")
+	}
+	fmt.Fprintf(w, string(dataJSON))
+	return
+}
+
 /* Sends email and text updates to Users. In future updates, we will allow Users to opt-out of
 these updates, or just email/text */
 func updateUserReply(replierUserID int, postUserID int, replierMessage string, posterMessage string) {
 	//Begin getting Users
 	replyUser, succ1 := getUserCaller(replierUserID)
 	if succ1 == true {
-		postUser, succ2 := getUserCaller(replierUserID)
+		postUser, succ2 := getUserCaller(postUserID)
 		if succ2 == true {
 			//Poster and replier found; compile messages and send them with go routines
 			theMessageSend := "Hey " + postUser.UserName + ", " + replyUser.UserName + " has responded to your comment: " +
@@ -851,7 +890,6 @@ func updateUserReply(replierUserID int, postUserID int, replierMessage string, p
 	} else {
 		//Failed to get replyUser. End function
 	}
-	wg.Done() //End Go routine
 }
 
 /* This calls the CRUD Microservice to get a User. It takes a

@@ -17,6 +17,47 @@
     </head>
     <body>
         {{/* Here is our header */}}
+        <header>
+            <div class="mbHeaderDiv">
+                <!--This will contain the sites name in large font-->
+                <div class="namediv">
+                    <h1 class="displayH1">Messageboard Microservice</h1>
+                </div>
+                <!-- This arranges links to various pages -->
+                <div class="navigationHolderDiv">
+                    <!-- Main Page -->
+                    <div class="navigationLinkDiv">
+                        <p class="navigationLinkP" onclick="navigateHeader(5)">
+                            Main Page
+                        </p>
+                    </div>
+                    <!-- Hotdog Message Page -->
+                    <div class="navigationLinkDiv">
+                        <p class="navigationLinkP" onclick="navigateHeader(3)">
+                            Hotdog MessageBoard
+                        </p>
+                    </div>
+                    <!-- Hamburger Message Page -->
+                    <div class="navigationLinkDiv">
+                        <p class="navigationLinkP" onclick="navigateHeader(4)">
+                            Hamburger MessageBoard
+                        </p>
+                    </div>
+                    <!-- Contact Message Page -->
+                    <div class="navigationLinkDiv">
+                        <p class="navigationLinkP" onclick="navigateHeader(1)">
+                            Contact Me
+                        </p>
+                    </div>
+                    <!-- Documentation Message Page -->
+                    <div class="navigationLinkDiv">
+                        <p class="navigationLinkP" onclick="navigateHeader(2)">
+                            Documentation
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </header>
         {{/* Send data to Javascript Pt 1 */}}
         {{$theBoardType := .WhatBoard}}
         {{template "sendBoardType" $theBoardType}}

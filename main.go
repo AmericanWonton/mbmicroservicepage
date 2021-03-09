@@ -101,6 +101,7 @@ func handleRequests() {
 	myRouter.HandleFunc("/evaluateTenResults", evaluateTenResults).Methods("POST")
 	myRouter.HandleFunc("/messageOriginalAjax", messageOriginalAjax).Methods("POST")
 	myRouter.HandleFunc("/messageReplyAjax", messageReplyAjax).Methods("POST")
+	myRouter.HandleFunc("/updateUserTextEmail", updateUserTextEmail).Methods("POST")
 	//Field validation/User Creation
 	myRouter.HandleFunc("/checkUsername", checkUsername).Methods("POST")
 	myRouter.HandleFunc("/createUser", createUser).Methods("POST")

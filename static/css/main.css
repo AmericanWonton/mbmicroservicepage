@@ -280,7 +280,63 @@ body, html {
 
 
 
+/* THIS IS STYLING FOR THE MESSAGEBOARD PAGES */
+.mbHeaderDiv{
+    display: block;
+    width: 100%;
+}
 
+.namediv {
+    /* Flexbox setup */
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+    /* Styling */
+    background-color: rgb(129, 28, 42);
+    padding: .2em;
+    /* DEBUG */
+    border: 1px solid black;
+}
+
+.displayH1 {
+    /* This is for style */
+    font-family: 'Bowlby One SC', cursive, serif, sans-serif;
+    font-size: 3rem;
+    /* font alignment */
+    align-content: center;
+    text-align: center;
+}
+
+.navigationHolderDiv{
+    /* Flexbox setup */
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: flex-end;
+    width: 100%;
+    /* Styling */
+    background-color: rgb(129, 28, 42);
+    /* DEBUG */
+    border: 1px solid black;
+}
+
+.navigationLinkDiv{
+    /* Flexbox setup */
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    /* Styling */
+
+    /* DEBUG */
+}
+
+.navigationLinkP{
+    font-size: 2rem;
+    text-align: center;
+}
 
 
 

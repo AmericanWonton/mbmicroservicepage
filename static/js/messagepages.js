@@ -299,6 +299,10 @@ function createMessageDivs(variableNameIntCurrently, currentMessage, currentPare
                         /* Update the amount of replies to this message */
                         numOReplies = numOReplies + 1;
                         replyNumP.innerHTML = numOReplies.toString() + " Replies";
+                        console.log("Successful Reply update: " + ReturnData.SuccessMsg);
+                        /* Send Text/Email updates to the User(s) */
+                        sendReplyUpdates(Number(ReturnData.CreatedMessage.UserID), Number(ReturnData.ParentMessage.UserID),
+                        String(ReturnData.CreatedMessage.TheMessage), String(ReturnData.ParentMessage.TheMessage));
                     } else {
                         /* Page Load unsuccessfull. Informing User in goInput */
                         textareaReply.value = ""; //Clear any values put in
@@ -560,6 +564,10 @@ function createMessageReply(variableNameIntCurrently, currentMessage){
                         /* Update the amount of replies to this message */
                         numOReplies = numOReplies + 1;
                         replyNumP.innerHTML = numOReplies.toString() + " Replies";
+                        console.log("Successful Reply update: " + ReturnData.SuccessMsg);
+                        /* Send Text/Email updates to the User(s) */
+                        sendReplyUpdates(Number(ReturnData.CreatedMessage.UserID), Number(ReturnData.ParentMessage.UserID),
+                        String(ReturnData.CreatedMessage.TheMessage), String(ReturnData.ParentMessage.TheMessage));
                     } else {
                         /* Page Load unsuccessfull. Informing User in goInput */
                         textareaReply.value = ""; //Clear any values put in
@@ -574,6 +582,35 @@ function createMessageReply(variableNameIntCurrently, currentMessage){
 
     //return the final div to the parent
     return messageSectionDiv;
+}
+
+/* This function is called after a reply to a message is successful;
+it calls a function in our server from Ajax to update our Users
+that their post has been responded to. */
+function sendReplyUpdates(newmessageID, postUserID, newMessage, parentMessage){
+    var MessageInfo = {
+        NewMessageUserID: Number(newmessageID),
+        PosterUserID: Number(postUserID),
+        NewMessage: String(newMessage),
+        ParentMessage: String(parentMessage)
+    };
+    var jsonString = JSON.stringify(MessageInfo); //Stringify Data
+    //Send Request to user message update page
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/updateUserTextEmail', true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.addEventListener('readystatechange', function(){
+        if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200){
+            var item = xhr.responseText;
+            var ReturnData = JSON.parse(item);
+            if (ReturnData.SuccessInt == 0){
+                console.log("Successful update");
+            } else {
+                console.log("Unsuccessful update.");
+            }
+        }
+    });
+    xhr.send(jsonString);
 }
 
 //Add event to check if this Message board exists on this page; if so, set value to 1 on load of page
@@ -705,7 +742,7 @@ window.addEventListener('DOMContentLoaded', function(){
     });
 
     /* DEBUG: This is a testing zone whenever we enter a page */
-    testStringTrunc("2021-02-25 18:01:08");
+    //testStringTrunc("2021-02-25 18:01:08");
 });
 
 //Change the Page Number showing to what page it currently is

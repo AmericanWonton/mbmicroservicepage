@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"os"
 )
 
 //DEBUG not sure if needed
@@ -81,6 +82,87 @@ func hamburgerMB(w http.ResponseWriter, r *http.Request) {
 	err1 := template1.ExecuteTemplate(w, "hamburgermsb.gohtml", vd)
 	HandleError(w, err1)
 }
+
+//Handles the documentation page
+func documentation(w http.ResponseWriter, req *http.Request) {
+	thePort := os.Getenv("PORT")
+	if thePort == "" {
+		thePort = "8080"
+	}
+
+	err1 := template1.ExecuteTemplate(w, "documentation.gohtml", nil)
+	HandleError(w, err1)
+}
+
+//Handles the documentation page
+/*
+func contact(w http.ResponseWriter, r *http.Request) {
+	thePort := os.Getenv("PORT")
+	if thePort == "" {
+		thePort = "8080"
+		fmt.Printf("DEBUG: Defaulting to this port %v\n", thePort)
+	}
+
+	if r.Method == http.MethodPost {
+		//Handle the email Ajax sent to us
+		fmt.Printf("DEBUG: AN EMAIL IS BEING SENT TO ME.\n")
+		//Collect JSON from Postman or wherever
+		//Get the byte slice from the request body ajax
+		bs, err := ioutil.ReadAll(r.Body)
+		if err != nil {
+			fmt.Println(err)
+		}
+		//Marshal the user data into our type
+		var dataPosted UserJSON
+		json.Unmarshal(bs, &dataPosted)
+
+		successEmail := emailToMe(dataPosted)
+
+		if successEmail == true {
+			//Send successful response back
+			type successMSG struct {
+				Message     string `json:"Message"`
+				SuccessNum  int    `json:"SuccessNum"`
+				RedirectURL string `json:"RedirectURL"`
+			}
+			msgSuccess := successMSG{
+				Message:     "Added the new account!",
+				SuccessNum:  0,
+				RedirectURL: "http://" + serverAddress,
+			}
+			theJSONMessage, err := json.Marshal(msgSuccess)
+			if err != nil {
+				fmt.Println(err)
+			}
+
+			fmt.Fprint(w, string(theJSONMessage))
+		} else {
+			type successMSG struct {
+				Message     string `json:"Message"`
+				SuccessNum  int    `json:"SuccessNum"`
+				RedirectURL string `json:"RedirectURL"`
+			}
+			msgSuccess := successMSG{
+				Message:     "Added the new account!",
+				SuccessNum:  1,
+				RedirectURL: "http://" + serverAddress,
+			}
+
+			theJSONMessage, err := json.Marshal(msgSuccess)
+			if err != nil {
+				fmt.Println(err)
+			}
+
+			fmt.Fprint(w, string(theJSONMessage))
+		}
+
+	} else {
+		//Serve the template normally
+		err1 := template1.ExecuteTemplate(w, "contact.gohtml", nil)
+		HandleError(w, err1)
+	}
+}
+*/
 
 //Handles the test page
 func test(w http.ResponseWriter, r *http.Request) {
