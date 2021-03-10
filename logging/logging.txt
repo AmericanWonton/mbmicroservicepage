@@ -178,3 +178,64 @@ DEBUG: We are now handling requests
 2021/03/08 19:48:06 
 
 DEBUG: We are now handling requests
+2021/03/09 17:35:47 
+
+DEBUG: We are now handling requests
+2021/03/09 17:35:52 No issues returning Usernames
+2021/03/09 17:35:55 No issues returning Usernames
+2021/03/09 17:36:14 No issues returning Usernames
+2021/03/09 17:36:17 No issues returning Usernames
+2021/03/09 17:38:03 
+
+DEBUG: We are now handling requests
+2021/03/09 17:38:05 No issues returning Usernames
+2021/03/09 17:38:50 
+
+DEBUG: We are now handling requests
+2021/03/09 17:38:52 No issues returning Usernames
+2021/03/09 17:39:19 
+
+DEBUG: We are now handling requests
+2021/03/09 17:39:20 No issues returning Usernames
+2021/03/09 17:40:28 
+
+DEBUG: We are now handling requests
+2021/03/09 17:40:31 No issues returning Usernames
+2021/03/09 17:41:03 No issues returning Usernames
+2021/03/09 17:41:38 
+
+DEBUG: We are now handling requests
+2021/03/09 17:41:49 No issues returning Usernames
+2021/03/09 17:43:15 
+
+DEBUG: We are now handling requests
+2021/03/09 17:43:18 No issues returning Usernames
+2021/03/09 18:34:23 
+
+DEBUG: We are now handling requests
+2021/03/09 18:34:36 No issues returning Usernames
+2021/03/09 18:36:19 
+
+DEBUG: We are now handling requests
+2021/03/09 18:40:11 
+
+DEBUG: We are now handling requests
+2021/03/09 18:42:05 
+
+DEBUG: We are now handling requests
+2021/03/09 18:43:21 No issues returning Usernames
+2021/03/09 18:43:23 No issues returning Usernames
+2021/03/09 19:44:15 
+
+DEBUG: We are now handling requests
+2021/03/09 19:44:19 No issues returning Usernames
+2021/03/09 19:44:21 No issues returning Usernames
+2021/03/09 19:44:47 Message successfully created for 1-3143228594
+2021/03/09 19:44:47 Email successfully created for jbkeller0303@gmail.com
+2021/03/09 19:45:43 
+
+DEBUG: We are now handling requests
+2021/03/09 19:45:47 No issues returning Usernames
+2021/03/09 19:45:48 No issues returning Usernames
+2021/03/09 19:46:10 Message successfully created for 1-3143228594
+2021/03/09 19:46:11 Email successfully created for jbkeller0303@gmail.com

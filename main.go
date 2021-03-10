@@ -97,6 +97,9 @@ func handleRequests() {
 	myRouter.HandleFunc("/test", test)
 	myRouter.HandleFunc("/hotdogMB", hotdogMB)
 	myRouter.HandleFunc("/hamburgerMB", hamburgerMB)
+	myRouter.HandleFunc("/documentation", documentation)
+	myRouter.HandleFunc("/contact", contact)
+	myRouter.HandleFunc("/genericUserContact", genericUserContact)
 	//Message update stuff
 	myRouter.HandleFunc("/evaluateTenResults", evaluateTenResults).Methods("POST")
 	myRouter.HandleFunc("/messageOriginalAjax", messageOriginalAjax).Methods("POST")

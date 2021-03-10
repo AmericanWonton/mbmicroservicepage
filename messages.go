@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -866,6 +867,66 @@ func updateUserTextEmail(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Fprintf(w, string(dataJSON))
 	return
+}
+
+/* Called from Ajax for generic needs to contact the user;
+Cocurrently updates Users then returns a reply to Ajax */
+func genericUserContact(w http.ResponseWriter, r *http.Request) {
+	//Initialize struct for taking messages
+	type MessageInfo struct {
+		YourNameInput    string `json:"YourNameInput"`
+		YourEmailInput   string `json:"YourEmailInput"`
+		YourMessageInput string `json:"YourMessageInput"`
+	}
+	//Collect JSON from Postman or wherever
+	//Get the byte slice from the request body ajax
+	bs, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		fmt.Println(err)
+	}
+	//Marshal it into our type
+	var messageInfo MessageInfo
+	json.Unmarshal(bs, &messageInfo)
+
+	//Declare return data and inform Ajax
+	type ReturnData struct {
+		SuccessMsg  string `json:"SuccessMsg"`
+		SuccessBool bool   `json:"SuccessBool"`
+		SuccessInt  int    `json:"SuccessInt"`
+	}
+	theReturnData := ReturnData{
+		SuccessMsg:  "Messages sent to me successfully",
+		SuccessBool: true,
+		SuccessInt:  0,
+	}
+
+	//Send Message to me
+	genericMessageSender(messageInfo.YourNameInput, messageInfo.YourEmailInput, messageInfo.YourMessageInput)
+
+	dataJSON, err := json.Marshal(theReturnData)
+	if err != nil {
+		fmt.Println("There's an error marshalling this data")
+	}
+	fmt.Fprintf(w, string(dataJSON))
+	return
+}
+
+/* Called from genericUserContact; it uses concurrency to send me messages */
+func genericMessageSender(yournameinput string, youremailinput string, yourmessage string) bool {
+	goodSend := true
+
+	//Poster and replier found; compile messages and send them with go routines
+	theMessageSend := "Hey me, this is from " + yournameinput + " at " + youremailinput + "\n" +
+		yourmessage
+	aCode, _ := strconv.Atoi(superUserACode)
+	phoneNum, _ := strconv.Atoi(superUserPhone)
+	wg.Add(1)
+	go sendText(theMessageSend, aCode, phoneNum)
+	wg.Add(1)
+	go sendEmail(theMessageSend, superUesrEmail, "User has a message")
+	wg.Wait()
+
+	return goodSend
 }
 
 /* Sends email and text updates to Users. In future updates, we will allow Users to opt-out of

@@ -12,14 +12,54 @@
         {{/* Here are our Media Query and stylesheets */}}
         {{template "media-queries"}}
         {{/* Here is our Javascript or additional code needed */}}
-        <script src="static/js/user.js"></script>
+        <script src="static/js/pagehandling.js"></script>
+        <script src="static/js/contact.js"></script>
     </head>
     <body>
         {{/* Here is our header */}}
-        {{template "contact_dev_header"}}
+        <header>
+            <div class="mbHeaderDiv">
+                <!--This will contain the sites name in large font-->
+                <div class="namediv">
+                    <h1 class="displayH1">Messageboard Microservice</h1>
+                </div>
+                <!-- This arranges links to various pages -->
+                <div class="navigationHolderDiv">
+                    <!-- Main Page -->
+                    <div class="navigationLinkDiv">
+                        <p class="navigationLinkP" onclick="navigateHeader(5)">
+                            Main Page
+                        </p>
+                    </div>
+                    <!-- Hotdog Message Page -->
+                    <div class="navigationLinkDiv">
+                        <p class="navigationLinkP" onclick="navigateHeader(3)">
+                            Hotdog MessageBoard
+                        </p>
+                    </div>
+                    <!-- Hamburger Message Page -->
+                    <div class="navigationLinkDiv">
+                        <p class="navigationLinkP" onclick="navigateHeader(4)">
+                            Hamburger MessageBoard
+                        </p>
+                    </div>
+                    <!-- Contact Message Page -->
+                    <div class="navigationLinkDiv">
+                        <p class="navigationLinkP" onclick="navigateHeader(1)">
+                            Contact Me
+                        </p>
+                    </div>
+                    <!-- Documentation Message Page -->
+                    <div class="navigationLinkDiv">
+                        <p class="navigationLinkP" onclick="navigateHeader(2)">
+                            Documentation
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </header>
         {{/* Here is our body */}}
         {{template "contact_section"}}
         {{/* Here is our footer */}}
-        {{template "footer_div"}}
     </body>
 </html>

@@ -314,7 +314,7 @@ body, html {
     display: flex;
     flex-wrap: wrap;
     align-content: center;
-    justify-content: flex-end;
+    justify-content: center;
     width: 100%;
     /* Styling */
     background-color: rgb(129, 28, 42);
@@ -329,7 +329,11 @@ body, html {
     align-content: center;
     justify-content: center;
     /* Styling */
-
+    padding-left: .4em;
+    padding-right: .4em;
+    margin-left: .2em;
+    margin-right: .2em;
+    border: 1px solid black;
     /* DEBUG */
 }
 
@@ -338,11 +342,331 @@ body, html {
     text-align: center;
 }
 
+.navigationLinkP:hover{
+    cursor: pointer;
+}
 
+/* THIS IS FOR THE DOCUMENTATION SECTION */
+.documentationIntroDiv{
+    /* Flex-box formatting */
+   display: flex;
+   flex-flow: row wrap;
+   justify-content: center;
+   align-content: center;
+   align-items: center;
+   width: 100%;
+}
 
+.greetingDiv{
+   /* Flex-box formatting */
+   display: flex;
+   flex-flow: row wrap;
+   justify-content: center;
+   align-content: center;
+   align-items: center;
+   width: 100%;
+   /* styling */
+   padding-left: 1em;
+   padding-right: 1em;
+}
 
+.spheleDiv{
+   /* Flex-box formatting */
+   display: flex;
+   flex-flow: row wrap;
+   justify-content: center;
+   align-content: center;
+   align-items: center;
+   width: 100%;
+   /* styling */
+   padding-top: .5em;
+   padding-left: .5em;
+   padding-right: .5em;
+}
+.spheleP{
+   /* font/styling */
+   font-size: 1rem;
+   align-self: center;
+   text-align: center;
+   margin-top: .5em;
+   margin-bottom: .5em;
+   font-family: 'Nunito', sans-serif;
+}
 
+.documentationIntroDiv{
+    /* Flex-box formatting */
+   display: flex;
+   flex-flow: row wrap;
+   justify-content: center;
+   align-content: center;
+   align-items: center;
+   width: 100%;
+}
 
+.greetingDiv{
+   /* Flex-box formatting */
+   display: flex;
+   flex-flow: row wrap;
+   justify-content: center;
+   align-content: center;
+   align-items: center;
+   width: 100%;
+   /* styling */
+   padding-left: 1em;
+   padding-right: 1em;
+}
+
+.spheleDiv{
+   /* Flex-box formatting */
+   display: flex;
+   flex-flow: row wrap;
+   justify-content: center;
+   align-content: center;
+   align-items: center;
+   width: 100%;
+   /* styling */
+   padding-top: .5em;
+   padding-left: .5em;
+   padding-right: .5em;
+}
+.spheleP{
+   /* font/styling */
+   font-size: 1rem;
+   align-self: center;
+   text-align: center;
+   margin-top: .5em;
+   margin-bottom: .5em;
+   font-family: 'Nunito', sans-serif;
+}
+
+.documentations_block_div{
+   /* Flex-box formatting */
+   display: flex;
+   flex-flow: row wrap;
+   justify-content: center;
+   align-content: center;
+   align-items: center;
+   width: 100%;
+   /* DEBUG */
+   border: 1px solid black;
+}
+
+.documentation_section_div{
+   /* Flex-box formatting */
+   display: flex;
+   flex-flow: row wrap;
+   justify-content: center;
+   align-content: center;
+   align-items: center;
+   width: 100%;
+   /* STYLING */
+   margin-top: .2em;
+   margin-bottom: .2em;
+   margin-left: .5em;
+   margin-right: .5em;
+}
+
+.header_opening_div{
+   /* Flex-box formatting */
+   display: flex;
+   flex-flow: row wrap;
+   justify-content: center;
+   align-content: center;
+   align-items: center;
+   width: 100%;
+   /* DEBUG */
+   border: 1px solid orange;
+}
+
+.header_opening_h2{
+   /* STYLING */
+   font-size: 1rem;
+   color: blue;
+}
+
+.header_opening_h2:hover{
+   /* STYLING */
+   font-size: 1.2rem;
+   color: purple;
+   cursor: pointer;
+}
+
+.body_opening_div{
+   /* Flex-box formatting */
+   display: none;
+   flex-flow: row wrap;
+   justify-content: center;
+   align-content: center;
+   align-items: center;
+   width: 100%;
+   /* DEBUG STYLING */
+   border: 1px solid brown;
+}
+
+.text_body_div{
+   /* styling */
+   font-size: 1rem;
+   margin: .1rem;
+}
+
+.text_body_p{
+   /* styling */
+   font-size: 1rem;
+   align-self: center;
+   text-align: center;
+}
+
+.pic_body_div{
+   /* Flex-box formatting */
+   display: flex;
+   flex-flow: row wrap;
+   justify-content: center;
+   align-content: center;
+   align-items: center;
+   width: 100%;
+   /* styling */
+   margin: .1rem;
+}
+
+.pic_body_img{
+   width: auto;
+   height: auto;
+}
+
+.linkPictures{
+    /* styling */
+    width: 5vw;
+    height: 5vh;
+}
+
+.linkA{
+   /* font and styling */
+   font-size: 1rem;
+   color: blue;
+}
+
+.linkA:hover{
+   /* font and styling */
+   font-size: 1rem;
+   color: purple;
+}
+
+/****** THIS IS FOR THE CONTACT SECTION ****/
+.informativeDiv{
+    /* Flex-box formatting */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    text-justify: center;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+    /* styling */
+    margin: .5em;
+    padding: 1em;
+}
+
+.informativeP{
+    align-self: center;
+    text-align: center;
+    font-size: 2rem;
+    color: black;
+}
+
+.meContactFormDiv{
+    /* Flex-box formatting */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.meContactForm{
+    /* Flex-box formatting */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+    /* debug */
+    border: 2px dashed red;
+}
+
+.fieldInformDiv{
+    /* Flex-box formatting */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    align-content: center;
+    align-items: center;
+    width: 40%;
+    margin-bottom: 2em;
+    margin-right: 1em;
+    /*Debug */
+    /* border: 2px solid black; */
+}
+
+.fieldDescribeP {
+    font-size: 1rem;
+    color: black;
+}
+
+.fieldValueDiv{
+    /* Flex-box formatting */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+    width: 40%;
+    margin-bottom: 2em;
+    margin-left: 1em;
+    /* Debug */
+    /* border: 2px solid black; */
+}
+
+.inputreg{
+    font-size: 1.5rem;
+    color: grey;
+}
+
+.inputTextArea{
+    font-size: 1.5rem;
+    color: grey;
+    width: 20vw;
+    height: 10vh;
+}
+
+.fieldSubmitDiv{
+    /* Flex-box formatting */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 2em;
+    /* Debug */
+}
+
+.submitB{
+    font-size: 1rem;
+    width: 40%;
+    height: 6vh;
+}
+
+#informResultDiv{
+    /* Flex-box formatting */
+    display: hidden;
+}
+
+#informTxtP{
+    font-size: 2rem;
+    align-self: center;
+}
 
 
 

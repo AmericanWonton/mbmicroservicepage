@@ -637,9 +637,329 @@
 
 {{/******* BEGINNING OF CONTACT SECTION ******/}}
 
+{{define "contact_section"}}
+    <div class="contentDiv">
+        <div class="informativeDiv">
+            <p class="informativeP">
+                Have a question for me? Want to know how I built some of this? Want some of this
+                built for YOU? Reach out and let me know what's on your mind!
+            </p>
+        </div>
+        <div class="meContactFormDiv">
+            <div class="meContactForm">
+                {{/* Name Field */}}
+                <div class="fieldInformDiv">
+                    <p class="fieldDescribeP">
+                        Name:
+                    </p>
+                </div>
+                <div class="fieldValueDiv">
+                    <input type="text" class="inputreg" id="YourNameInput" name="YourNameInput" placeholder="Your Name">
+                </div>
+                {{/* Email */}}
+                <div class="fieldInformDiv">
+                    <p class="fieldDescribeP">
+                        Email:
+                    </p>
+                </div>
+                <div class="fieldValueDiv">
+                    <input type="text" class="inputreg" id="YourEmailInput" name="YourEmailInput" placeholder="Your Email">
+                </div>
+                {{/* Message 2 Me */}}
+                <div class="fieldInformDiv">
+                    <p class="fieldDescribeP">
+                        Message 2 Me:
+                    </p>
+                </div>
+                <div class="fieldValueDiv">
+                    <textarea  class="inputTextArea" id="YourMessageInput" name="YourMessageInput" placeholder="Got a question? Let me know!"></textarea>
+                </div>
+                {{/* Submit Button */}}
+                <div class="fieldSubmitDiv">
+                    <button class="submitB" id="submitB" onclick="sendUpdate()">Submit</button>
+                </div>
+                {{/* Informative Div */}}
+                <div class="informResultDiv" id="informResultDiv">
+                    <p class="informTxtP" id="informTxtP">
 
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{{end}}
 
 {{/***** END OF CONTACT SECTION *******/}}
+
+{{/****** BEGINNING OF DOCUMENTATION SECTION ******/}}
+
+{{define "documentation_intro"}}
+    <div class="documentationIntroDiv">
+        <div class="greetingDiv">
+            <div class="spheleDiv">
+                <p class="spheleP">
+                    Hello and welcome to the Microservice Messageboard. I'm Joseph Keller, the web Dev
+                    behind this site!
+                </p>
+                <p class="spheleP">
+                    The purpose of this site is to test and demonstrate various Web Development
+                    and DevOps technologies implemented into a Microservice application.
+                    This application is split into 3 Microservices. There's "Update",(for contacting the User with updates
+                    via text and email rest APIS), "CRUD",(another set of rest APIS which are called to update our messageboards
+                    through congruent calls), and "Mainpage",(which handles the page you are looking at now!)
+
+                </p>
+                <p class="spheleP">
+                    I've laid out steps to building this web app below, with links to documentation
+                    and videos to each section. If you have a question on any of these topics, please 
+                    feel free to email me in the 'Contact' section. You can also feel free to 
+                    check out this project from git, here:
+                </p>
+                <!-- Main page project link -->
+                <p class="spheleP">
+                    <!-- Github -->
+                    Link to Mainpage Git: <a class="linkA" href="https://github.com/AmericanWonton/mbmicroservicepage"
+                    target="_blank" alt="Github Project Link">
+                        <img alt="Github Project Link" src="static/images/svg/github_pic.svg"
+                        class="linkPictures">
+                    </a>
+                    <!-- Docker -->
+                    Link to Mainpage Docker: <a class="linkA" href="https://hub.docker.com/repository/docker/americanwonton/mainwebpage"
+                    target="_blank" alt="Docker Project Link">
+                        <img alt="Docker Project Link" src="static/images/svg/docker.svg"
+                        class="linkPictures">
+                    </a>
+                </p>
+                <!-- Update page project link -->
+                <p class="spheleP">
+                    <!-- Github -->
+                    Link to Update Git: <a class="linkA" href="https://github.com/AmericanWonton/updatems"
+                    target="_blank" alt="Github Project Link">
+                        <img alt="Github Project Link" src="static/images/svg/github_pic.svg"
+                        class="linkPictures">
+                    </a>
+                    <!-- Docker -->
+                    Link to Update Docker: <a class="linkA" href="https://hub.docker.com/repository/docker/americanwonton/update"
+                    target="_blank" alt="Docker Project Link">
+                        <img alt="Docker Project Link" src="static/images/svg/docker.svg"
+                        class="linkPictures">
+                    </a>
+                </p>
+                <!-- Crud page project link -->
+                <p class="spheleP">
+                    <!-- Github -->
+                    Link to CRUD Git: <a class="linkA" href="https://github.com/AmericanWonton/crudmicroservice"
+                    target="_blank" alt="Github Project Link">
+                        <img alt="Github Project Link" src="static/images/svg/github_pic.svg"
+                        class="linkPictures">
+                    </a>
+                    <!-- Docker -->
+                    Link to CRUD Docker: <a class="linkA" href="https://hub.docker.com/repository/docker/americanwonton/crudoperations"
+                    target="_blank" alt="Docker Project Link">
+                        <img alt="Docker Project Link" src="static/images/svg/docker.svg"
+                        class="linkPictures">
+                    </a>
+                </p>
+                <p class="spheleP">
+                    If you like what you see, feel free to check out my 
+                    <a class="linkA" href="http://josephkeller.me/"
+                    target="_blank" alt="My website">website!</a>
+                </p>
+            </div>
+        </div>
+    </div>
+{{end}}
+
+{{define "documentation_documents_block"}}
+    <div class="documentations_block_div">
+        {{/* HTML, CSS, GOLANG WEBDEV */}}
+        <div class="documentation_section_div">
+            <div class="header_opening_div">
+                <h2 class="header_opening_h2" id="hedOpen1" onclick="documentDivDisplay(1)">
+                    HTML, CSS, and Golang WebDev
+                </h2>
+            </div>
+            <div class="body_opening_div" id="bodOpen1">
+                <div class="text_body_div">
+                    <p class="text_body_p">
+                        For basic web-dev skills, I’ve got to hand it to Todd McLeod.
+                        Golang is a nifty language for building websites and APIS, but it can be
+                        intimidating learning some of the newer concepts that take advantage of
+                        GoRoutines and Concurrent patterns for faster delivery. Todd is a fun,
+                        energetic teacher and he makes use of widely seen use-case scenarios
+                        for developers. Check out his lessons on <a class="linkA"
+                        href="https://www.udemy.com/course/learn-how-to-code/"
+                        target="_blank" alt="Todd Golang">Golang</a>, <a class="linkA"
+                        href="https://www.udemy.com/course/html-tutorial/"
+                        target="_blank" alt="Todd HTML and CSS">Creating a Website</a>, and
+                        <a class="linkA" href="https://www.udemy.com/course/go-programming-language/"
+                        target="_blank" alt="Todd Golang WebDev">WebDev with Golang</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+        {{/* DOCKER AND DOCKER HUB */}}
+        <div class="documentation_section_div">
+            <div class="header_opening_div">
+                <h2 class="header_opening_h2" id="hedOpen2" onclick="documentDivDisplay(2)">
+                    Docker
+                </h2>
+            </div>
+            <div class="body_opening_div" id="bodOpen2">
+                <div class="text_body_div">
+                    <p class="text_body_p">
+                        Docker is a commonplace development tool, vital for making containerized
+                         apps for easy implementation and development. This app is deployed in a
+                          Docker shell on an AWS Ubuntu server, connecting to containerized Mongo 
+                          and MySQL databases. As far as a good teacher goes, you can’t go wrong with
+                           Docker’s <a class="linkA"
+                        href="https://docs.docker.com/get-started/"
+                        target="_blank" alt="Docker Get Started">Get Started</a> page.
+                         Don’t forget to set up an account on <a class="linkA"
+                        href="https://hub.docker.com/"
+                        target="_blank" alt="Docker Hub">Docker Hub</a>
+                            to share future projects!
+                    </p>
+                </div>
+                <div class="text_body_div">
+                    <p class="text_body_p">
+                        For this specific project, I needed to tweak my Docker setup
+                         just a smidge. For starters, Ubuntu will have a <a class="linkA"
+                        href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04"
+                        target="_blank" alt="Docker Ubuntu">unique structure</a>
+                          for Docker you may want to take a look at. Depending on who is 
+                          collaborating with you, it couldn’t hurt to <a class="linkA"
+                        href="https://www.digitalocean.com/community/questions/how-to-fix-docker-got-permission-denied-while-trying-to-connect-to-the-docker-daemon-socket"
+                        target="_blank" alt="Docker User Setup">set up a separate User
+                           account</a> as well. If you’d like to just use the root account, make sure 
+                           to supersede any command with ‘sudo’ beforehand, as well as <a class="linkA"
+                        href="https://docs.docker.com/engine/reference/commandline/login/"
+                        target="_blank" alt="Docker Login">login to
+                            your account</a> beforehand. Finally, this project required a lot of
+                             debugging to determine just where my files were getting moved.
+                              If you’re new to Docker, take a look at how to <a class="linkA"
+                        href="https://www.baeldung.com/ops/docker-container-filesystem"
+                        target="_blank" alt="Explore Container files">explore a docker container
+                         filesystem</a>
+                               to see just what these containers look like while operating! 
+                               (Note, I’m utilizing Alpine in my Dockerfile for this project; 
+                               your commands might need to look something like this when exploring 
+                               the filesystem: 
+                               <b class="bold_code">docker exec -it CONTAINER_HASH /bin/sh.</b>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {{/* CRON JOBS */}}
+        <div class="documentation_section_div">
+            <div class="header_opening_div">
+                <h2 class="header_opening_h2" id="hedOpen3" onclick="documentDivDisplay(3)">
+                    Cronjobs
+                </h2>
+            </div>
+            <div class="body_opening_div" id="bodOpen3">
+                <div class="text_body_div">
+                    <p class="text_body_p">
+                        To illustrate a ‘live data’ database, I’ve been inserting values
+                         into my Mongo and SQL tables with a separate app that runs off
+                          a Cron-Job. It runs daily on Tuesday evenings. You can check 
+                          out the project <a class="linkA"
+                        href="https://github.com/AmericanWonton/superDBAutomation"
+                        target="_blank" alt="Automation Project">here</a>.
+                    </p>
+                </div>
+                <div class="text_body_div">
+                    <p class="text_body_p">
+                        On my windows machine, I’d typically like scheduling this on
+                         Task Scheduler. Fear not, <a class="linkA"
+                        href="https://www.youtube.com/watch?v=QZJ1drMQz1A&t=101s"
+                        target="_blank" alt="Cron Job Examples">Linux Cron Jobs</a>
+                         aren’t too difficult
+                          to comprehend! I’ve taken a copy of what I run on this server
+                           as an example:
+                    </p>
+                </div>
+                <div class="pic_body_div">
+                    <img class="pic_body_img" src="static/images/png/Cron-JobExample.PNG" alt="Cronjob">
+                </div>
+            </div>
+        </div>
+        {{/* SQL AND NO-SQL Databases */}}
+        <div class="documentation_section_div">
+            <div class="header_opening_div">
+                <h2 class="header_opening_h2" id="hedOpen4" onclick="documentDivDisplay(4)">
+                    SQL and No-SQL
+                </h2>
+            </div>
+            <div class="body_opening_div" id="bodOpen4">
+                <div class="text_body_div">
+                    <p class="text_body_p">
+                        I’ve utilized Mongo Atlas to store data for this web app.
+                        Check out <a class="linkA"
+                        href="https://www.udemy.com/course/go-programming-language/"
+                        target="_blank" alt="Todd Golang">Todd McLeod’s Udemy
+                           Course</a> for Golang WebDev to learn how to set up a No-SQL DB.
+                    </p>
+                </div>
+                <div class="text_body_div">
+                    <p class="text_body_p">
+                        As far as implementation in Golang is concerned,
+                         you might want to check out <a class="linkA"
+                        href="https://github.com/AmericanWonton/crudmicroservice"
+                        target="_blank" alt="CRUD Operations Link">this project link.</a>
+                          It’s been difficult getting the EXACT CRUD operations
+                           I needed but I’ve fine tuned them to be as efficient as possible.
+                    </p>
+                </div>
+            </div>
+        </div>
+        {{/* EMAIL API */}}
+        <div class="documentation_section_div">
+            <div class="header_opening_div">
+                <h2 class="header_opening_h2" id="hedOpen5" onclick="documentDivDisplay(5)">
+                    Email API
+                </h2>
+            </div>
+            <div class="body_opening_div" id="bodOpen5">
+                <div class="text_body_div">
+                    <p class="text_body_p">
+                        I got sick of an older API I was using to send and receive emails.
+                         I decided to setup a dummy gmail account implement Google’s email APIs
+                          to send and receive emails. It takes some doing,(along with a Google Dev
+                           account creation), but if interested,
+                           <a class="linkA"
+                        href="https://medium.com/wesionary-team/sending-emails-with-go-golang-using-smtp-gmail-and-oauth2-185ee12ab306"
+                        target="_blank" alt="Google Email API">here is a good article on implementing
+                            it for your usage.</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {{/* TEXT API */}}
+        <div class="documentation_section_div">
+            <div class="header_opening_div">
+                <h2 class="header_opening_h2" id="hedOpen6" onclick="documentDivDisplay(6)">
+                    Twilio Text API
+                </h2>
+            </div>
+            <div class="body_opening_div" id="bodOpen6">
+                <div class="text_body_div">
+                    <p class="text_body_p">
+                        I wanted to experiment with sending text messages for an idea for another app.
+                        I decided to utilize this project as a stepping stone for setting that up. Twilio
+                        is a relatively easy API service to setup,(and cheap, I'd say!)
+                           <a class="linkA"
+                        href="https://www.twilio.com/blog/2017/09/send-text-messages-golang.html"
+                        target="_blank" alt="Twilio Text API">Here is a good article on implementing
+                            it for your usage.</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{{end}}
+
+{{/******** END OF DOCUMENTATION SECTION *****/}}
 
 {{/******* BEGINNING OF FOOTER SECTION ******/}}
 {{define "footer_div"}}

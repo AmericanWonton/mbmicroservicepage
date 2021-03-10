@@ -24,6 +24,9 @@ var sendTextCall string
 var randomIDAPI string
 var userLogin string
 var getUserCall string
+var superUserPhone string
+var superUserACode string
+var superUesrEmail string
 
 /* Both are used for usernames below */
 var allUsernames []string
@@ -86,6 +89,9 @@ func getAPICallVariables() {
 	updateMongoMessageBoardCall = text[8]
 	isMessageBoardMade = text[9]
 	getUserCall = text[10]
+	superUserPhone = text[11]
+	superUserACode = text[12]
+	superUesrEmail = text[13]
 }
 
 //Runs a mongo query to get all Usernames, then puts it in a map to return
@@ -335,7 +341,8 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 }
 
 //Sends a text message with a go routine, no response needed, it's just logged
-func sendText(theMessage string, areacode int, phonenumber int) {
+func sendText(theMessage string, areacode int, phonenumber int) bool {
+	goodSend := true
 	//Declare DataType for JSON
 	type TextInfo struct {
 		TextMessage string `json:"TextMessage"`
@@ -389,6 +396,7 @@ func sendText(theMessage string, areacode int, phonenumber int) {
 	logMessage := ""
 	if otherReturnedMessage.SuccOrFail != 0 {
 		logMessage = "Failure to send text message: " + otherReturnedMessage.TheErr + "\n" + otherReturnedMessage.ResultMsg
+		goodSend = false
 	} else {
 		area := strconv.Itoa(areacode)
 		phonnum := strconv.Itoa(phonenumber)
@@ -397,10 +405,12 @@ func sendText(theMessage string, areacode int, phonenumber int) {
 	logWriter(logMessage)
 
 	wg.Done() //For GoRoutines
+	return goodSend
 }
 
 //Sends an email with a go routine, no response needed it's just logged
-func sendEmail(theMessage string, emailAddress string, subject string) {
+func sendEmail(theMessage string, emailAddress string, subject string) bool {
+	goodSend := true
 	//Declare DataType for JSON
 	//Declare DataType from JSON
 	type EmailInfo struct {
@@ -457,12 +467,14 @@ func sendEmail(theMessage string, emailAddress string, subject string) {
 	logMessage := ""
 	if otherReturnedMessage.SuccOrFail != 0 {
 		logMessage = "Failure to email: " + otherReturnedMessage.TheErr + "\n" + otherReturnedMessage.ResultMsg
+		goodSend = false
 	} else {
 		logMessage = "Email successfully created for " + emailAddress
 	}
 	logWriter(logMessage)
 
 	wg.Done() //For GoRoutines
+	return goodSend
 }
 
 //User Sign In Check
